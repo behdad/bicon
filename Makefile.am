@@ -4,7 +4,7 @@ EXTRA_DIST = \
 		bootstrap
 		bicon.pc.in
 
-SUBDIRS = bjoining bconsole bicon keymap font bin
+SUBDIRS = bjoining bconsole bicon keymap font bin doc
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = bicon.pc

@@ -46,6 +46,9 @@ AC_CONFIG_FILES([bicon.pc
                  bicon/Makefile
                  keymap/Makefile
                  font/Makefile
+                 doc/Makefile
+                 doc/man/Makefile
                  bin/Makefile
-                 bin/abicon])
+                 bin/abicon
+                 ])
 AC_OUTPUT
