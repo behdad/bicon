@@ -67,7 +67,9 @@ case "$TERM" in
 				setxkbmap \
 					-display "$DISPLAY" \
 					-layout "us,$EXPLANG" \
-					-option grp:alt_shift_toggle,grp_led:scroll
+					-option grp:alt_shift_toggle,grp_led:scroll \
+					-print | \
+				xkbcomp -w 2 - "$DISPLAY"
 			fi
 
 			# set font
