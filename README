@@ -22,20 +22,23 @@ Usage
 -----
 
 This program is not currently usable under X. In fact, it is only
-usable under the Linux (*BSD?) console.
+usable under the Linux console.
 
-Simply run "abicon" to get a console supporting Arabic or
+Simply run "bicon_console" to get a console supporting Arabic or
 Persian. The language used is chosen according to the LANG
 environment variable.
 
-Run "abicon ar" to get Arabic support, or "abicon fa" for Persian.
+You can also choose the language country by specifying the country on
+the country on the command line, e.g ::
 
-Of course, you have a man page abicon(1) to check.
+	bicon_console sa          # enables Arabic (Saudi Arabia) support
+	bicon_console ir          # for Persian(Iran)
+
+Of course, you have a man page bicon_console(1) to check.
 
 Reporting Bugs
 --------------
 
 Please report all bugs to
-http://bugs.arabeyes.org/cgi-bin/bugzilla/query.cgi. Until this
-can be done - it is not possible at the moment - send an e-mail
-to developer@arabeyes.org.
+http://bugs.arabeyes.org/cgi-bin/bugzilla/query.cgi
+Feedback at developer@arabeyes.org is also welcome.

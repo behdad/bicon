@@ -50,6 +50,6 @@ AC_CONFIG_FILES([bicon.pc
                  doc/Makefile
                  doc/man/Makefile
                  bin/Makefile
-                 bin/abicon
+                 bin/bicon_console
                  ])
 AC_OUTPUT

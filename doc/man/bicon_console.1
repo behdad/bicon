@@ -16,21 +16,21 @@
 .\" .sp <n>    insert n+1 empty lines
 .\" for manpage-specific macros, see man(7)
 .SH NAME
-abicon \- a bidirectional console
+bicon_console \- a bidirectional console
 .SH SYNOPSIS
-.B abicon [lang]
+.B bicon_console [isocode]
 .SH DESCRIPTION
-.B abicon
+.B bicon_console
 is a console program that supports bidirectional text display, for languages like Arabic, Persian and Hebrew.
 
-.B abicon
+.B bicon_console
 uses 
 .B bicon(1)
 to support the language after loading a suitable keymap and font.
 
 .TP
-lang
-The two letter ISO language code, as used in the LANG environment variable. The default value is derived from the LANG currrent value.
+isocode
+The two letter ISO country code, in small letters. The default value is derived from the LANG currrent value.
 
 .SH AUTHOR
 This manual page was written by Muhammad Alkarouri, of the Arabeyes project.

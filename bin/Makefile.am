@@ -1,2 +1,2 @@
-bin_SCRIPTS=abicon
+bin_SCRIPTS=bicon_console
 

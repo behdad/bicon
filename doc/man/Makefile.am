@@ -1,1 +1,1 @@
-man1_MANS = bicon.1 abicon.1
+man1_MANS = bicon.1 bicon_console.1

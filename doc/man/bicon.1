@@ -24,11 +24,11 @@ bicon \- bidirectional console
 is a console program that supports bidirectional text display, for languages like Arabic, Persian and Hebrew.
 
 .B bicon
-hooks into the I/O of the current console to display proper directed text using the Unicode BiDi algorithm.
+hooks into the I/O of the current console to display proper directed text using the Unicode BiDi algorithm. Proper directed here includes shaping and joining.
 
 .B bicon
-is not intended to be used directly. Please use 
-.B abicon(1)
+does not load the keymap or font. Please use 
+.B bicon_console(1)
 to get proper support for your BiDi language, including loading your keymap and font.
 
 .SH OPTIONS
