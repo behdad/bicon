@@ -1,71 +1,30 @@
-Directories:
+=================================
+BiCon - The Bidirectional Console
+=================================
 
-	fjoining/:	joining library
-	fconsole/:	linux console library
-	fcon/:		a filter for linux console that applies bidi and joining
-	keymap/:	isiri2901 driver for linux console
-	font/:		tools needed to make persian unicode fonts for linux console
-	testtexts:	some utf8 persian text files
+This is the bidirectional console as presented by Arabeyes.
 
+Installation
+------------
+You need the fribidi library to compile this program. Probably you have it in your distribution. If not, get it from http://fribidi.sourceforge.net
 
-You need FriBidi library installed to use this package. get it from
-  http://fribidi.sf.net/
+Installation is simple, the usual::
+	./configure
+	make
+	make install
 
-To make, just run `make' at command line.
+steps.
 
-Currently you can use this package just under linux console.
+Usage
+-----
+This program is ot currently usable under X. In fact, it is only usable under the Linux (*BSD?) console.
 
-To run a command, with bidi enabled console, run "./bin/farsi [cmd param ...]",
-if no cmd is passed, /bin/sh is used.
+Simply run "abicon" to get a console supporting Arabic or Persian. The language used is chosen according to the LANG environment variable.
 
-To lookup an english word with http://bamdad.org/dict's english-persian
-dictionary, run "./bin/farsidict word"
+Run "abicon ar" to get Arabic support, or "abicon fa" for Persian.
 
-To findout what's going on, run these commands:
+Of course, you have a man page abicon(1) to check.
 
-#---- script start ----
-	# set keyboard mode to unicode
-kbd_mode -u
-
-	# load persian keyboard map
-loadkeys keymap/isiri2901.kmap.gz
-	# you can switch between languages with left-alt + left-shift
-
-	# load the font
-consolechars -f font/farsi-8x16-512.psf.gz
-	# put console in utf-8 mode
-echo -ne "\033%G"
-
-	# pass the utf8 file through vuconsole filter
-fconsole/vuconsole test.utf8/hafez
-	# you should see the first hafez sonnet
-
-	# run fcon filter to get a bidi enabled shell
-fcon/fcon
-	# now, you are in a bidi enabled shell
-
-	# you should type these in the new shell
-cat testtexts/hafez
-	# you should see the same sonnet
-
-	# and this one is an arabic example
-cat testtexts/fatiha
-	# amazing, not?
-
-	# switch to persian, type some letters and enjoy
-	# then switch back to english
-
-	# quit fcon shell
-exit
-
-	# load system's default font
-consolechars -d
-
-	# load system's default keyboard map
-loadkeys -d
-
-	# set keyboard mode to ascii
-kbd_mode -a
-
-	# done
-#---- script end ----
+Reporting Bugs
+--------------
+Please report all bugs to http://bugs.arabeyes.org/cgi-bin/bugzilla/query.cgi. Until this can be done - it is not possible at the moment - send an e-mail to developer@arabeyes.org.
