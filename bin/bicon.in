@@ -4,37 +4,135 @@ exec_prefix=@exec_prefix@
 bindir=@bindir@
 pkgdatadir=@datadir@/@PACKAGE@
 
-WAS_UNICODE=false
-kbd_mode | grep -q Unicode && WAS_UNICODE=true
-
 LOWER='abcdefghijklmnopqrstuvwxyz'
 UPPER='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-if [ -z "$1" ]; then
-	LANGUAGE=`echo $LANG | sed "s/...\(..\).*/\1/;y/$UPPER/$LOWER/"`
-	echo $LANGUAGE
+EXPLANG="$1"
+shift
+IMPLANG="`echo $LANG | sed "s/...\(..\).*/\1/;y/$UPPER/$LOWER/"`"
+
+if [ -n "$EXPLANG" ]; then
+	LANGUAGE="$EXPLANG"
+	export LANGUAGES="$EXPLAN:$LANGUAGES"
 else
-	LANGUAGE=$1
+	LANGUAGE="$IMPLANG"
 fi
 
-if ! ${WAS_UNICODE}; then
-	kbd_mode -u
-	echo -ne '\033%G'
-fi
+function isconsole() {
+	if [ 0 "<" $(expr "`tty`" : "/dev/tty[0-9]") ]
+	then return 0; else return 1; fi
+}
 
-loadkeys ${pkgdatadir}/keymap/$LANGUAGE.map.gz 2>/dev/null ||
-loadkeys $LANGUAGE
-setfont ${pkgdatadir}/font/bicon-8x16-512.psfu.gz
+function iskbdunicode() {
+	if kbd_mode | grep -q -i Unicode
+	then return 0; else return 1; fi
+}
 
-${bindir}/bicon.bin
 
-setfont
-loadkeys -d 2>/dev/null
+# setup environment (bicon_start)
+case "$TERM" in
 
-if ${WAS_UNICODE}; then
-	dumpkeys | loadkeys -u
-else
-	kbd_mode -a
-	echo -ne '\033%@'
-fi
+	linux)
+		if isconsole; then
+			# save old keyboard state
+			iskbdunicode &&
+			WAS_UNICODE=true || WAS_UNICODE=false
+			if [ "x$WAS_UNICODE" = xfalse ]; then
+				kbd_mode -u
+				echo -ne '\033%G'
+			fi
+			OLD_KBD=`dumpkeys`
 
+			# set keymap
+			loadkeys "${pkgdatadir}/keymap/$LANGUAGE.map.gz" 2>/dev/null ||
+			loadkeys "$LANGUAGE"
+
+			# set font
+			setfont "${pkgdatadir}/font/bicon-8x16-512.psfu.gz"
+		fi
+	;;
+
+	xterm)
+		if [ -n "$DISPLAY" ]; then
+			# only load keymap if asked explicitly
+			if [ -n "$EXPLANG" ]; then
+
+				# save old keyboard state
+				OLD_XKB="`setxkbmap \
+					-display "$DISPLAY" \
+					-print`"
+
+				# set keymap
+				# better heuristic wanted
+				setxkbmap \
+					-display "$DISPLAY" \
+					-layout "us,$EXPLANG" \
+					-option grp:alt_shift_toggle,grp_led:scroll
+			fi
+
+			# set font
+			# guess there's no way to do
+		fi
+	;;
+
+	*)
+
+	;;
+
+esac
+
+
+echo "BiCon started"
+# do the real thing
+${bindir}/bicon.bin "$@"
+echo "BiCon done"
+
+
+# rollback environment (bicon_stop)
+case "$TERM" in
+
+	linux)
+		if isconsole; then
+			# default font
+			setfont
+
+			# default keymap
+			#loadkeys -d
+
+			# or
+
+			# load old keymap
+			if [ -n "$OLD_KBD" ]; then
+				echo "$OLD_KBD" | loadkeys
+				unset OLD_KBD
+			fi
+
+
+			# load old keyboard state
+			if [ "x$WAS_UNICODE" = "xtrue" -a ! iskbdunicode ]; then
+				dumpkeys | loadkeys -u
+			else
+				kbd_mode -a
+				echo -ne '\033%@'
+			fi
+			unset WAS_UNICODE
+		fi
+	;;
+
+	xterm)
+		if [ -n "$DISPLAY" ]; then
+			
+			# load old keyboard state and keymap
+			if [ -n "$OLD_XKB" ]; then
+
+				echo "$OLD_XKB" | xkbcomp -w 2 - "$DISPLAY"
+				unset "OLD_XKB"
+			fi
+		fi
+	;;
+
+	*)
+
+	;;
+
+esac

@@ -7,7 +7,7 @@ This is the bidirectional console as presented by Arabeyes.
 Installation
 ------------
 
-You need the fribidi library to compile this program. Probably
+You need the FriBidi library to compile this program. Probably
 you have it in your distribution. If not, get it from
 http://fribidi.sourceforge.net
 
@@ -19,8 +19,9 @@ Installation is simple, the usual steps:
 Usage
 -----
 
-This program is not currently usable under X. In fact, it is only
-usable under the Linux console.
+This program currently can be used under Linux console, or
+terminal emulators with basic Unicode rendering support, like
+gnome-terminal, xterm, or PuTTY.
 
 Simply run "bicon" to get a console supporting Arabic or Persian.
 The language used is chosen according to the LANG environment

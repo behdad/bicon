@@ -18,7 +18,7 @@
 .SH NAME
 bicon.bin \- bidirectional console layer
 .SH SYNOPSIS
-.B bicon.bin [command]
+.B bicon.bin [command [arguments...]]
 .SH DESCRIPTION
 .B bicon.bin
 is a console program that supports bidirectional text display, for languages like Arabic, Persian and Hebrew.
@@ -39,6 +39,29 @@ is executed by
 after it loads. If omitted,
 .B bicon.bin
 uses the current SHELL, or /bin/sh if SHELL is undefined.
+
+.TP
+arguments
+are passed to the command to run.
+
+
+.SH ENVIRONMENT
+The following environment variables are utilized by
+.B script
+:
+
+.TP
+SHELL
+If the variable SHELL exists, the shell forked by
+.B bicon
+will be that shell. If SHELL is not set, the Bourne shell is
+assumed.  (Most shells set this variable automatically).
+
+
+.SH SEE ALSO
+bicon(1),
+screen(1).
+
 
 .SH AUTHOR
 This manual page was written by Muhammad Alkarouri, of the Arabeyes project.

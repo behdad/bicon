@@ -18,9 +18,9 @@
 .SH NAME
 bicon \- a bidirectional console
 .SH SYNOPSIS
-.B bicon [isocode]
+.B bicon [isocode] [command [arguments...]]
 .SH DESCRIPTION
-.B bicon
+.B Bicon
 is a console program that supports bidirectional text display, for languages like Arabic, Persian and Hebrew.
 
 .B bicon
@@ -35,7 +35,70 @@ you can switch between Arabic and English, or between Persian and English, using
 .SH OPTIONS
 .TP
 isocode
-The two letter ISO country code, in small letters. The default value is derived from the LANG currrent value.
+The two letter ISO country code, in small letters.
+If left empty, the derived value from the LANG variable is used
+instead.
+
+.TP
+command
+is executed by
+.B bicon
+after it loads. If omitted,
+.B bicon
+uses the current
+SHELL
+, or /bin/sh if
+SHELL
+is undefined.
+
+.TP
+arguments
+are passed to the command to run.
+
+.SH ENVIRONMENT
+The following environment variables are utilized by
+.B bicon
+:
+
+.TP
+SHELL
+If the variable
+SHELL
+exists, the shell forked by
+.B bicon
+will be that shell. If
+SHELL
+is not set, the Bourne shell is
+assumed.  (Most shells set this variable automatically).
+
+.TP
+LANG
+If isocode is not passed to
+.B bicon
+, it will examine LANG to determine the desired language.
+
+.TP
+TERM
+Variable TERM is examined in case to determine how to set the keymap
+and font.  Recognized values are linux and xterm currently.
+
+.TP
+DISPLAY
+If the value of TERM is xterm, then DISPLAY is examined by
+.B bicon
+to find the X server to contant to load the keymap.
+
+.El
+.SH SEE ALSO
+bicon.bin(1),
+unicode_start(1),
+unicode_stop(1),
+loadkeys(1),
+dumpkeys(1),
+kbd_mode(1),
+setfont(8),
+setxkbmap(1),
+xkbcomp(1).
 
 .SH AUTHOR
 This manual page was written by Muhammad Alkarouri, of the Arabeyes project.
