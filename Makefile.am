@@ -9,7 +9,7 @@ SUBDIRS = bjoining bconsole bicon keymap font bin
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = bicon.pc
                                                                                 
-CLEANFILES =
+CLEANFILES = ChangeLog.bak
                                                                                 
 DISTCLEANFILES =
                                                                                 

@@ -1,36 +1,170 @@
-2004-January  Behdad Esfahbod <bicon@behdad.org>
-	* *: Well, code is handed to Arabeyes people.  Decided to
-	change the name to "BiCon".  I'm not going to be the
-	maintainer anymore (hopefully).  Already imported to
-	Arabeyes CVS.  These nice people have removed the code
-	borrowed from "script" and replaced with code from Python
-	sources.  We are still to make changes to fit the new
-	system.  Thanks guys.
+2004-02-25 22:31  behdad
 
-==========================================================================
+	* ChangeLog, keymap/Makefile.am: Ok, removed changelog entry ;).
 
-2002-06-13  Behdad Esfahbod <farsi@behdad.org>
-	* */*.[ch]: Major changes.  Support many options now, among them is
-	the option to output logical text, not visual.
+2004-02-25 22:13  behdad
 
-2002-06-12  Behdad Esfahbod <farsi@behdad.org>
-	* keymap/isiri2901.kmap.gz: Proposed key positions for bidi marks
-	added.
+	* font/: Makefile.am, bdf_set_names, bicon-8x16.bdf,
+	  bicon-arabic.sfm, bicon-ascii.sfm, bicon-bdf2psf.pl,
+	  bicon-marks.sfm, bicon-nomarks.sfm, create_psf,
+	  farsi-8x16.bdf.gz, farsi_arabic.sfm, farsi_ascii.sfm,
+	  farsi_bdf2psf.pl, farsi_marks.sfm, farsi_nomarks.sfm,
+	  glyphlist.txt, glyphlist.txt.gz: renamed farsi to bicon.
+	  slightly modified Makefile.am
 
-2001-12-14  Behdad Esfahbod <behdad@bamdad.org>
-	* farsi: Makes the shells current directory to be the same as when
-	user runs the script.
+2004-02-25 21:48  behdad
 
-2001-12-05  Behdad Esfahbod <behdad@bamdad.org>
-	* fcon/fcon.c: Now accepts parameters to run instead of default /bin/sh.
-	* bin/farsi: Pass parameteres to fcon.
-	* bin/farsidict: A small script for dictionary lookup, using farsi.
+	* ChangeLog: Alkarouri: Please log your changes in ChangeLog.
 
-2001-10-13  Behdad Esfahbod <behdad@bamdad.org>
-	* */Makefile: Small changes.
+2004-02-25 21:46  behdad
 
-2001-10-04  Behdad Esfahbod <behdad@bamdad.org>
-	* fconsole/Makefile: Set target clean to remove fconsole-config too.
+	* keymap/: Makefile.am, ar.map, arab.kmap, fa.map, isiri2901.kmap:
+	  Keymaps renamed to the locale they represent.  Makefile.am fixed
+	  to find and build(compress) all keymaps.
 
-2001-9-22   Behdad Esfahbod <behdad@bamdad.org>
-	* First released under farsidev mailing list.
+2004-02-25 20:50  alkarouri
+
+	* Makefile.am, configure.ac, bin/Makefile.am, bin/abicon.in,
+	  keymap/Makefile.am: correcting keymap Makefile.am and adding a
+	  script bin/abicon
+
+2004-02-24 20:48  alkarouri
+
+	* Makefile.am, configure.ac, font/Makefile, font/Makefile.am,
+	  keymap/Makefile.am: the keymap and font directories are added to
+	  the package
+
+2004-02-18 22:02  behdad
+
+	* bin/: farsidict, farsifilter: removed farsidict and farsifilter.
+
+2004-02-18 21:59  behdad
+
+	* keymap/isiri2901.kmap: my email address updated
+
+2004-02-18 21:58  behdad
+
+	* keymap/isiri2901.kmap: typo fixed
+
+2004-02-18 21:58  behdad
+
+	* keymap/: arab.kmap, arab.kmap.gz, isiri2901.kmap,
+	  isiri2901.kmap.gz: Removed arab.kmap.gz and isiri2901.kmap.gz and
+	  added ungzipped versions.  We can compress them in build process.
+
+2004-02-18 21:54  alkarouri
+
+	* bconsole/COPYING, bjoining/COPYING, keymap/COPYING: Removing the
+	  COPYING files in subdirectories, as ./COPYING includes all info
+
+2004-01-30 15:31  behdad
+
+	* bicon.pc.in: pkgconfig file added
+
+2004-01-30 15:31  behdad
+
+	* Makefile.am, bootstrap, configure.ac, bconsole/Makefile.am,
+	  bjoining/Makefile.am: Fixes here and there.
+
+2004-01-27 10:44  alkarouri
+
+	* COPYING: Clarifying license issues in COPYING
+
+2004-01-27 02:58  behdad
+
+	* bootstrap: exit if anyone fails
+
+2004-01-27 02:55  behdad
+
+	* bootstrap: check if we need to run libtoolize
+
+2004-01-27 02:53  behdad
+
+	* bicon/bicon_read.h: Renamed binitread or something like that to
+	  bicon_read_init
+
+2004-01-27 02:38  behdad
+
+	* AUTHORS, ChangeLog, NEWS, bconsole/COPYING, bconsole/Makefile.am,
+	  bconsole/bconsole_ligature.c, bicon/Makefile.am,
+	  bicon/bicon_read.c, bjoining/COPYING, bjoining/Makefile.am,
+	  bjoining/bjoining_vis2cuni.c: Fixed Makefile.am stuff to make
+	  distcheck to work.
+
+2004-01-27 02:11  behdad
+
+	* bconsole/COPYING, bconsole/Makefile.am, bjoining/COPYING,
+	  bjoining/Makefile.am: Fixing Makefile.am (hopefully)
+
+2004-01-27 01:59  behdad
+
+	* ChangeLog, HISTORY, TODO, bootstrap, bicon/Makefile.am,
+	  bicon/bicon_so.c: General cleanup.
+
+2004-01-27 01:32  behdad
+
+	* bicon/: bconso.c, bicon.c, bicon_read.c, bicon_so.c, pty_spawn.c:
+	  Some cleanup.  Renamed bconso.c to bicon_so.c
+
+2004-01-21 05:14  elzubeir
+
+	* README, TODO, AUTHORS, HISTORY, Makefile.am, configure.ac,
+	  COPYING, ChangeLog, HISTORY.farsi, bootstrap, bin/bicon,
+	  bin/farsidict, bin/farsifilter, font/Makefile,
+	  font/farsi_ascii.sfm, font/farsi_marks.sfm,
+	  font/farsi_nomarks.sfm, font/bdf_set_names, font/create_psf,
+	  font/farsi_arabic.sfm, font/glyphlist.txt.gz,
+	  font/farsi-8x16.bdf.gz, bicon/Makefile.am, bicon/bconso.c,
+	  bicon/bicon.c, bicon/pty_spawn.c, bicon/pty_spawn.h,
+	  font/farsi_bdf2psf.pl, sbin/farsigetty, bconsole/Makefile.am,
+	  bconsole/bconsole.h, bconsole/bconsole_lig.i,
+	  bconsole/bconsole_ligature.c, bconsole/bconsole_ligature.h,
+	  bconsole/bconsole_nsm_shape.i, bconsole/edconsole,
+	  bconsole/vuconsole, bicon/bicon_read.c, bicon/bicon_read.h,
+	  bconsole/COPYING, bconsole/bconsole-config.in,
+	  bconsole/bconsole_log2con.c, bconsole/bconsole_log2con.h,
+	  bconsole/bconsole_vu.c, bjoining/Makefile.am, bjoining/arablig.i,
+	  bjoining/arabname.i, bjoining/bjoining.h,
+	  bjoining/bjoining_charprop.c, bjoining/bjoining_charprop.h,
+	  bjoining/bjoining_compose.c, bjoining/bjoining_compose.h,
+	  bjoining/bjoining_log2cuni.c, bjoining/bjoining_log2cuni.h,
+	  bjoining/compose.i, bjoining/nonspace.i, bjoining/shape.i,
+	  bjoining/bjoining-config.in, bjoining/fixfarsiye.c,
+	  bjoining/msye.c, bjoining/bjoining_vis2cuni.c, bjoining/COPYING,
+	  bjoining/bjoining_vis2cuni.h, bjoining/bjoining_vu.c,
+	  bjoining/bjoining_ye.c, bjoining/bjoining_ye.h, keymap/COPYING,
+	  keymap/arab.kmap.gz, keymap/isiri2901.kmap.gz, testtexts/fatiha,
+	  testtexts/hafez, testtexts/marks: + Initial import of the BiCon
+	  project + Codebase by Behdad, modified by M. Karouri + I just
+	  cleaned it up a little for cvs import ;)
+
+2004-01-21 05:14  elzubeir
+
+	* README, TODO, AUTHORS, HISTORY, Makefile.am, configure.ac,
+	  COPYING, ChangeLog, HISTORY.farsi, bootstrap, bin/bicon,
+	  bin/farsidict, bin/farsifilter, font/Makefile,
+	  font/farsi_ascii.sfm, font/farsi_marks.sfm,
+	  font/farsi_nomarks.sfm, font/bdf_set_names, font/create_psf,
+	  font/farsi_arabic.sfm, font/glyphlist.txt.gz,
+	  font/farsi-8x16.bdf.gz, bicon/Makefile.am, bicon/bconso.c,
+	  bicon/bicon.c, bicon/pty_spawn.c, bicon/pty_spawn.h,
+	  font/farsi_bdf2psf.pl, sbin/farsigetty, bconsole/Makefile.am,
+	  bconsole/bconsole.h, bconsole/bconsole_lig.i,
+	  bconsole/bconsole_ligature.c, bconsole/bconsole_ligature.h,
+	  bconsole/bconsole_nsm_shape.i, bconsole/edconsole,
+	  bconsole/vuconsole, bicon/bicon_read.c, bicon/bicon_read.h,
+	  bconsole/COPYING, bconsole/bconsole-config.in,
+	  bconsole/bconsole_log2con.c, bconsole/bconsole_log2con.h,
+	  bconsole/bconsole_vu.c, bjoining/Makefile.am, bjoining/arablig.i,
+	  bjoining/arabname.i, bjoining/bjoining.h,
+	  bjoining/bjoining_charprop.c, bjoining/bjoining_charprop.h,
+	  bjoining/bjoining_compose.c, bjoining/bjoining_compose.h,
+	  bjoining/bjoining_log2cuni.c, bjoining/bjoining_log2cuni.h,
+	  bjoining/compose.i, bjoining/nonspace.i, bjoining/shape.i,
+	  bjoining/bjoining-config.in, bjoining/fixfarsiye.c,
+	  bjoining/msye.c, bjoining/bjoining_vis2cuni.c, bjoining/COPYING,
+	  bjoining/bjoining_vis2cuni.h, bjoining/bjoining_vu.c,
+	  bjoining/bjoining_ye.c, bjoining/bjoining_ye.h, keymap/COPYING,
+	  keymap/arab.kmap.gz, keymap/isiri2901.kmap.gz, testtexts/fatiha,
+	  testtexts/hafez, testtexts/marks: Initial revision
+
