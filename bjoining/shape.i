@@ -73,7 +73,6 @@
   {0x06D0, 4, {0xFBE4, 0xFBE5, 0xFBE6, 0xFBE7}}, /* E */
   {0x06D2, 2, {0xFBAE, 0xFBAF}}, /* YEH BARREE */
   {0x06D3, 2, {0xFBB0, 0xFBB1}}, /* YEH BARREE WITH HAMZA ABOVE */
-  {0x200C, 1, {DELETE}}, /* ZWNJ */
-  {0x200D, 4, {DELETE, DELETE, DELETE, DELETE}}, /* ZWJ */
+  {0x200D, 4, {0x200D, 0x200D, 0x200D, 0x200D}}, /* ZWJ */
   {0x200E, 0}, /* LRM */
   {0x200F, 0}, /* RLM */

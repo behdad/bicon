@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define DELETE 0xFFFF
+#define NOLIG 0xFFFF
 
 #define ISOLATED 0
 #define FINAL 1
@@ -69,19 +69,19 @@ init_tables (
 	{
 	  join_tab[0][join_c[0]].code = p->code;
 	  join_tab[0][join_c[0]++].ty = -1;
-	  if (p->shape[1] != DELETE && p->shape[1] != p->code)
+	  if (p->shape[1] != p->code)
 	    {
 	      join_tab[0][join_c[0]].code = p->shape[1];
 	      join_tab[0][join_c[0]++].ty = 1;
 	    }
 	  if (p->num == 4)
 	    {
-	      if (p->shape[2] != DELETE && p->shape[2] != p->code)
+	      if (p->shape[2] != p->code)
 		{
 		  join_tab[1][join_c[1]].code = p->shape[2];
 		  join_tab[1][join_c[1]++].ty = 1;
 		}
-	      if (p->shape[3] != DELETE && p->shape[3] != p->code)
+	      if (p->shape[3] != p->code)
 		{
 		  join_tab[0][join_c[0]].code = p->shape[3];
 		  join_tab[0][join_c[0]++].ty = 1;
@@ -189,7 +189,7 @@ bjoining_vis2cuni (
   };
   unichar lig;
 
-  if (0 == (options & B_LOGICAL_OUTPUT))
+  if (!(options & B_LOGICAL_OUTPUT))
     {
       startindex = len - 1;
       endindex = 0;
@@ -232,7 +232,7 @@ bjoining_vis2cuni (
   if (join == YES)
     shape[save] = (shape[save] == MEDIAL) ? FINAL : ISOLATED;
 
-  if (0 == (options & B_NO_ZWJZWNJZWJ))
+  if (!(options & B_NO_ZWJZWNJZWJ))
     {
       for (counter = len, zwnl = 0, nls = 0, p = endindex; counter;
 	   --counter, p -= dir)
@@ -251,7 +251,7 @@ bjoining_vis2cuni (
 	    }
 	  if (nls == 5)
 	    {
-	      if (zwnl == 0)
+	      if (!zwnl)
 		{
 		  stoplig = malloc (len * sizeof stoplig[0]);
 		  memset (stoplig, 0, len * sizeof stoplig[0]);
@@ -272,15 +272,16 @@ bjoining_vis2cuni (
 	}
       else
 	ret[q] = vis[p];
-      if ((0 == (options & B_NO_LA_LIGATURE)) && hasprev
-	  && ((0 != (options & B_NO_ZWJZWNJZWJ) || !zwnl || stoplig[p] == 0))
+      if (!(options & B_NO_LA_LIGATURE) && hasprev
+	  && (options & B_NO_ZWJZWNJZWJ || !zwnl || !stoplig[p])
 	  && (lig = arablig (ret[q], ret[q + dir])) != NOLIG)
 	{
 	  ret[q + dir] = lig;
 	}
       else
 	{
-	  if (ret[q] != DELETE || 0 != (options & B_KEEP_JOINING_MARKS))
+	  if ((ret[q] != ZWJ && ret[q] != ZWNJ)
+	      || options & B_KEEP_JOINING_MARKS)
 	    q -= dir;
 	}
       hasprev = 1;

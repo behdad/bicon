@@ -27,6 +27,4 @@ unichar arablig (
   unichar first,
   unichar second);
 
-#define NOLIG 0xFFFF
-
 #endif

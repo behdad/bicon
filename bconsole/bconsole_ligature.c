@@ -86,7 +86,7 @@ bconsole_ligature (
   };
 
   len = *retlen;
-  if (0 == (options & B_LOGICAL_OUTPUT))
+  if (!(options & B_LOGICAL_OUTPUT))
     {
       startindex = len - 1;
       endindex = 0;
@@ -111,7 +111,7 @@ bconsole_ligature (
 	join = join_type (us[p], 1);
     }
 
-  if (0 == (options & B_NO_ZWJZWNJZWJ))
+  if (!(options & B_NO_ZWJZWNJZWJ))
     {
       for (counter = len, zwnl = 0, nls = 0, p = endindex; counter;
 	   --counter, p -= dir)
@@ -130,7 +130,7 @@ bconsole_ligature (
 	    }
 	  if (nls == 5)
 	    {
-	      if (zwnl == 0)
+	      if (!zwnl)
 		{
 		  stoplig = malloc (len * sizeof (stoplig[0]));
 		  memset (stoplig, 0, len * sizeof (stoplig[0]));
@@ -146,8 +146,8 @@ bconsole_ligature (
        --counter, p -= dir)
     {
       us[q] = us[p];
-      if ((0 == (options & B_NO_EXTRA_LIGATURE)) && hasprev
-	  && ((0 != (options & B_NO_ZWJZWNJZWJ) || !zwnl || stoplig[p] == 0))
+      if (!(options & B_NO_EXTRA_LIGATURE) && hasprev
+	  && (options & B_NO_ZWJZWNJZWJ || !zwnl || !stoplig[p])
 	  && (lig = ligature (us[q], us[q + dir])) != NOLIG)
 	{
 	  us[q + dir] = lig;
@@ -155,7 +155,7 @@ bconsole_ligature (
       else
 	{
 	  if ((us[q] != ZWJ && us[q] != ZWNJ)
-	      || 0 != (options & B_KEEP_JOINING_MARKS))
+	      || options & B_KEEP_JOINING_MARKS)
 	    q -= dir;
 	}
       hasprev = 1;
