@@ -14,7 +14,9 @@ arab_comp[] =
 #define comp_size array_size(arab_comp)
 
 int
-bjoining_compose (unichar * u, int *unilen)
+bjoining_compose (
+  unichar * u,
+  int *unilen)
 {
   int p, i;
 

@@ -3,7 +3,11 @@
 
 #include "bjoining.h"
 
-int bjoining_log2cuni (unichar * str, int len,
-		       unichar * cstr, int *clen, int options);
+int bjoining_log2cuni (
+  unichar * str,
+  int len,
+  unichar * cstr,
+  int *clen,
+  int options);
 
 #endif

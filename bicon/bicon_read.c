@@ -47,7 +47,10 @@ FriBidiCharSet utf8;
 
 
 ssize_t
-bicon_read (int fd, void *buf, size_t ct)
+bicon_read (
+  int fd,
+  void *buf,
+  size_t ct)
 {
   int buflen;
   buflen = 0;
@@ -219,7 +222,8 @@ bicon_read (int fd, void *buf, size_t ct)
 }
 
 int
-bicon_read_init (void)
+bicon_read_init (
+  void)
 {
   utf8 = fribidi_parse_charset ("UTF-8");
   if (!utf8)

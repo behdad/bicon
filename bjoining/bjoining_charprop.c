@@ -14,7 +14,8 @@ nonspac_tab[] =
 #define ns_end(i) nonspac_tab[i].end
 
 int
-bjoining_isnonspacing (unichar u)
+bjoining_isnonspacing (
+  unichar u)
 {
   int l, r, m;
 

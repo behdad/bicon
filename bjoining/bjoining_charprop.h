@@ -3,6 +3,7 @@
 
 #include "bjoining.h"
 
-int bjoining_isnonspacing (unichar u);
+int bjoining_isnonspacing (
+  unichar u);
 
 #endif

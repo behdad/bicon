@@ -8,7 +8,9 @@
 #define UBUFLEN (BUFLEN * sizeof (unichar))
 
 int
-main (int argc, char **argv)
+main (
+  int argc,
+  char **argv)
 {
   int options;
   char s[BUFLEN];

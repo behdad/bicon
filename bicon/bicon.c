@@ -8,7 +8,9 @@ char **args;
 const char SH[] = "/bin/sh";
 
 int
-main (int argc, char **argv)
+main (
+  int argc,
+  char **argv)
 {
   int i;
   args = malloc (argc * sizeof (char *));

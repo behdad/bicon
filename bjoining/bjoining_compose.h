@@ -3,6 +3,8 @@
 
 #include "bjoining.h"
 
-int bjoining_compose (unichar * s, int *len);
+int bjoining_compose (
+  unichar * s,
+  int *len);
 
 #endif

@@ -3,7 +3,11 @@
 
 #include "bconsole.h"
 
-int bconsole_log2con (unichar * str, int len, unichar * cstr, int *clen,
-		      int options);
+int bconsole_log2con (
+  unichar * str,
+  int len,
+  unichar * cstr,
+  int *clen,
+  int options);
 
 #endif

@@ -37,13 +37,16 @@ static join_table_type *join_tab[2];
 static int join_c[2];
 
 static int
-comp_unichars (CONST void *p, CONST void *q)
+comp_unichars (
+  CONST void *p,
+  CONST void *q)
 {
   return *(unichar *) p - *(unichar *) q;
 }
 
 static void
-init_tables ()
+init_tables (
+  )
 {
   int i;
   int count[5] = { 0, 0, 0, 0, 0 };
@@ -97,7 +100,9 @@ init_tables ()
 }
 
 int
-join_type (unichar w, int next)
+join_type (
+  unichar w,
+  int next)
 {
   int *p;
 
@@ -112,7 +117,8 @@ join_type (unichar w, int next)
 }
 
 con_shape_type *
-find_con_shape (unichar w)
+find_con_shape (
+  unichar w)
 {
   if (!tables_init)
     init_tables ();
@@ -136,7 +142,9 @@ arablig_type arablig_tab[] = {
 
 #define arablig_size array_size(arablig_tab)
 unichar
-arablig (unichar first, unichar second)
+arablig (
+  unichar first,
+  unichar second)
 {
   int i;
 
@@ -153,8 +161,12 @@ arablig (unichar first, unichar second)
 #undef arablig_size
 
 int
-bjoining_vis2cuni (unichar * vis, int len, unichar * ret, int *retlen,
-		   int options)
+bjoining_vis2cuni (
+  unichar * vis,
+  int len,
+  unichar * ret,
+  int *retlen,
+  int options)
 {
   enum
   { NO, YES }

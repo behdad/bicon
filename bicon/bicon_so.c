@@ -70,7 +70,8 @@ hook_function (SLtt_init_video, "libslang.so", turn_utf8_off,);
 hook_function (initscr, "libcurses.so", turn_utf8_off,);
 
 void
-init (void)
+init (
+  void)
 {
   return;
 }

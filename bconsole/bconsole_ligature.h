@@ -3,6 +3,9 @@
 
 #include "bconsole.h"
 
-int bconsole_ligature (unichar * us, int *len, int options);
+int bconsole_ligature (
+  unichar * us,
+  int *len,
+  int options);
 
 #endif

@@ -3,8 +3,12 @@
 
 #include "bjoining.h"
 
-int bjoining_vis2cuni (unichar * vis, int len,
-		       unichar * cuni, int *clen, int options);
+int bjoining_vis2cuni (
+  unichar * vis,
+  int len,
+  unichar * cuni,
+  int *clen,
+  int options);
 
 /*
  * returns the joining status of w to its (next ? "next" : "previous")
@@ -15,9 +19,13 @@ int bjoining_vis2cuni (unichar * vis, int len,
  *   1  joins
  *  -1  ambigous
  */
-int join_type (unichar w, int next);
+int join_type (
+  unichar w,
+  int next);
 
-unichar arablig (unichar first, unichar second);
+unichar arablig (
+  unichar first,
+  unichar second);
 
 #define NOLIG 0xFFFF
 

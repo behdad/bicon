@@ -5,8 +5,12 @@
 #include <string.h>
 
 int
-bjoining_log2cuni (unichar * str, int ulen, unichar * cstr, int *clen,
-		   int options)
+bjoining_log2cuni (
+  unichar * str,
+  int ulen,
+  unichar * cstr,
+  int *clen,
+  int options)
 {
   int f = 1;
   int len = ulen;

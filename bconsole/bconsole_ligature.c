@@ -18,7 +18,9 @@ lig_type lig_tab[] = {
 #define lig_size array_size(lig_tab)
 
 unichar
-ligature (unichar first, unichar second)
+ligature (
+  unichar first,
+  unichar second)
 {
   int i;
 
@@ -45,7 +47,8 @@ nsm_shape_type nsm_shape_tab[] = {
 #define nsm_shape_size array_size(nsm_shape_tab)
 
 nsm_shape_type *
-nsm_shape (unichar code)
+nsm_shape (
+  unichar code)
 {
   int i;
 
@@ -60,7 +63,10 @@ nsm_shape (unichar code)
 }
 
 int
-bconsole_ligature (unichar * us, int *retlen, int options)
+bconsole_ligature (
+  unichar * us,
+  int *retlen,
+  int options)
 {
   int p, q, len;
   unichar lig;

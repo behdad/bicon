@@ -3,8 +3,12 @@
 #include <stdlib.h>
 
 int
-bconsole_log2con (unichar * str, int ulen, unichar * cstr, int *clen,
-		  int options)
+bconsole_log2con (
+  unichar * str,
+  int ulen,
+  unichar * cstr,
+  int *clen,
+  int options)
 {
   int f = 1;
 

@@ -16,7 +16,8 @@ namely the PSF License Agreement For Python 2.2.3
 #include "pty_spawn.h"
 
 static pid_t
-_fork (int *master_fd)
+_fork (
+  int *master_fd)
 {
   pid_t pid;
   int slave_fd;
@@ -46,7 +47,10 @@ _fork (int *master_fd)
 }
 
 static int
-_copy (int master_fd, reader master_read, reader stdin_read)
+_copy (
+  int master_fd,
+  reader master_read,
+  reader stdin_read)
 {
   fd_set rfds;
   char buf[BUFLEN], *buf_p;
@@ -77,8 +81,11 @@ _copy (int master_fd, reader master_read, reader stdin_read)
 }
 
 int
-bicon_spawn (const char *file, char *const args[], reader master_read,
-	     reader stdin_read)
+bicon_spawn (
+  const char *file,
+  char *const args[],
+  reader master_read,
+  reader stdin_read)
 {
   pid_t pid;
   int master_fd;

@@ -7,7 +7,8 @@
 #define UBUFLEN (BUFLEN * sizeof (unichar))
 
 int
-main ()
+main (
+  )
 {
   char s[BUFLEN];
   unichar us[BUFLEN];
