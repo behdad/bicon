@@ -2,8 +2,8 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.57)
-AC_INIT(bicon,20040401)
-AC_CONFIG_SRCDIR([bjoining/bjoining_charprop.c])
+AC_INIT(bicon,0.0.20040401)
+AC_CONFIG_SRCDIR([bicon/bicon.c])
 AC_CONFIG_HEADER([config.h])
 AM_INIT_AUTOMAKE
 

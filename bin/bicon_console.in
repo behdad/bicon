@@ -24,7 +24,7 @@ fi
 
 loadkeys ${pkgdatadir}/keymap/$LANGUAGE.map.gz 2>/dev/null ||
 loadkeys $LANGUAGE
-setfont ${pkgdatadir}/font/bicon-8x16-512.psf.gz
+setfont ${pkgdatadir}/font/bicon-8x16-512.psfu.gz
 
 ${bindir}/bicon
 
