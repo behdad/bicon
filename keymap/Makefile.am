@@ -1,8 +1,10 @@
-keymapdir = $(pkgdatadir)/keymap
-keymap_DATA = arab.kmap.gz isiri2901.kmap.gz
+KEYMAPS = $(wildcard *.map)
 
-%.kmap.gz: %.kmap
-	gzip --stdout $*.kmap > $@
+keymapdir = $(pkgdatadir)/keymap
+keymap_DATA = $(patsubst %.map,%.map.gz,$(KEYMAPS))
+
+%.gz: %
+	gzip -9 --stdout $< > $@
 
 clean-local:
-	$(RM) *.kmap.gz
+	$(RM) *.map.gz
