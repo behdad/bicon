@@ -8,36 +8,40 @@ That being said, here is a try on explaining it.
 Prologue
 --------
 
-The program is the last in a series on programs to make the console support 
-bidirectionality. This has been needed in the Arabic, Persian and Hebrew 
-languages among others.
+The program is the last in a series on programs to make the
+console support bidirectionality. This has been needed in the
+Arabic, Persian and Hebrew languages among others.
 
 Acon
 ----
-Written by Ahmed Abdel-Hamid Mohamed, this was the first program that enjoyed 
-relatively wide support, as it was distributed in Mandrake.
+Written by Ahmed Abdel-Hamid Mohamed, this was the first program
+that enjoyed relatively wide support, as it was distributed in
+Mandrake.
 
 Akka
 ----
-The second effort has gone into improving the original acon code and giving it 
-vast additional abilities, this was the Akka project, in Arabeyes. The Akka 
-project is still there, if somebody wants to look at it. Key contributors are 
-Chahine Hamila, Mohamed Elzubeir and Samy Al Bahra. It reached the version 1.0 
-beta, but the code is becoming too complicated for further enhancements. 
-Additional information is found in the project site, at Arabeyes.
+The second effort has gone into improving the original acon code
+and giving it vast additional abilities, this was the Akka
+project, in Arabeyes. The Akka project is still there, if
+somebody wants to look at it. Key contributors are Chahine
+Hamila, Mohamed Elzubeir and Samy Al Bahra. It reached the
+version 1.0 beta, but the code is becoming too complicated for
+further enhancements.  Additional information is found in the
+project site, at Arabeyes.
 
 Farsi
 -----
-Taking place more or less parallel to the Akka development, Behdad Esfahbod - 
-widely known for his work on Fribidi - wrote "farsi", as a tool doing the same 
-job as Akka, more Persian oriented. He used code written by fellow fribidi-er 
-Roozbeh Pournader. He also used code borrowed from script(1), which is licensed
-as a "BSD with advertisement clause". This code proved to be the major stopper 
-for its distribution. More of the story can be found in HISTORY.farsi, in this 
-package.
+Taking place more or less parallel to the Akka development,
+Behdad Esfahbod - widely known for his work on FriBidi - wrote
+"farsi", as a tool doing the same job as Akka, more Persian
+oriented.  He adopted the basic joining code from Roozbeh
+Pournader, and borrowed some from script(1), mixed and matched
+with FriBidi and Voila!  The code from script(1) proved to be the
+major stopper for its distribution. More of the story can be
+found in HISTORY.farsi, in this package.
 
 At last: BiCon
 --------------
-The next step in Arabeyes was to base the code on the old farsi code. After 
-cleaning up the problematic-licensed code and enhancing Arabic support besides 
-Persian, _BiCon_ was there.
+The next step in Arabeyes was to base the code on the old farsi
+code. After cleaning up the problematic-licensed code and
+enhancing Arabic support besides Persian, _BiCon_ was there.

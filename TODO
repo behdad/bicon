@@ -1,11 +1,13 @@
+Short time:
+* Fix isiri keymap.
+* Fix Arabic keymap.
+* Fix bug with ZWNJ&ZWJ.
+* Fix build and scripts.
+
+Long time:
 * Parse command-line options.
-
 * Somehow share options between C sources and shell script!
-
 * Documentation.
-
-* Fix fconso bug, also support mc.
-
+* Fix bicon_so bug, also support mc.
 * Clean-up ZWJ-ZWNJ-ZWJ code, also support ligature-making ZWJ.
-
 * Implement fcon as shared library (stick on fd 1 and 2 if point to tty)!

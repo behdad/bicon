@@ -1,3 +1,14 @@
+2004-January  Behdad Esfahbod <farsi@behdad.org>
+	* *: Well, code is handed to Arabeyes people.  Decided to
+	change the name to "BiCon".  I'm not going to be the
+	maintainer anymore (hopefully).  Already imported to
+	Arabeyes CVS.  These nice people have removed the code
+	borrowed from "script" and replaced with code from Python
+	sources.  We are still to make changes to fit the new
+	system.  Thanks guys.
+
+==========================================================================
+
 2002-06-13  Behdad Esfahbod <farsi@behdad.org>
 	* */*.[ch]: Major changes.  Support many options now, among them is
 	the option to output logical text, not visual.

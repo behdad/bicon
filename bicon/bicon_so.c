@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <dlfcn.h>
 
-#define NAME "bconso"
+#define NAME "bicon.so"
 
 #define default_lang "en_US"
 #define utf8_on_str "\e%G"
