@@ -13,8 +13,8 @@ else
 	echo -ne '\033%G'
 fi
 
-loadkeys ${pkgdatadir}/keymap/arab.kmap.gz 2>/dev/null
-setfont ${pkgdatadir}/font/farsi-8x16-512.psf.gz
+loadkeys ${pkgdatadir}/keymap/ar.map.gz 2>/dev/null
+setfont ${pkgdatadir}/font/bicon-8x16-512.psf.gz
 
 ${bindir}/bicon
 
