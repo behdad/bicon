@@ -1,0 +1,10 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: BiCon
+Description: Bidi Console Tools
+Version: @VERSION@
+Libs: -L${libdir} -lbjoining -lbconsole
+Cflags: -I${includedir}/bicon
