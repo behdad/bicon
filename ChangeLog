@@ -1,25 +1,162 @@
-2004-03-31 05:49  alkarouri
+2004-04-01 08:33  behdad
+
+	* README, bin/bicon.in, doc/man/Makefile.am, doc/man/bicon.1,
+	  doc/man/bicon.bin.1: Wow, now bicon(1) works for X terminals too!
+
+2004-04-01 06:44  behdad
+
+	* bicon/.cvsignore: One more.  Sorry for the noise ;).
+
+2004-04-01 06:44  behdad
+
+	* .cvsignore, bconsole/.cvsignore, bjoining/.cvsignore,
+	  font/.cvsignore, keymap/.cvsignore: .cvsignore added for each
+	  directory that needs it.  Happy "cvs up"ing :).
+
+2004-04-01 06:43  behdad
+
+	* CVSROOT/cvsignore: Added, with typicall autotools based common
+	  files to ignore.
+
+2004-04-01 06:35  behdad
+
+	* README, configure.ac: Changed to create bin/bicon instead of
+	  bin/bicon_console.
+
+2004-04-01 06:35  behdad
+
+	* bicon/Makefile.am: The output is called bicon.bin now, instead of
+	  bicon.
+
+2004-04-01 06:34  behdad
+
+	* bin/: Makefile.am, bicon, bicon.in, bicon.old, bicon_console.in:
+	  bicon renamed to bicon.old, bicon_console.in renamed to bicon.in
+
+2004-04-01 06:33  behdad
+
+	* bconsole/bconsole_ligature.c, bjoining/bjoining_vis2cuni.c,
+	  bjoining/bjoining_vis2cuni.h, bjoining/shape.i: A bug causing
+	  ZWNJ to be converted to U-FFFF fixed.  Also some code cleanup.
+
+2004-04-01 06:33  behdad
+
+	* doc/man/: bicon.1, bicon.bin.1: Changed accordingly and added
+
+2004-04-01 06:32  behdad
+
+	* doc/man/: Makefile.am, bicon.1, bicon_console.1: Sorry, I'm
+	  renaming bicon_console to bicon, and bicon to bicon.bin.
+
+2004-04-01 05:50  behdad
+
+	* .indent.pro: "unichar" added as a type.
+
+2004-04-01 05:47  behdad
+
+	* bconsole/: edconsole, vuconsole: Removed.  All they did was to
+	  set font (different fonts each) and cat "$@" to bconsole_vu.
+	  Later bconsole_start can be called to set the fonts.	We may add
+	  something like these again.
+
+2004-04-01 05:43  behdad
+
+	* NEWS: NEWS updated for release.
+
+2004-04-01 05:40  behdad
+
+	* bconsole/bconsole_ligature.c, bconsole/bconsole_ligature.h,
+	  bconsole/bconsole_log2con.c, bconsole/bconsole_log2con.h,
+	  bconsole/bconsole_vu.c, bicon/bicon.c, bicon/bicon_read.c,
+	  bicon/bicon_read.h, bicon/bicon_so.c, bicon/pty_spawn.c,
+	  bicon/pty_spawn.h, bjoining/bjoining_charprop.c,
+	  bjoining/bjoining_charprop.h, bjoining/bjoining_compose.c,
+	  bjoining/bjoining_compose.h, bjoining/bjoining_log2cuni.c,
+	  bjoining/bjoining_log2cuni.h, bjoining/bjoining_vis2cuni.c,
+	  bjoining/bjoining_vis2cuni.h, bjoining/bjoining_vu.c,
+	  bjoining/bjoining_ye.c, bjoining/bjoining_ye.h,
+	  bjoining/fixfarsiye.c, bjoining/msye.c: Autoindented with GNU
+	  syntax. (not much difference)
+
+2004-04-01 05:37  behdad
+
+	* Makefile.am: Added phony targets ChangeLog-update and indent.
+
+2004-04-01 05:37  behdad
+
+	* INSTALL: Removed INSTALL.  ./bootstrap creates it.
+
+2004-04-01 05:28  behdad
+
+	* .indent.pro, Makefile.am, font/Makefile.am, keymap/Makefile.am:
+	  indent(1) config file added.
+
+2004-04-01 04:49  behdad
+
+	* testtext/: Makefile.am, fatiha, hafez, marks: These are just
+	  renamed from testtexts/
+
+2004-04-01 04:48  behdad
+
+	* Makefile.am, configure.ac, keymap/Makefile.am: renamed testtexts/
+	  to testtext/
+
+2004-04-01 04:35  behdad
+
+	* Makefile.am, configure.ac, bin/bicon_console.in,
+	  doc/man/Makefile.am: Fixing "make distcheck".  Not done yet.
+	  wait.
+
+2004-04-01 04:34  behdad
+
+	* font/create_psf: Removing a file modified by a third party is
+	  damn hard :(.  Finally done I guess.
+
+2004-04-01 04:33  behdad
+
+	* font/Makefile.am, font/bicon-arabic.sfm,
+	  font/bicon-arabic.sub-sfm, font/bicon-ascii.sfm,
+	  font/bicon-ascii.sub-sfm, font/bicon-marks.sfm,
+	  font/bicon-marks.sub-sfm, font/bicon-nomarks.sfm,
+	  font/bicon-nomarks.sub-sfm, keymap/Makefile.am: Rewritten for
+	  better build.
+
+2004-04-01 03:54  alkarouri
+
+	* Makefile.am, configure.ac, font/Makefile.am, font/create_psf,
+	  keymap/Makefile.am: Fixes for Makfile.am so make distcheck works
+
+2004-03-31 00:17  alkarouri
+
+	* Makefile.cvs: Makefile.cvs calls ./bootstrap. Conforming with
+	  developers guide.
+
+2004-03-31 00:06  alkarouri
+
+	* ChangeLog: Updating ChangeLog for alpha release
+
+2004-03-30 23:49  alkarouri
 
 	* ChangeLog, doc/man/bicon_console.1: minor corrections to the man
 	  page of bicon_console
 
-2004-03-31 05:22  alkarouri
+2004-03-30 23:22  alkarouri
 
 	* doc/man/bicon.1: minor corrections to the man page of bicon
 
-2004-03-31 04:18  alkarouri
+2004-03-30 22:18  alkarouri
 
 	* README, configure.ac, bin/Makefile.am, bin/abicon.in,
 	  bin/bicon_console.in, doc/man/Makefile.am, doc/man/abicon.1,
 	  doc/man/bicon.1, doc/man/bicon_console.1: renaming abicon to
 	  bicon_console, all references
 
-2004-03-31 04:06  behdad
+2004-03-30 22:06  behdad
 
 	* keymap/: Makefile.am, ar.map, arabic.map: renamed ar.map to
 	  arabic.map.  ar.map probably is reserved for Argentina.
 
-2004-03-31 03:44  alkarouri
+2004-03-30 21:44  alkarouri
 
 	* ChangeLog, configure.ac, bin/abicon.in, keymap/Makefile.am: -
 	  make install now creates arabic countries keymaps as symbolic
@@ -27,77 +164,85 @@
 	  rather than the language, as different keymaps exist for the same
 	  language (Arabic).
 
-2004-03-29 15:25  behdad
+2004-03-29 09:25  behdad
 
 	* keymap/: fa.map, ir.map: Renamed "fa.map" to "ir.map", as this is
 	  the way to name keymaps.  "ar" should be renamed too if it's the
 	  layout for a specific country.  Is it?
 
-2004-03-29 14:59  behdad
+2004-03-29 08:59  behdad
 
 	* bin/abicon.in: Try system's keymaps if we don't have a keymap for
 	  the language.
 
-2004-03-28 21:46  behdad
+2004-03-28 15:46  behdad
 
 	* README: Wrapped lines in README
 
-2004-03-28 21:42  alkarouri
+2004-03-28 15:42  alkarouri
 
 	* INSTALL, README: updating README
 
-2004-03-28 21:31  behdad
+2004-03-28 15:31  behdad
 
 	* bin/abicon.in: Using sed to cut out of LANG.	No bashism.
 
-2004-03-28 21:06  alkarouri
+2004-03-28 15:06  alkarouri
 
 	* ChangeLog, Makefile.am, configure.ac, doc/Makefile.am,
 	  doc/man/Makefile.am: configure installation of man pages
 
-2004-03-28 20:34  alkarouri
+2004-03-28 14:34  alkarouri
 
 	* doc/man/abicon.1: added abicon man page
 
-2004-03-28 16:05  alkarouri
+2004-03-28 10:05  alkarouri
 
 	* bin/abicon.in: abicon gets its default language from the LANG
 	  parameter
 
-2004-03-28 00:51  behdad
+2004-03-28 02:25  elzubeir
+
+	* CVSROOT/writers: + adding Ahmed Negm
+
+2004-03-27 19:51  behdad
 
 	* bin/abicon.in: Now you can invoke "abicon fa" to get a Persian
 	  keyboard.
 
-2004-03-28 00:50  behdad
+2004-03-27 19:50  behdad
 
 	* keymap/ar.map: Removed wrong header from Arabic map.
 
-2004-03-21 21:35  behdad
+2004-03-21 16:35  behdad
 
 	* ChangeLog: ChangeLog generated from CVS log
 
-2004-03-14 22:47  alkarouri
+2004-03-14 17:47  alkarouri
 
 	* doc/man/bicon.1: Writing the man page for bicon.
 
-2004-03-12 03:17  alkarouri
+2004-03-12 17:43  nadim
+
+	* CVSROOT/writers: + Added Ahmad Tarek to the mix
+
+2004-03-11 22:17  alkarouri
 
 	* bin/abicon.in: correcting abicon with the new naming
 	  (farsi=>bicon)
 
-2004-02-26 03:43  behdad
+2004-02-25 22:43  behdad
 
 	* AUTHORS, ChangeLog, HISTORY, Makefile.am: Appended old ChangeLog
 	  to HISTORY.  ChangeLog is going to be generated by calling cvs2cl
 	  periodically.  Don't forget to call it before making dist.  I
 	  would automate this later.
 
-2004-02-26 03:31  behdad
+2004-02-25 22:31  behdad
 
 	* ChangeLog, keymap/Makefile.am: Ok, removed changelog entry ;).
 
-2004-02-26 03:13  behdad
+2004-02-25 22:13  behdad
 
 	* font/: Makefile.am, bdf_set_names, bicon-8x16.bdf,
 	  bicon-arabic.sfm, bicon-ascii.sfm, bicon-bdf2psf.pl,
@@ -107,78 +252,90 @@
 	  glyphlist.txt, glyphlist.txt.gz: renamed farsi to bicon.
 	  slightly modified Makefile.am
 
-2004-02-26 02:48  behdad
+2004-02-25 21:48  behdad
 
 	* ChangeLog: Alkarouri: Please log your changes in ChangeLog.
 
-2004-02-26 02:46  behdad
+2004-02-25 21:46  behdad
 
 	* keymap/: Makefile.am, ar.map, arab.kmap, fa.map, isiri2901.kmap:
 	  Keymaps renamed to the locale they represent.  Makefile.am fixed
 	  to find and build(compress) all keymaps.
 
-2004-02-26 01:50  alkarouri
+2004-02-25 20:50  alkarouri
 
 	* Makefile.am, configure.ac, bin/Makefile.am, bin/abicon.in,
 	  keymap/Makefile.am: correcting keymap Makefile.am and adding a
 	  script bin/abicon
 
-2004-02-25 01:48  alkarouri
+2004-02-24 20:48  alkarouri
 
 	* Makefile.am, configure.ac, font/Makefile, font/Makefile.am,
 	  keymap/Makefile.am: the keymap and font directories are added to
 	  the package
 
-2004-02-19 03:02  behdad
+2004-02-18 22:02  behdad
 
 	* bin/: farsidict, farsifilter: removed farsidict and farsifilter.
 
-2004-02-19 02:59  behdad
+2004-02-18 21:59  behdad
 
 	* keymap/isiri2901.kmap: my email address updated
 
-2004-02-19 02:58  behdad
+2004-02-18 21:58  behdad
 
 	* keymap/isiri2901.kmap: typo fixed
 
-2004-02-19 02:58  behdad
+2004-02-18 21:58  behdad
 
 	* keymap/: arab.kmap, arab.kmap.gz, isiri2901.kmap,
 	  isiri2901.kmap.gz: Removed arab.kmap.gz and isiri2901.kmap.gz and
 	  added ungzipped versions.  We can compress them in build process.
 
-2004-02-19 02:54  alkarouri
+2004-02-18 21:54  alkarouri
 
 	* bconsole/COPYING, bjoining/COPYING, keymap/COPYING: Removing the
 	  COPYING files in subdirectories, as ./COPYING includes all info
 
-2004-01-30 20:31  behdad
+2004-02-17 17:02  nadim
+
+	* CVSROOT/writers: + Added Ahmad Khalifa
+
+2004-02-17 16:33  nadim
+
+	* CVSROOT/writers: + Added Musab Al-Rawi
+
+2004-02-10 02:02  elzubeir
+
+	* CVSROOT/writers: + Adding elqabbany
+
+2004-01-30 15:31  behdad
 
 	* bicon.pc.in: pkgconfig file added
 
-2004-01-30 20:31  behdad
+2004-01-30 15:31  behdad
 
 	* Makefile.am, bootstrap, configure.ac, bconsole/Makefile.am,
 	  bjoining/Makefile.am: Fixes here and there.
 
-2004-01-27 15:44  alkarouri
+2004-01-27 10:44  alkarouri
 
 	* COPYING: Clarifying license issues in COPYING
 
-2004-01-27 07:58  behdad
+2004-01-27 02:58  behdad
 
 	* bootstrap: exit if anyone fails
 
-2004-01-27 07:55  behdad
+2004-01-27 02:55  behdad
 
 	* bootstrap: check if we need to run libtoolize
 
-2004-01-27 07:53  behdad
+2004-01-27 02:53  behdad
 
 	* bicon/bicon_read.h: Renamed binitread or something like that to
 	  bicon_read_init
 
-2004-01-27 07:38  behdad
+2004-01-27 02:38  behdad
 
 	* AUTHORS, ChangeLog, NEWS, bconsole/COPYING, bconsole/Makefile.am,
 	  bconsole/bconsole_ligature.c, bicon/Makefile.am,
@@ -186,22 +343,30 @@
 	  bjoining/bjoining_vis2cuni.c: Fixed Makefile.am stuff to make
 	  distcheck to work.
 
-2004-01-27 07:11  behdad
+2004-01-27 02:11  behdad
 
 	* bconsole/COPYING, bconsole/Makefile.am, bjoining/COPYING,
 	  bjoining/Makefile.am: Fixing Makefile.am (hopefully)
 
-2004-01-27 06:59  behdad
+2004-01-27 01:59  behdad
 
 	* ChangeLog, HISTORY, TODO, bootstrap, bicon/Makefile.am,
 	  bicon/bicon_so.c: General cleanup.
 
-2004-01-27 06:32  behdad
+2004-01-27 01:32  behdad
 
 	* bicon/: bconso.c, bicon.c, bicon_read.c, bicon_so.c, pty_spawn.c:
 	  Some cleanup.  Renamed bconso.c to bicon_so.c
 
-2004-01-21 10:14  elzubeir
+2004-01-22 00:53  nadim
+
+	* CVSROOT/writers: + Added 'Muhammad Alkarouri' to commit access
+
+2004-01-21 07:31  elzubeir
+
+	* CVSROOT/modules: CVS_SILENT added bicon module alias
+
+2004-01-21 05:14  elzubeir
 
 	* README, TODO, AUTHORS, HISTORY, Makefile.am, configure.ac,
 	  COPYING, ChangeLog, HISTORY.farsi, bootstrap, bin/bicon,
@@ -228,12 +393,11 @@
 	  bjoining/msye.c, bjoining/bjoining_vis2cuni.c, bjoining/COPYING,
 	  bjoining/bjoining_vis2cuni.h, bjoining/bjoining_vu.c,
 	  bjoining/bjoining_ye.c, bjoining/bjoining_ye.h, keymap/COPYING,
-	  keymap/arab.kmap.gz, keymap/isiri2901.kmap.gz, testtexts/fatiha,
-	  testtexts/hafez, testtexts/marks: + Initial import of the BiCon
-	  project + Codebase by Behdad, modified by M. Karouri + I just
-	  cleaned it up a little for cvs import ;)
+	  keymap/arab.kmap.gz, keymap/isiri2901.kmap.gz: + Initial import
+	  of the BiCon project + Codebase by Behdad, modified by M. Karouri
+	  + I just cleaned it up a little for cvs import ;)
 
-2004-01-21 10:14  elzubeir
+2004-01-21 05:14  elzubeir
 
 	* README, TODO, AUTHORS, HISTORY, Makefile.am, configure.ac,
 	  COPYING, ChangeLog, HISTORY.farsi, bootstrap, bin/bicon,
@@ -260,6 +424,457 @@
 	  bjoining/msye.c, bjoining/bjoining_vis2cuni.c, bjoining/COPYING,
 	  bjoining/bjoining_vis2cuni.h, bjoining/bjoining_vu.c,
 	  bjoining/bjoining_ye.c, bjoining/bjoining_ye.h, keymap/COPYING,
-	  keymap/arab.kmap.gz, keymap/isiri2901.kmap.gz, testtexts/fatiha,
-	  testtexts/hafez, testtexts/marks: Initial revision
+	  keymap/arab.kmap.gz, keymap/isiri2901.kmap.gz: Initial revision
+
+2004-01-15 01:49  elzubeir
+
+	* CVSROOT/readers: making sure 'arabeyes' is a read-only
+
+2004-01-13 15:37  nadim
+
+	* CVSROOT/writers: + Added Abd El-Rahman Ghareeb (ghareeb) +
+	  Translation volunteer
+
+2004-01-12 19:25  nadim
+
+	* CVSROOT/writers: + Added Ahmed El-Helw (ahmedre)
+
+2003-12-14 13:20  nadim
+
+	* CVSROOT/writers: Added Thamer Mahmoud
+
+2003-11-23 02:52  elzubeir
+
+	* CVSROOT/writers: CVS_SILENT: adding zawawi
+
+2003-11-06 01:37  elzubeir
+
+	* CVSROOT/writers: CVS_SILENT : adding Hassan Abdin
+
+2003-11-02 02:08  elzubeir
+
+	* CVSROOT/cvswrappers: CVS_SILENT: oops -- stw not sxt (writer
+	  template)
+
+2003-11-02 01:55  elzubeir
+
+	* CVSROOT/cvswrappers: + adding -kb wrappers for OOo documents
+
+2003-09-05 18:36  nadim
+
+	* CVSROOT/writers: CVS_SILENT + removed chahine (he has no entry in
+	  cvs.passwd) + reshuffled order of people to reflect that which is
+	  in cvs.passwd   (easier to find people and verify things that
+	  way)
+
+2003-09-05 18:17  nadim
+
+	* CVSROOT/writers: CVS_SILENT added benmoussa (not sure why he was
+	  removed)
+
+2003-09-01 01:27  elzubeir
+
+	* CVSROOT/writers: CVS_SILENT adding Hafid Benhadria
+
+2003-08-25 20:35  nadim
+
+	* CVSROOT/loginfo: + Ooops, my bad - sorry; reverted back to normal
+	  state
+
+2003-08-25 20:33  nadim
+
+	* CVSROOT/loginfo: + Added cvs_mail_log entry
+
+2003-08-25 07:23  elzubeir
+
+	* CVSROOT/writers: + Revoked write access from several idlers
+
+2003-08-10 04:41  elzubeir
+
+	* CVSROOT/loginfo: CVS_SILENT: adding a tmp tester
+
+2003-08-03 08:30  elzubeir
+
+	* CVSROOT/: loginfo, verifymsg: + Updating location of scripts
+
+2003-07-11 18:33  nadim
+
+	* CVSROOT/writers: CVS_SILENT - Changed oueja to anmar
+	  (consistency)
+
+2003-07-09 06:27  elzubeir
+
+	* CVSROOT/writers: CVS_SILENT: adding twaijry
+
+2003-07-07 01:42  elzubeir
+
+	* CVSROOT/writers: CVS_SILENT: added alrasheedan user
+
+2003-06-17 04:02  elzubeir
+
+	* CVSROOT/modules: SILENT_CVS: added itl module, replaced maalam
+	  with bayani
+
+2003-06-17 03:18  elzubeir
+
+	* CVSROOT/loginfo: CVS_SILENT: changed location
+
+2003-06-17 03:15  elzubeir
+
+	* CVSROOT/verifymsg: CVS_SILENT: changed location
+
+2003-05-20 07:07  elzubeir
+
+	* CVSROOT/loginfo: CVS_SILENT changing hostname
+
+2003-05-02 17:50  elzubeir
+
+	* CVSROOT/writers: CVS_SILENT tester
+
+2003-04-25 14:23  elzubeir
+
+	* CVSROOT/writers: CVS_SILENT adding saleh user
+
+2003-03-22 16:45  elzubeir
+
+	* CVSROOT/loginfo: CVS_SILENT updating list address
+
+2003-03-22 16:36  elzubeir
+
+	* CVSROOT/loginfo: CVS_SILENT adding explicit hostname
+
+2003-03-19 09:29  elzubeir
+
+	* CVSROOT/writers: CVS_SILENT added harthi
+
+2003-03-18 03:42  elzubeir
+
+	* CVSROOT/writers: CVS_SILENT added obeid
+
+2003-03-11 23:21  elzubeir
+
+	* CVSROOT/writers: CVS_SILENT added oueja
+
+2003-03-04 11:37  elzubeir
+
+	* CVSROOT/writers: CVS_SILENT: new account
+
+2003-03-02 07:35  elzubeir
+
+	* CVSROOT/writers: CVS_SILENT adding 'raffa'
+
+2003-02-28 14:57  elzubeir
+
+	* CVSROOT/writers: CVS_SILENT adding 'sayed'
+
+2003-02-09 02:13  elzubeir
+
+	* CVSROOT/writers: CVS_SILENT added 'abdin'
+
+2003-02-07 18:03  elzubeir
+
+	* CVSROOT/writers: CVS_SILENT adding amaoui back... jeez
+
+2003-02-07 17:05  elzubeir
+
+	* CVSROOT/writers: CVS_SILENT Removing 'amaoui'
+
+2003-02-01 16:27  elzubeir
+
+	* CVSROOT/writers: CVS_SILENT - adding accounts
+
+2003-01-11 16:56  elzubeir
+
+	* CVSROOT/writers: + ignore - admin adding 'hashraf'
+
+2003-01-03 18:01  elzubeir
+
+	* CVSROOT/writers: + ignore - admin
+
+2003-01-02 14:34  elzubeir
+
+	* CVSROOT/writers: + ignore - admin -- adding 'benmoussa'
+
+2003-01-01 03:01  elzubeir
+
+	* CVSROOT/writers: + ignore - admin
+
+2002-12-30 15:57  elzubeir
+
+	* CVSROOT/writers: + ignore - admin -- adding afattah
+
+2002-12-15 11:08  elzubeir
+
+	* CVSROOT/loginfo: This is just a test.. adding silly RCS headers
+	  anyway
+
+2002-12-15 11:04  elzubeir
+
+	* CVSROOT/config: testing.. this is just a test
+
+2002-12-14 20:50  elzubeir
+
+	* CVSROOT/loginfo: + ignore - admin
+
+2002-12-14 20:46  elzubeir
+
+	* CVSROOT/modules: + ignore - admin + added maalam and quran
+	  modules
+
+2002-12-14 20:44  elzubeir
+
+	* CVSROOT/loginfo: + ignore - admin
+
+2002-12-10 14:43  elzubeir
+
+	* CVSROOT/writers: + ignore - admin -- adding 'kayat'
+
+2002-12-09 10:38  elzubeir
+
+	* CVSROOT/cvswrappers: + ignore - admin
+
+2002-12-06 19:41  elzubeir
+
+	* CVSROOT/writers: + ignore - admin -- adding aminagha once again
+
+2002-11-30 18:02  elzubeir
+
+	* CVSROOT/writers: + ignore - admin
+
+2002-11-27 08:40  elzubeir
+
+	* CVSROOT/writers: + ignore - admin + removing aminagha
+
+2002-11-02 11:03  elzubeir
+
+	* CVSROOT/cvswrappers: + Set .ogg files to default to being
+	  binaries (so committer does not need	 to explicitly specify it
+	  is)
+
+2002-11-01 17:14  elzubeir
+
+	* CVSROOT/writers: + ignore - admin + adding alnajem (Linux Kuwait)
+
+2002-10-29 09:02  elzubeir
+
+	* CVSROOT/writers: + ignore - admin -- adding alghadban
+
+2002-10-29 01:23  elzubeir
+
+	* CVSROOT/writers: + ignore - admin -- adding daghrir and damt
+
+2002-10-21 17:27  elzubeir
+
+	* CVSROOT/writers: + ignore - admin + Isam says put him back on
+
+2002-10-12 11:40  elzubeir
+
+	* CVSROOT/writers: + ignore - admin - removing write access from
+	  'aminagha'
+
+2002-09-14 01:02  elzubeir
+
+	* CVSROOT/writers: + ignore - admin | reverted last action
+
+2002-09-13 17:54  elzubeir
+
+	* CVSROOT/writers: + ignore - admin -- suspending account
+
+2002-09-03 13:55  elzubeir
+
+	* CVSROOT/writers: ignore - admin
+
+2002-08-29 12:04  elzubeir
+
+	* CVSROOT/writers: + ignore - admin + Added new committer "Nuriddin
+	  Aminagha" (aminagha)
+
+2002-08-22 21:32  elzubeir
+
+	* CVSROOT/writers: + ignore - admin + Added new committer Hany
+	  Heggy 'heggy'
+
+2002-06-10 16:00  elzubeir
+
+	* CVSROOT/writers: ignore - admin added 'behdad' (autotools
+	  experience -- misc)
+
+2002-06-08 17:48  elzubeir
+
+	* CVSROOT/writers: ignore - admin + Added committer 'bahra'
+	  (projects/akka)
+
+2002-06-07 18:03  elzubeir
+
+	* CVSROOT/modules: ignore - admin + Added module aliases
+
+2002-06-07 17:56  elzubeir
+
+	* CVSROOT/modules: ignore - admin + fux
+
+2002-06-07 17:53  elzubeir
+
+	* CVSROOT/: config, modules: ignore - admin + added configs and
+	  modules
+
+2002-06-07 15:58  elzubeir
+
+	* CVSROOT/writers: ignore - admin + Removed idle accounts
+	  (eldesoky,majid)
+
+2002-06-03 14:57  elzubeir
+
+	* CVSROOT/writers: ignore - admin + Added new committer 'forkani'
+	  (projects/edara)
+
+2002-06-02 17:19  elzubeir
+
+	* CVSROOT/writers: ignore - admin + Added new committer 'dalal'
+	  (projects/external/putty)
+
+2002-05-24 20:54  elzubeir
+
+	* CVSROOT/verifymsg: ignore - admin Verify that log msg is present
+
+2002-05-19 00:11  elzubeir
+
+	* CVSROOT/writers: ignore - admin + Added new committer
+
+2002-05-12 14:38  elzubeir
+
+	* CVSROOT/writers: + Added new committer (translate/) 'medini'
+
+2002-04-29 11:19  elzubeir
+
+	* CVSROOT/writers: + Added committer 'bouhlel' [translate/]
+
+2002-04-24 19:17  elzubeir
+
+	* CVSROOT/writers: + Added new committer [saad] (translate/)
+
+2002-04-21 16:00  elzubeir
+
+	* CVSROOT/writers: + Added new committer 'aser' (translate/)
+
+2002-04-20 11:39  elzubeir
+
+	* CVSROOT/writers: + Removed two inactive accounts, 'shafei' and
+	  'ibrahim'
+
+2002-04-09 02:45  elzubeir
+
+	* CVSROOT/writers: + Added new committer 'khatib' (translate/kde)
+
+2002-03-29 01:04  elzubeir
+
+	* CVSROOT/writers: + Added new committer 'nashif' (projects/)
+
+2002-03-19 17:09  elzubeir
+
+	* CVSROOT/writers: + Added new committer 'ibrahim' (translate/kde)
+
+2002-03-19 12:54  elzubeir
+
+	* CVSROOT/loginfo: IGNORE - Admin + Removed revision numbers from
+	  subject
+
+2002-03-19 01:41  elzubeir
+
+	* CVSROOT/loginfo: + Made changes to adapt to cvs_mail_log script
+
+2002-03-18 00:21  elzubeir
+
+	* CVSROOT/loginfo: + Adding fullname to notification logs
+
+2002-03-17 02:01  elzubeir
+
+	* CVSROOT/: loginfo, writers: + Added new committer 'soliman' +
+	  Enhanced log
+
+2002-03-16 01:07  elzubeir
+
+	* CVSROOT/loginfo: administrative (ignore)
+
+2002-02-18 09:41  elzubeir
+
+	* CVSROOT/writers: + Added new committer 'shaari'
+
+2002-02-13 17:51  elzubeir
+
+	* CVSROOT/writers: + Added new member 'bouafif' (projects/)
+
+2002-02-12 09:15  elzubeir
+
+	* CVSROOT/writers: + Added new committer 'chebil' (translate/)
+
+2002-02-10 15:55  elzubeir
+
+	* CVSROOT/writers: + Added new committer 'haydar'
+	  (projects/distro/haydarlinux/)
+
+2002-02-05 00:04  elzubeir
+
+	* CVSROOT/writers: + Removed two comiiters (sowaileh and almuhairi)
+
+2002-02-03 14:50  elzubeir
+
+	* CVSROOT/writers: + Added new committer 'hamed' (translate/kde)
+
+2002-01-27 15:25  elzubeir
+
+	* CVSROOT/writers: + Added new committer 'elmehdi'
+	  (translate/gnome)
+
+2002-01-22 19:22  elzubeir
+
+	* CVSROOT/writers: + Added new committer 'jasmi' -->  'translate/'
+
+2002-01-20 00:29  elzubeir
+
+	* CVSROOT/writers: + Added new committer 'hatem' (projects/edara) +
+	  Added new committer 'usama' (projects/edara)
+
+2002-01-19 00:13  elzubeir
+
+	* CVSROOT/writers: Added new committer -- Baher Badr projects/edara
+
+2002-01-14 02:13  elzubeir
+
+	* CVSROOT/writers: Added new CVS committer (Ahmed Al Issaei) -
+	  translate/
+
+2001-12-30 21:08  elzubeir
+
+	* CVSROOT/writers: Added new CVS comitter 'shafei' - translate/kde
+
+2001-12-29 21:02  elzubeir
+
+	* CVSROOT/writers: Added new CVS committer 'chaddad'
+
+2001-12-28 17:01  elzubeir
+
+	* CVSROOT/writers: Added new CVS committer 'mosawi'
+
+2001-12-28 13:32  elzubeir
+
+	* CVSROOT/writers: Added new committer 'moustapha' - translate/kde
+
+2001-12-25 17:21  elzubeir
+
+	* CVSROOT/readers: + Explicitly adding 'anoncvs' as reader
+
+2001-12-25 16:54  elzubeir
+
+	* CVSROOT/writers: + Added list of users with write access
+
+2001-12-25 16:54  elzubeir
+
+	* CVSROOT/loginfo: + Added password file, and loginfo (to send
+	  notification emails)
+
+2001-12-24 23:07  elzubeir
+
+	* CVSROOT/: checkoutlist, commitinfo, config, cvswrappers,
+	  editinfo, loginfo, modules, notify, rcsinfo, taginfo, verifymsg:
+	  initial checkin
 
