@@ -18,7 +18,7 @@
 .SH NAME
 bicon \- bidirectional console
 .SH SYNOPSIS
-.B bicon
+.B bicon [command]
 .SH DESCRIPTION
 .B bicon
 is a console program that supports bidirectional text display, for languages like Arabic, Persian and Hebrew.
@@ -32,8 +32,13 @@ does not load the keymap or font. Please use
 to get proper support for your BiDi language, including loading your keymap and font.
 
 .SH OPTIONS
+.TP
+command
+is executed by
 .B bicon
-currently has no options.
+after it loads. If omitted,
+.B bicon
+uses the current SHELL, or /bin/sh if SHELL is undefined.
 
 .SH AUTHOR
 This manual page was written by Muhammad Alkarouri, of the Arabeyes project.
