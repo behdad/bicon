@@ -7,13 +7,13 @@ libtoolize --automake --force --copy || exit 1
 #aclocal -I ./m4
 aclocal || exit 1
 
-autoheader || exit 1
+autoheader --warnings=all || exit 1
 
 #  generate Makefile.in's from Makefile.am's
-automake --add-missing --force --copy || exit 1
+automake --warnings=all --add-missing --force --copy || exit 1
 
 # generate configure from configure.in
-autoconf --force || exit 1
+autoconf --warnings=all --force || exit 1
 
 #echo "Now run ./configure"
 #./configure "$@" || exit 1
