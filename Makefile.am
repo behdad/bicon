@@ -18,3 +18,12 @@ MAINTAINERCLEANFILES = \
 		ltmain.sh \
 		missing \
 		`find -name Makefile.in`
+
+.PHONY: ChangeLog-update indent
+
+ChangeLog-update:
+	cvs2cl
+
+indent:
+	test -f .indent.pro || { echo ".indent.pro not found"; false; }
+	find -name "*.[ch]" | xargs indent
