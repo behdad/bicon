@@ -1,3 +1,5 @@
+##                                               -*- Automake -*-
+## Process this file with automake to produce Makefile.in
 ##############################################################################
 ## $Id$
 ## $Author$
@@ -5,11 +7,11 @@
 ## $Revision$
 ## $Source$
 ##############################################################################
-##                                               -*- Automake -*-
-## Process this file with automake to produce Makefile.in
 
 ## The order of subdirs is important, don't change without a reason.
 SUBDIRS = bjoining bconsole bicon keymap font bin doc testtext
+
+EXTRA_DIST = bootstrap ChangeLog.old
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = @PACKAGE@.pc
@@ -29,26 +31,42 @@ MAINTAINERCLEANFILES = \
 		$(srcdir)/ltmain.sh \
 		$(srcdir)/missing \
 		`find "$(srcdir)" -type f -name Makefile.in -print` \
-		`find "$(srcdir)" -type f -name "*~" -print`
+		`find "$(srcdir)" -type f -name "*~" -print` \
+		`$(srcdir)/bootstrap --write-configure`
+# The last line above is a horrible hack.
+# GNU Coding Standards recommends that `make maintainer-clean' should not 
+# remove the configure script.
+# We instead make configure call bootstrap.
 
-# Indent all C source and header files
-
-.PHONY: indent
+# Indent all C source and header files, using indent(1):
 
 indent: $(srcdir)/.indent.pro
 	cd "$(srcdir)" && \
 	find . -type f -mindepth 2 -name "*.[ch]" -print | \
-		xargs ./missing --run indent
+	  xargs ./missing --run indent
 
+.PHONY: indent
 
-# Creating ChangeLog from CVS log, with cvs2cl:
+# Creating ChangeLog from CVS log, using cvs2cl(1):
 
 MAINTAINERCLEANFILES += ChangeLog ChangeLog.bak
 
-EXTRA_DIST = ChangeLog
+EXTRA_DIST += ChangeLog
 
-ChangeLog:
-	if test -d "$(srcdir)/CVS"; then \
-		cd "$(srcdir)" && \
-		./missing --run cvs2cl --stdout --utc --FSF -U AUTHORS; \
-	fi > $@
+ChangeLog: $(srcdir)/ChangeLog
+
+$(srcdir)/ChangeLog:
+	@if test -d "$(srcdir)/CVS"; then \
+	  (cd "$(srcdir)" && \
+	  ./missing --run cvs2cl --stdout --utc --FSF -U AUTHORS) > $@.tmp \
+	  && echo "For older changes see ChangeLog.old" >> $@.tmp && mv $@.tmp $@ \
+	  || ($(RM) $@.tmp; \
+	      echo Failed to generate ChangeLog, your ChangeLog may be outdated >&2; \
+	      (test -f $@ || echo cvs2cl is required to generate this file >> $@)); \
+	else \
+	  test -f $@ || \
+	  (echo A CVS checkout and cvs2cl is required to generate ChangeLog >&2 && \
+	  echo A CVS checkout and cvs2cl is required to generate this file >> $@); \
+	fi
+
+.PHONY: ChangeLog $(srcdir)/ChangeLog
