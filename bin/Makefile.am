@@ -8,7 +8,7 @@ do_subst = sed \
 		-e 's,@VERSION\@,$(VERSION),g'
                                                                                
 bicon: bicon.in Makefile
-	$(do_subst) < $(srcdir)/$< > $@
+	$(do_subst) $(srcdir)/bicon.in > $@
 	chmod +x $@
 
 MOSTLYCLEANFILES=bicon.tmp

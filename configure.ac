@@ -33,11 +33,10 @@ AC_SUBST(FRIBIDI_LIBS)
 AC_SUBST(FRIBIDI_CFLAGS)
 
 # Checks for header files.
-AC_INCLUDE_DEFAULTS
-#AC_HEADER_STDC
+AC_HEADER_STDC
 AC_HEADER_SYS_WAIT
 AC_HEADER_TIME
-#AC_CHECK_HEADERS([sys/types.h sys/stat.h stdlib.h string.h strings.h inttypes.h unistd.h])
+AC_CHECK_HEADERS([sys/types.h sys/stat.h stdlib.h string.h strings.h inttypes.h unistd.h])
 AC_CHECK_HEADERS([paths.h sys/file.h sys/ioctl.h termios.h])
 
 # Checks for typedefs and structures.
