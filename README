@@ -6,7 +6,10 @@ This is the bidirectional console as presented by Arabeyes.
 
 Installation
 ------------
-You need the fribidi library to compile this program. Probably you have it in your distribution. If not, get it from http://fribidi.sourceforge.net
+
+You need the fribidi library to compile this program. Probably
+you have it in your distribution. If not, get it from
+http://fribidi.sourceforge.net
 
 Installation is simple, the usual::
 	./configure
@@ -17,9 +20,13 @@ steps.
 
 Usage
 -----
-This program is ot currently usable under X. In fact, it is only usable under the Linux (*BSD?) console.
 
-Simply run "abicon" to get a console supporting Arabic or Persian. The language used is chosen according to the LANG environment variable.
+This program is not currently usable under X. In fact, it is only
+usable under the Linux (*BSD?) console.
+
+Simply run "abicon" to get a console supporting Arabic or
+Persian. The language used is chosen according to the LANG
+environment variable.
 
 Run "abicon ar" to get Arabic support, or "abicon fa" for Persian.
 
@@ -27,4 +34,8 @@ Of course, you have a man page abicon(1) to check.
 
 Reporting Bugs
 --------------
-Please report all bugs to http://bugs.arabeyes.org/cgi-bin/bugzilla/query.cgi. Until this can be done - it is not possible at the moment - send an e-mail to developer@arabeyes.org.
+
+Please report all bugs to
+http://bugs.arabeyes.org/cgi-bin/bugzilla/query.cgi. Until this
+can be done - it is not possible at the moment - send an e-mail
+to developer@arabeyes.org.
