@@ -6,6 +6,7 @@ AC_INIT(bicon,0.1)
 AC_CONFIG_SRCDIR([bicon/bicon.c])
 AC_CONFIG_HEADER([config.h])
 AM_INIT_AUTOMAKE
+AM_MAINTAINER_MODE
 
 # Checks for programs.
 AC_PROG_CC
