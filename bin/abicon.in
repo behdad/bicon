@@ -19,7 +19,8 @@ if ! ${WAS_UNICODE}; then
 	echo -ne '\033%G'
 fi
 
-loadkeys ${pkgdatadir}/keymap/$LANGUAGE.map.gz 2>/dev/null
+loadkeys ${pkgdatadir}/keymap/$LANGUAGE.map.gz 2>/dev/null ||
+loadkeys $LANGUAGE
 setfont ${pkgdatadir}/font/bicon-8x16-512.psf.gz
 
 ${bindir}/bicon
