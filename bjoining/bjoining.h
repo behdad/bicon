@@ -3,7 +3,7 @@
 
 #define CONST const
 
-#include <fribidi/fribidi.h>
+#include <fribidi.h>
 
 typedef FriBidiChar unichar;
 

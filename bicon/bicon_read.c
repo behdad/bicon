@@ -20,7 +20,6 @@
  */
 #include <stdio.h>
 #include <unistd.h>
-#include <fribidi/fribidi.h>
 #include <string.h>
 #include <bconsole.h>
 

@@ -1,6 +1,5 @@
 #include "bjoining_log2cuni.h"
 
-#include <fribidi/fribidi.h>
 #include <stdlib.h>
 #include <string.h>
 

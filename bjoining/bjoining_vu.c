@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <fribidi/fribidi.h>
 #include "bjoining.h"
 
 #define BUFLEN 65000

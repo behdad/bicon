@@ -8,6 +8,7 @@
 ##                                               -*- Automake -*-
 ## Process this file with automake to produce Makefile.in
 
+## The order of subdirs is important, don't change without a reason.
 SUBDIRS = bjoining bconsole bicon keymap font bin doc testtext
 
 pkgconfigdir = $(libdir)/pkgconfig
@@ -49,8 +50,7 @@ MAINTAINERCLEANFILES += ChangeLog
 EXTRA_DIST = ChangeLog
 
 ChangeLog:
-	if test -d CVS; then \
-		./missing --run cvs2cl --utc --FSF -U AUTHORS; \
-	else \
-		touch $@; \
-	fi
+	if test -d "$(srcdir)/CVS"; then \
+		cd "$(srcdir)" && \
+		./missing --run cvs2cl --stdout --utc --FSF -U AUTHORS; \
+	fi > $@
