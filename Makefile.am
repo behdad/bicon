@@ -15,31 +15,27 @@ pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = @PACKAGE@.pc
 
 MAINTAINERCLEANFILES = \
-		ChangeLog.bak \
-		INSTALL \
-		aclocal.m4 \
-		autoscan.log \
-		compile \
-		config.guess \
-		config.h.in \
-		config.sub \
-		configure \
-		configure.scan \
-		depcomp \
-		install-sh \
-		ltmain.sh \
-		missing \
-		`find . -type f -name Makefile.in - print` \
+		$(srcdir)/INSTALL \
+		$(srcdir)/aclocal.m4 \
+		$(srcdir)/autoscan.log \
+		$(srcdir)/compile \
+		$(srcdir)/config.guess \
+		$(srcdir)/config.h.in \
+		$(srcdir)/config.sub \
+		$(srcdir)/configure \
+		$(srcdir)/configure.scan \
+		$(srcdir)/depcomp \
+		$(srcdir)/install-sh \
+		$(srcdir)/ltmain.sh \
+		$(srcdir)/missing \
+		`find "$(srcdir)" -type f -name Makefile.in -print` \
 		`find "$(srcdir)" -type f -name "*~" -print`
-
-.PHONY: \
-		indent \
-		ChangeLog-maintain
-
 
 # Indent all C source and header files
 
-indent: .indent.pro
+.PHONY: indent
+
+indent: $(srcdir)/.indent.pro
 	cd "$(srcdir)" && \
 	find . -type f -mindepth 2 -name "*.[ch]" -print | \
 		xargs ./missing --run indent
@@ -47,7 +43,7 @@ indent: .indent.pro
 
 # Creating ChangeLog from CVS log, with cvs2cl:
 
-MAINTAINERCLEANFILES += ChangeLog
+MAINTAINERCLEANFILES += ChangeLog ChangeLog.bak
 
 EXTRA_DIST = ChangeLog
 
