@@ -8,14 +8,17 @@
 ##                                               -*- Automake -*-
 ## Process this file with automake to produce Makefile.in
 
-AUTOMAKE_OPTIONS = gnu
-
 SUBDIRS = bjoining bconsole bicon keymap font bin doc testtext
 
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = bicon.pc
-                                                                                
+pkgconfig_DATA = @PACKAGE@.pc
+
+AUTOMAKE_OPTIONS = gnu
+
+EXTRA_DIST = ChangeLog
+
 MAINTAINERCLEANFILES = \
+  		ChangeLog \
 		ChangeLog.bak \
 		INSTALL \
 		aclocal.m4 \
@@ -38,7 +41,11 @@ MAINTAINERCLEANFILES = \
 		ChangeLog-maintain
 
 indent: .indent.pro
-	cd $(srcdir) && find -mindepth 2 -name "*.[ch]" | xargs indent
+	@cd $(srcdir) && find -mindepth 2 -name "*.[ch]" | xargs ./missing --run indent
 
-ChangeLog-maintain:
-	cvs2cl
+ChangeLog:
+	@if test -d CVS; then \
+		./missing --run cvs2cl --utc --FSF -U AUTHORS; \
+	else \
+		touch $@; \
+	fi
