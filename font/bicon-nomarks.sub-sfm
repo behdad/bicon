@@ -56,7 +56,7 @@
 0x52	U+00ae
 0x55	U+00d9 U+00da U+00db
 0x59	U+00dd
-0x5f	U+f804
+#0x5f	U+f804 # Why did I do this in the old days? --behdad
 0x60	U+201B # Single HIGH-REVERSED-9 quotation mark
 0x61	U+00e3
 0x6f	U+00f5
