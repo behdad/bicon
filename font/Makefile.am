@@ -24,8 +24,7 @@ BDF = bicon-8x16.bdf
 
 all: $(font_DATA)
 
-clean-local:
-	$(RM) *.sfm *.psf *.psfu *.psfu.gz
+CLEANFILES = *.sfm *.psf *.psfu *.psfu.gz
 
 %-set-names: %.bdf
 	"$(srcdir)/bdf_set_names" $< > $<~ && mv -f $<~ $< || { $(RM) $<~; false; }

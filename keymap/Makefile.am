@@ -1,17 +1,16 @@
 KEYMAPS = $(wildcard *.map)
+KEYMAPSGZ = $(patsubst %.map,%.map.gz,$(KEYMAPS))
 
 ARABICS = ae bh dz eg iq jo kw lb ly ma om qa sa sd sy tn ye
-
 ARABICSMAPGZ = $(patsubst %,%.map.gz,$(ARABICS))
 
 keymapdir = $(pkgdatadir)/keymap
-dist_keymap_DATA = $(patsubst %.map,%.map.gz,$(KEYMAPS))
+dist_keymap_DATA = $(KEYMAPSGZ)
+
+CLEANFILES = $(KEYMAPSGZ)
 
 %.gz: %
 	gzip -9 --stdout $< > $@
-
-clean-local:
-	$(RM) *.map.gz
 
 install-data-hook:
 	cd "$(DSTDIR)/$(keymapdir)" && \
