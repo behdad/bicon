@@ -42,17 +42,17 @@ case $TERM in
 	linux)
 		if isconsole; then
 			# save old keyboard state
-			iskbdunicode &&
-			WAS_UNICODE=true || WAS_UNICODE=false
-			if [ "x$WAS_UNICODE" = xfalse ]; then
+			OLD_UNICODE_STATE=""
+			iskbdunicode && OLD_UNICODE_STATE=-u
+			if [ x$OLD_UNICODE_STATE = x ]; then
 				kbd_mode -u
-				echo -ne '\033%G'
 			fi
 			OLD_KBD=`dumpkeys`
+			echo -ne '\033%G'
 
 			# set keymap
-			loadkeys "${datadir}/keymap/$LANGUAGE.map.gz" 2>/dev/null ||
-			loadkeys "$LANGUAGE"
+			loadkeys -u "${datadir}/keymap/$LANGUAGE.map.gz" 2>/dev/null ||
+			loadkeys -u "$LANGUAGE"
 
 			# set font
 			setfont "${datadir}/font/bicon-8x16-512.psfu.gz"
@@ -113,19 +113,22 @@ case $TERM in
 
 			# load old keymap
 			if [ -n "$OLD_KBD" ]; then
-				echo "$OLD_KBD" | loadkeys
+				loadkeys -s -c $OLD_UNICODE_STATE $PAR <<EOF
+					$OLD_KBD
+EOF
 				unset OLD_KBD
 			fi
 
 
 			# load old keyboard state
-			if [ "x$WAS_UNICODE" = "xtrue" -a ! iskbdunicode ]; then
-				dumpkeys | loadkeys -u
-			else
+			if [ x$OLD_UNICODE_STATE = x ]; then
 				kbd_mode -a
 				echo -ne '\033%@'
+			else
+				kbd_mode -u
+				echo -ne '\033%G'
 			fi
-			unset WAS_UNICODE
+			unset OLD_UNICODE_STATE
 		fi
 	;;
 
@@ -135,7 +138,9 @@ case $TERM in
 			# load old keyboard state and keymap
 			if [ -n "$OLD_XKB" ]; then
 
-				echo "$OLD_XKB" | xkbcomp -w 2 - "$DISPLAY"
+				xkbcomp -w 2 - "$DISPLAY" <<EOF
+					$OLD_XKB
+EOF
 				unset OLD_XKB
 			fi
 		fi
