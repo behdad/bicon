@@ -87,6 +87,7 @@ esac
 echo "BiCon started"
 # do the real thing
 ${bindir}/bicon.bin "$@"
+STATUS=$?
 echo "BiCon done"
 
 
@@ -138,3 +139,5 @@ case "$TERM" in
 	;;
 
 esac
+
+exit $STATUS
