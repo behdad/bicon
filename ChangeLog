@@ -1,0 +1,25 @@
+2002-06-13  Behdad Esfahbod <farsi@behdad.org>
+	* */*.[ch]: Major changes.  Support many options now, among them is
+	the option to output logical text, not visual.
+
+2002-06-12  Behdad Esfahbod <farsi@behdad.org>
+	* keymap/isiri2901.kmap.gz: Proposed key positions for bidi marks
+	added.
+
+2001-12-14  Behdad Esfahbod <behdad@bamdad.org>
+	* farsi: Makes the shells current directory to be the same as when
+	user runs the script.
+
+2001-12-05  Behdad Esfahbod <behdad@bamdad.org>
+	* fcon/fcon.c: Now accepts parameters to run instead of default /bin/sh.
+	* bin/farsi: Pass parameteres to fcon.
+	* bin/farsidict: A small script for dictionary lookup, using farsi.
+
+2001-10-13  Behdad Esfahbod <behdad@bamdad.org>
+	* */Makefile: Small changes.
+
+2001-10-04  Behdad Esfahbod <behdad@bamdad.org>
+	* fconsole/Makefile: Set target clean to remove fconsole-config too.
+
+2001-9-22   Behdad Esfahbod <behdad@bamdad.org>
+	* First released under farsidev mailing list.

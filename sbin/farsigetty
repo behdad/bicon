@@ -1,0 +1,65 @@
+#!/bin/bash
+
+PATH="/usr/local/bin:/bin:/usr/bin"
+export PATH
+# Find path
+path="$0"
+old_path=""
+while test -n "$path"; do
+  old_path="$path"
+  path="`readlink "$path"`"
+done
+path="${old_path%/*}/.."
+
+# Clear the screen
+clear
+
+# Initialization for PERSIANDIGITS function.
+sedstr=""
+for i in `seq 0 9`; do
+  sedstr="s/$i/`echo -ne "\xdb\xb$i"`/g; $sedstr"
+done
+
+# Change latin digits to persian digits
+PERSIANDIGITS () {
+  sed -e "$sedstr" "$@"
+}
+
+
+# We have passed the tty we are on, strip non-number portion.
+ttynumber=${1//[^0-9]/}
+shift
+
+# Initilize the console
+set -- --init "$@"
+. "$path/bin/farsi"
+
+unset user
+while test -z "$user"; do
+# Read /etc/نسخه (farsi's /etc/issue) and substitute some escape sequences.
+  echo
+  if test -f /etc/نسخه -a -x /bin/نام‌ماشین; then
+    {
+    sed "
+    s/\\\\l/ترمینالِ $ttynumber/g;
+    s/\\\\r/‎`uname -r`‎/g;
+    " /etc/نسخه |
+    PERSIANDIGITS |
+    sed "s/\\\\m/‎`uname -m`‎/g;"
+    echo -n "‎`نام‌ماشین -s 2>&1`‎ "
+    } |
+    "$path/fconsole/fconsole_vu" $BCONSOLE_VU_OPTIONSLINE
+  else
+    sed "
+    s/\\\\l/tty$ttynumber/g;
+    s/\\\\r/`uname -r`/g;
+    s/\\\\m/`uname -m`/g;
+    " /etc/issue
+    echo -n "`hostname -s 2>&1` "
+  fi
+  echo -n "login: "
+  read user
+done
+
+# Run login in a farsi console
+exec "$path/bin/farsifilter" $BCON_OPTIONSLINE login -- "$user"

@@ -1,0 +1,7 @@
+This software contains many files, with many licenses.
+Some files are LGPL, others are "BSD with advertisement". Still others are in 
+the public domain.
+This is not a full release, it is a pre-beta. Hopefully by the next stage all 
+files will be clearly labelled.
+In some directories, there will be a file called COPYING. You can assume that 
+whatever is mentioned there is right, but they do not cover all files, usually.
