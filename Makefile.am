@@ -40,7 +40,9 @@ MAINTAINERCLEANFILES = \
 # Indent all C source and header files
 
 indent: .indent.pro
-	find "$(srcdir)" -type f -mindepth 2 -name "*.[ch]" -print | xargs ./missing --run indent
+	cd "$(srcdir)" && \
+	find . -type f -mindepth 2 -name "*.[ch]" -print | \
+		xargs ./missing --run indent
 
 
 # Creating ChangeLog from CVS log, with cvs2cl:
