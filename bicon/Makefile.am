@@ -3,16 +3,16 @@ INCLUDES = \
 		-I$(top_srcdir)/bjoining \
 		-I$(top_srcdir)/bconsole
 
-bin_PROGRAMS = bicon
+bin_PROGRAMS = bicon.bin
 
-bicon_SOURCES = \
+bicon_bin_SOURCES = \
 		bicon.c \
 		bicon_read.c \
 		bicon_read.h \
 		pty_spawn.c \
 		pty_spawn.h
 
-bicon_LDADD = \
+bicon_bin_LDADD = \
 		$(FRIBIDI_LIBS) \
 		$(top_builddir)/bconsole/libbconsole.la \
 		$(top_builddir)/bjoining/libbjoining.la
