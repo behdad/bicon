@@ -8,7 +8,8 @@ WAS_UNICODE=false
 kbd_mode | grep -q Unicode && WAS_UNICODE=true
 
 if [ -z "$1" ]; then
-	LANGUAGE=${LANG:0:2}
+	LANGUAGE=`echo $LANG | sed 's/\(..\).*/\1/'`
+	echo $LANGUAGE
 else
 	LANGUAGE=$1
 fi
