@@ -28,8 +28,8 @@ MAINTAINERCLEANFILES = \
 		install-sh \
 		ltmain.sh \
 		missing \
-		`find -name Makefile.in` \
-		`find "$(srcdir)" -name "*~"`
+		`find . -type f -name Makefile.in - print` \
+		`find "$(srcdir)" -type f -name "*~" -print`
 
 .PHONY: \
 		indent \
@@ -39,7 +39,7 @@ MAINTAINERCLEANFILES = \
 # Indent all C source and header files
 
 indent: .indent.pro
-	@cd $(srcdir) && find -mindepth 2 -name "*.[ch]" | xargs ./missing --run indent
+	find "$(srcdir)" -type f -mindepth 2 -name "*.[ch]" -print | xargs ./missing --run indent
 
 
 # Creating ChangeLog from CVS log, with cvs2cl:
@@ -49,7 +49,7 @@ MAINTAINERCLEANFILES += ChangeLog
 EXTRA_DIST = ChangeLog
 
 ChangeLog:
-	@if test -d CVS; then \
+	if test -d CVS; then \
 		./missing --run cvs2cl --utc --FSF -U AUTHORS; \
 	else \
 		touch $@; \
