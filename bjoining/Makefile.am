@@ -1,7 +1,7 @@
 INCLUDES = \
 		$(FRIBIDI_CFLAGS)
 
-lib_LTLIBRARIES = libbjoining.la
+pkglib_LTLIBRARIES = libbjoining.la
 
 libbjoining_la_SOURCES = \
 		bjoining_compose.c \

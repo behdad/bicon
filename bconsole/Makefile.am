@@ -2,7 +2,7 @@ INCLUDES = \
 		$(FRIBIDI_CFLAGS) \
 		-I$(top_srcdir)/bjoining
 
-lib_LTLIBRARIES = libbconsole.la
+pkglib_LTLIBRARIES = libbconsole.la
 
 libbconsole_la_SOURCES = \
 		bconsole_ligature.c \

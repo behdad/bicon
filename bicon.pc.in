@@ -8,5 +8,5 @@ includedir=@includedir@
 Name: @PACKAGE_NAME@
 Description: Bidi Console Tools
 Version: @VERSION@
-Libs: -L${libdir} -lbjoining -lbconsole
+Libs: -L${libdir}/@PACKAGE@ -lbjoining -lbconsole
 Cflags: -I${includedir}/@PACKAGE@

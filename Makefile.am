@@ -6,7 +6,6 @@ pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = bicon.pc
                                                                                 
 MAINTAINERCLEANFILES = \
-		ChangeLog.bak \
 		INSTALL \
 		aclocal.m4 \
 		config.guess \
@@ -19,16 +18,18 @@ MAINTAINERCLEANFILES = \
 		missing \
 		`find -name Makefile.in`
 
+MOSTLYCLEANFILES = ChangeLog.bak
+
 if MAINTAINER_MODE
 
 .PHONY: ChangeLog-update indent
 
-
 ChangeLog-update:
 	cvs2cl
 
-indent:
-	test -f .indent.pro || { echo ".indent.pro not found"; false; }
-	find -name "*.[ch]" | xargs indent
+indent: .indent.pro
+	cd $(srcdir) && find -mindepth 2 -name "*.[ch]" | xargs indent
+
+MOSTLYCLEANFILES += `find "$(srcdir)" -name "*~"`
 
 endif
