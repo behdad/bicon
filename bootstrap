@@ -1,5 +1,5 @@
 #!/bin/sh
-libtoolize
+test -f ltmain.sh || libtoolize
 aclocal
 autoheader
 automake -a
