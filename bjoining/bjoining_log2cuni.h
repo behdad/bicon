@@ -4,9 +4,9 @@
 #include "bjoining.h"
 
 int bjoining_log2cuni (
-  unichar * str,
+  unichar *str,
   int len,
-  unichar * cstr,
+  unichar *cstr,
   int *clen,
   int options);
 

@@ -95,11 +95,12 @@ bicon_spawn (
   pid = _fork (&master_fd);
   if (pid == -1)
     return 126;
-  if (pid == 0) {
-    execvp (file, args);
-    fprintf(stderr, "bicon: failed running %s\n", file);
-    exit(1);
-  }
+  if (pid == 0)
+    {
+      execvp (file, args);
+      fprintf (stderr, "bicon: failed running %s\n", file);
+      exit (1);
+    }
   tcgetattr (1, &ts);
   newts = ts;
   cfmakeraw (&newts);

@@ -19,7 +19,10 @@ MAINTAINERCLEANFILES = \
 		missing \
 		`find -name Makefile.in`
 
+if MAINTAINER_MODE
+
 .PHONY: ChangeLog-update indent
+
 
 ChangeLog-update:
 	cvs2cl
@@ -27,3 +30,5 @@ ChangeLog-update:
 indent:
 	test -f .indent.pro || { echo ".indent.pro not found"; false; }
 	find -name "*.[ch]" | xargs indent
+
+endif

@@ -40,10 +40,24 @@ AC_HEADER_TIME
 AC_CHECK_HEADERS([sys/types.h sys/stat.h stdlib.h string.h strings.h inttypes.h unistd.h])
 AC_CHECK_HEADERS([paths.h sys/file.h sys/ioctl.h termios.h])
 
-# Checks for typedefs, structures, and compiler characteristics.
+# Checks for typedefs and structures.
 AC_C_CONST
 AC_TYPE_PID_T
 AC_TYPE_SIZE_T
+
+# Checks for compiler characteristics.
+changequote(,)dnl
+if test "x$GCC" = "xyes"; then
+  case " $CFLAGS " in
+  *[\ \	]-Wall[\ \	]*) ;;
+  *) CFLAGS="$CFLAGS -Wall " ;;
+  esac
+  case " $CFLAGS " in
+  *[\ \	]-pedantic[\ \	]*) ;;
+  *) CFLAGS="$CFLAGS -pedantic " ;;
+  esac
+fi
+changequote([,])dnl
 
 # Checks for library functions.
 AC_FUNC_FORK

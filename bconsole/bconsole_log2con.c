@@ -4,9 +4,9 @@
 
 int
 bconsole_log2con (
-  unichar * str,
+  unichar *str,
   int ulen,
-  unichar * cstr,
+  unichar *cstr,
   int *clen,
   int options)
 {

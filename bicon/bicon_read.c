@@ -26,12 +26,12 @@
 
 #define BUFLEN BUFSIZ
 #define LATIN1 ((unsigned char)0xC0)
-#define CSI ((unsigned char)(0x80+'\e'))
+#define CSI ((unsigned char)(0x80+'\033'))
 #define NONTERMINATED_PARAGRAPH -1
 
 /* Console UTF-8 mode on/off sequences. */
-#define UTF8_ON_STR "\e%G"
-#define UTF8_OFF_STR "\e%@"
+#define UTF8_ON_STR "\033%G"
+#define UTF8_OFF_STR "\033%@"
 
 #define B_NO_UTF8_STARTUP   0x00010000	/* Do not start in UTF-8 mode. */
 typedef unsigned char uchar;
@@ -49,7 +49,7 @@ FriBidiCharSet utf8;
 ssize_t
 bicon_read (
   int fd,
-  void *buf,
+  uchar *buf,
   size_t ct)
 {
   int buflen;
@@ -140,8 +140,8 @@ bicon_read (
 		/* non-ASCII text, process as needed. */
 		/* Convert to Unicode. */
 		len =
-		  fribidi_charset_to_unicode (utf8, input_cursor, par_len,
-					      us);
+		  fribidi_charset_to_unicode (utf8, (char *) input_cursor,
+					      par_len, us);
 		/* Convert to contextual form (glyphs). */
 		bconsole_log2con (us, len, cus, &len, bicon_options);
 		/* In this stage the number of characters is the same as
@@ -149,7 +149,8 @@ bicon_read (
 		par_width = len;
 		/* Convert back to UTF-8. */
 		len =
-		  fribidi_unicode_to_charset (utf8, cus, len, output_cursor);
+		  fribidi_unicode_to_charset (utf8, cus, len,
+					      (char *) output_cursor);
 		/* Update output_cursor. */
 		output_cursor += len;
 		/* Finally write the output. */
@@ -193,14 +194,14 @@ bicon_read (
 	    {
 	      input_cursor++;
 	      /* Skip over escape sequences */
-	      if (x == '\e' || (x == LATIN1 && *input_cursor == CSI))
+	      if (x == '\033' || (x == LATIN1 && *input_cursor == CSI))
 		{
 		  /* Handle utf8 turn on/off sequences. */
 		  utf8mode ^=
 		    !strcmp (input_cursor - 1,
 			     utf8mode ? UTF8_OFF_STR : UTF8_ON_STR);
 
-		  /* An escape sequence looks like this: \e.[0-?]*[ -/]*[@-~]?
+		  /* An escape sequence looks like this: \033.[0-?]*[ -/]*[@-~]?
 		   * We handle a somehow looser expression. */
 		  input_cursor++;
 		  while (*input_cursor >= '0' && *input_cursor <= '?')

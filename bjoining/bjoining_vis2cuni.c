@@ -162,9 +162,9 @@ arablig (
 
 int
 bjoining_vis2cuni (
-  unichar * vis,
+  unichar *vis,
   int len,
-  unichar * ret,
+  unichar *ret,
   int *retlen,
   int options)
 {

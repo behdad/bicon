@@ -15,7 +15,7 @@ arab_comp[] =
 
 int
 bjoining_compose (
-  unichar * u,
+  unichar *u,
   int *unilen)
 {
   int p, i;

@@ -3,7 +3,7 @@
 /* should be applied on logical unicode string, not visual */
 int
 bjoining_ye_farsi_fix_for_ms (
-  unichar * us,
+  unichar *us,
   int len)
 {
   int join;
@@ -29,7 +29,7 @@ bjoining_ye_farsi_fix_for_ms (
 /* should be applied on logical unicode string, not visual */
 int
 bjoining_ye_to_farsi (
-  unichar * us,
+  unichar *us,
   int len)
 {
   int p;

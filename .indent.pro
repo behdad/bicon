@@ -22,3 +22,4 @@
 -T fribidi_uint
 -T fribidi_boolean
 -T unichar
+-T uchar

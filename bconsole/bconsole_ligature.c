@@ -64,7 +64,7 @@ nsm_shape (
 
 int
 bconsole_ligature (
-  unichar * us,
+  unichar *us,
   int *retlen,
   int options)
 {

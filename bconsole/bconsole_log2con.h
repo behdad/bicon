@@ -4,9 +4,9 @@
 #include "bconsole.h"
 
 int bconsole_log2con (
-  unichar * str,
+  unichar *str,
   int len,
-  unichar * cstr,
+  unichar *cstr,
   int *clen,
   int options);
 

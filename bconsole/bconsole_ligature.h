@@ -4,7 +4,7 @@
 #include "bconsole.h"
 
 int bconsole_ligature (
-  unichar * us,
+  unichar *us,
   int *len,
   int options);
 

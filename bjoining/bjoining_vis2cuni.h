@@ -4,9 +4,9 @@
 #include "bjoining.h"
 
 int bjoining_vis2cuni (
-  unichar * vis,
+  unichar *vis,
   int len,
-  unichar * cuni,
+  unichar *cuni,
   int *clen,
   int options);
 

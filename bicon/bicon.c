@@ -17,7 +17,7 @@ main (
   if (argc == 1)
     {
       char *sh = getenv ("SHELL");
-      args[0] = sh ? sh : (char *)SH;
+      args[0] = sh ? sh : (char *) SH;
       args[1] = NULL;
     }
   else

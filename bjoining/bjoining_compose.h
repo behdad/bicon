@@ -4,7 +4,7 @@
 #include "bjoining.h"
 
 int bjoining_compose (
-  unichar * s,
+  unichar *s,
   int *len);
 
 #endif
