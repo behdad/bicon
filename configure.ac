@@ -5,7 +5,7 @@ AC_INIT(bicon,0.1,
         [http://bugs.arabeyes.org/cgi-bin/bugzilla/enter_bug.cgi?product=BiCon])
 AC_CONFIG_SRCDIR(bicon/bicon.c)
 AC_CONFIG_HEADERS(config.h)
-AM_INIT_AUTOMAKE([gnu,check-news])
+AM_INIT_AUTOMAKE([gnu check-news])
 AM_MAINTAINER_MODE
 
 dnl Checks for programs.
