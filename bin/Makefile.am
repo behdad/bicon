@@ -11,5 +11,7 @@ bicon: bicon.in Makefile
 	$(do_subst) $(srcdir)/bicon.in > $@
 	chmod +x $@
 
+EXTRA_DIST = bicon.in
+
 MOSTLYCLEANFILES=bicon.tmp
 CLEANFILES=bicon

@@ -8,12 +8,11 @@
 ## Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT([BiCon],[0.1],[http://bugs.arabeyes.org/cgi-bin/bugzilla/enter_bug.cgi?product=BiCon])
+AC_INIT([BiCon],[0.1.pre],[http://bugs.arabeyes.org/cgi-bin/bugzilla/enter_bug.cgi?product=BiCon])
 AC_REVISION($Id$)
 AC_CONFIG_SRCDIR(bicon/bicon.c)
 AC_CONFIG_HEADERS(config.h)
 AM_INIT_AUTOMAKE([gnu check-news])
-AM_MAINTAINER_MODE
 
 # Checks for programs.
 AC_PROG_CC

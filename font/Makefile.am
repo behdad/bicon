@@ -1,54 +1,50 @@
+include fonts.mk
+
+ALL_CONSOLE_FONTS_PSFU_GZ = $(ALL_CONSOLE_FONTS_PSFU:=.gz)
+
 fontdir = $(pkgdatadir)/font
-dist_font_DATA = \
-		bicon-8x16-512.psfu.gz \
-		bicon-8x16-512-marks.psfu.gz \
-		bicon-8x16-512-logical.psfu.gz \
-		bicon-8x16-512-marks-logical.psfu.gz
+dist_font_DATA = $(ALL_CONSOLE_FONTS_PSFU_GZ) $(BDF)
+noinst_DATA = $(ALL_CONSOLE_FONTS_SFM)
+EXTRA_DIST = $(ALL_SUBSFMS)
 
-SUBSFMS = \
-		bicon-ascii.sub-sfm \
-		bicon-arabic.sub-sfm \
-		bicon-nomarks.sub-sfm \
-		bicon-marks.sub-sfm
-TOOLS = \
-		bicon-bdf2psf.pl
+noinst_SCRIPTS = bicon-bdf2psf.pl
+BDF2PSF = $(srcdir)/bicon-bdf2psf.pl
 
-EXTRA_DIST = $(BDF) $(SUBSFMS) $(TOOLS)
+CLEANFILES = *.sfm *.psf *.psfu *.psfu.gz *.tmp
 
-BDF2PSF = "$(srcdir)/bicon-bdf2psf.pl"
+SUFFIXES = .bdf .bdf-maintain .sfm -ltr.sfm .psf -ltr.psf .psfu .psfu.gz
 
+# Note:  I replaced the non-portable rules below with old suffix way to make
+# them portable.  But unfortunately this way the dependancies like %.psf: $(BDF)
+# do not work anymore :(.  Perhaps a check for GNU make should happen...
 
+# %.psfu.gz: %.psfu
+.psfu.psfu.gz:
+	gzip --best -c $< > $@
 
-# font to use
-BDF = bicon-8x16.bdf
+# %-set-names: %.bdf
+.bdf.bdf-maintain:
+	$(srcdir)/bdf_set_names $< > $<.tmp && mv -f $<.tmp $<
 
-all: $(font_DATA)
+# %-ltr.psf: %.sfm $(BDF) $(BDF2PSF)
+.sfm-ltr.psf: $(BDF) $(BDF2PSF)
+	$(BDF2PSF) -m -s $< -o $@ < $(srcdir)/$(BDF)
 
-CLEANFILES = *.sfm *.psf *.psfu *.psfu.gz
+# %.psf: %.sfm $(BDF) $(BDF2PSF)
+.sfm.psf: $(BDF) $(BDF2PSF)
+	$(BDF2PSF) -s $< -o $@ < $(srcdir)/$(BDF)
 
-%-set-names: %.bdf
-	"$(srcdir)/bdf_set_names" $< > $<~ && mv -f $<~ $< || { $(RM) $<~; false; }
+# %-ltr.sfm: %.sfm
+.sfm-ltr.sfm:
+	$(LN_S) $< $@
 
-%-logical.psf: %.sfm $(BDF)
-	$(BDF2PSF) -m -s $< -o $@ < "$(srcdir)/$(BDF)"
-
-%.psf: %.sfm $(BDF)
-	$(BDF2PSF) -s $< -o $@ < "$(srcdir)/$(BDF)"
-
-%.psfu: %.psf %.sfm
-	psfaddtable $^ $@
-
-%.gz: %
-	gzip -9 --stdout $< > $@
+# %.psfu: %.psf %.sfm
+.psf.psfu:
+	$(MAKE) $(AM_MAKEFLAGS) $*.sfm
+	psfaddtable $*.psf $*.sfm $*.psfu
 
 bicon-8x16-512.sfm: bicon-ascii.sub-sfm bicon-arabic.sub-sfm bicon-nomarks.sub-sfm
 	cat $^ > $@
 
 bicon-8x16-512-marks.sfm: bicon-ascii.sub-sfm bicon-arabic.sub-sfm bicon-marks.sub-sfm
-	cat $^ > $@
-
-bicon-8x16-512-logical.sfm: bicon-ascii.sub-sfm bicon-arabic.sub-sfm bicon-nomarks.sub-sfm
-	cat $^ > $@
-
-bicon-8x16-512-marks-logical.sfm: bicon-ascii.sub-sfm bicon-arabic.sub-sfm bicon-marks.sub-sfm
 	cat $^ > $@
