@@ -9,6 +9,8 @@ The --mirrorrtl option causes the RTL glyphs to be mirrored horizontally."
 	exit
 fi
 
+DIR=`dirname $0`
+
 CLEANUP () {
 	rm -f $TEMPPREFIX.*
 }
@@ -29,7 +31,7 @@ set -e
 cat "$@" > $TEMPPREFIX.sfm &&
 echo "Extracting glyphs from font $FONT" &&
 { test "$FONT" "!=" "${FONT%.gz}" && zcat "$FONT" || cat "$FONT"; } |
-./bicon-bdf2psf.pl $MIRROR -s $TEMPPREFIX.sfm -o $TEMPPREFIX.psf &&
+$DIR/bicon-bdf2psf.pl $MIRROR -s $TEMPPREFIX.sfm -o $TEMPPREFIX.psf &&
 echo "Adding SFM tables to font" &&
 psfaddtable $TEMPPREFIX.psf $TEMPPREFIX.sfm ${OUTPUT%.gz} &&
 CLEANUP || { CLEANUP; false; }

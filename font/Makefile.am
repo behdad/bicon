@@ -6,19 +6,19 @@ all: $(font_DATA)
 BDF=bicon-8x16.bdf
 
 %-set-names: %.bdf
-	./bdf_set_names $< > $<~ && mv -f $<~ $< || { $(RM) $<~; false; }
+	$(srcdir)/bdf_set_names $< > $<~ && mv -f $<~ $< || { $(RM) $<~; false; }
 
 bicon-8x16-512.psf: $(BDF) bicon-arabic.sfm bicon-ascii.sfm bicon-nomarks.sfm
-	./create_psf $@ $^
+	$(srcdir)/create_psf $@ $^
 
 bicon-8x16-512-marks.psf: $(BDF) bicon-arabic.sfm bicon-ascii.sfm bicon-marks.sfm
-	./create_psf $@ $^
+	$(srcdir)/create_psf $@ $^
 
 bicon-8x16-512-logical.psf: $(BDF) bicon-arabic.sfm bicon-ascii.sfm bicon-nomarks.sfm
-	./create_psf --mirrorrtl $@ $^
+	$(srcdir)/create_psf --mirrorrtl $@ $^
 
 bicon-8x16-512-marks-logical.psf: $(BDF) bicon-arabic.sfm bicon-ascii.sfm bicon-marks.sfm
-	./create_psf --mirrorrtl $@ $^
+	$(srcdir)/create_psf --mirrorrtl $@ $^
 
 %.gz: %
 	@echo "Compressing $<"
