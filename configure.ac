@@ -11,7 +11,7 @@
 ## Use autoscan to check if you need to add something to this file.
 
 AC_PREREQ(2.59)
-AC_INIT([BiCon],[0.0.20040505],[http://bugs.arabeyes.org/cgi-bin/bugzilla/enter_bug.cgi?product=BiCon])
+AC_INIT([BiCon],[0.2.0],[http://bugs.arabeyes.org/cgi-bin/bugzilla/enter_bug.cgi?product=BiCon])
 AC_REVISION([$Id$])
 AC_CONFIG_SRCDIR(bicon/bicon.c)
 AC_CONFIG_HEADERS(config.h)
