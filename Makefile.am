@@ -15,10 +15,7 @@ pkgconfig_DATA = @PACKAGE@.pc
 
 AUTOMAKE_OPTIONS = gnu
 
-EXTRA_DIST = ChangeLog
-
 MAINTAINERCLEANFILES = \
-  		ChangeLog \
 		ChangeLog.bak \
 		INSTALL \
 		aclocal.m4 \
@@ -40,8 +37,18 @@ MAINTAINERCLEANFILES = \
 		indent \
 		ChangeLog-maintain
 
+
+# Indent all C source and header files
+
 indent: .indent.pro
 	@cd $(srcdir) && find -mindepth 2 -name "*.[ch]" | xargs ./missing --run indent
+
+
+# Creating ChangeLog from CVS log, with cvs2cl:
+
+MAINTAINERCLEANFILES += ChangeLog
+
+EXTRA_DIST = ChangeLog
 
 ChangeLog:
 	@if test -d CVS; then \
