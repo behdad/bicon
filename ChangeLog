@@ -1,3 +1,31 @@
+2004-03-29 15:25  behdad
+
+	* keymap/: fa.map, ir.map: Renamed "fa.map" to "ir.map", as this is
+	  the way to name keymaps.  "ar" should be renamed too if it's the
+	  layout for a specific country.  Is it?
+
+2004-03-29 14:59  behdad
+
+	* bin/abicon.in: Try system's keymaps if we don't have a keymap for
+	  the language.
+
+2004-03-28 21:46  behdad
+
+	* README: Wrapped lines in README
+
+2004-03-28 21:42  alkarouri
+
+	* INSTALL, README: updating README
+
+2004-03-28 21:31  behdad
+
+	* bin/abicon.in: Using sed to cut out of LANG.	No bashism.
+
+2004-03-28 21:06  alkarouri
+
+	* ChangeLog, Makefile.am, configure.ac, doc/Makefile.am,
+	  doc/man/Makefile.am: configure installation of man pages
+
 2004-03-28 20:34  alkarouri
 
 	* doc/man/abicon.1: added abicon man page

@@ -10,6 +10,7 @@ AM_INIT_AUTOMAKE
 # Checks for programs.
 AC_PROG_CC
 AC_PROG_LIBTOOL
+AC_PROG_LN_S
 
 # Checks for libraries.
 AC_CHECK_LIB([dl], [dlopen])
