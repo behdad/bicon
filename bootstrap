@@ -1,6 +1,6 @@
 #!/bin/sh
-test -f ltmain.sh || libtoolize
-aclocal
-autoheader
-automake -a
-autoconf
+test -f ltmain.sh || libtoolize			|| exit 1
+aclocal						|| exit 1
+autoheader					|| exit 1
+automake --add-missing				|| exit 1
+autoconf					|| exit 1
