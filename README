@@ -11,12 +11,10 @@ You need the fribidi library to compile this program. Probably
 you have it in your distribution. If not, get it from
 http://fribidi.sourceforge.net
 
-Installation is simple, the usual::
+Installation is simple, the usual steps:
 	./configure
 	make
 	make install
-
-steps.
 
 Usage
 -----
@@ -24,17 +22,17 @@ Usage
 This program is not currently usable under X. In fact, it is only
 usable under the Linux console.
 
-Simply run "bicon_console" to get a console supporting Arabic or
-Persian. The language used is chosen according to the LANG
-environment variable.
+Simply run "bicon" to get a console supporting Arabic or Persian.
+The language used is chosen according to the LANG environment
+variable.
 
 You can also choose the language country by specifying the country on
 the country on the command line, e.g ::
 
-	bicon_console sa          # enables Arabic (Saudi Arabia) support
-	bicon_console ir          # for Persian(Iran)
+	bicon sa          # enables Arabic (Saudi Arabia) support
+	bicon ir          # for Persian(Iran)
 
-Of course, you have a man page bicon_console(1) to check.
+Of course, you have a man page bicon(1) to check.
 
 Reporting Bugs
 --------------
