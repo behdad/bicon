@@ -15,7 +15,7 @@ SUFFIXES = .map .map.gz
 	gzip --best -c $< > $@
 
 install-data-hook:
-	cd "$(DESTDIR)/$(keymapdir)" && \
+	cd "$(DESTDIR)$(keymapdir)" && \
 	for termapgz in $(ARABICSMAPGZ); do \
 		if $(LN_S) arabic.map.gz $$termapgz; then \
 			echo "Creating symlink for $$termapgz succeeded" ; \
@@ -25,5 +25,5 @@ install-data-hook:
 	done
 
 uninstall-hook:
-	cd "$(DESTDIR)/$(keymapdir)" && \
+	cd "$(DESTDIR)$(keymapdir)" && \
 	$(RM) $(ARABICSMAPGZ)
