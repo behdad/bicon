@@ -1,5 +1,0 @@
-#!/bin/bash
-dir="`dirname "$0"`"
-"$dir/font" "$dir/../farsi-8x16-512-edit.psf.gz"
-cat "$@" |
-"$dir/bconsole_vu"
