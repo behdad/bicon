@@ -1,10 +1,11 @@
 dnl Process this file with autoconf to produce a configure script.
+
 AC_PREREQ(2.54)
 AC_INIT(bicon,0.1,
         [http://bugs.arabeyes.org/cgi-bin/bugzilla/enter_bug.cgi?product=BiCon])
 AC_CONFIG_SRCDIR(bicon/bicon.c)
 AC_CONFIG_HEADERS(config.h)
-AM_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE([gnu,check-news])
 AM_MAINTAINER_MODE
 
 dnl Checks for programs.
@@ -13,8 +14,8 @@ AC_PROG_LIBTOOL
 AC_PROG_LN_S
 
 dnl Checks for libraries.
-AC_CHECK_LIB([dl], [dlopen])
-AC_CHECK_LIB([util], [forkpty])
+AC_CHECK_LIB(dl, dlopen)
+AC_CHECK_LIB(util, forkpty)
 
 PKG_CHECK_MODULES(FRIBIDI,fribidi >= 0.10.4)
 AC_SUBST(FRIBIDI_LIBS)
