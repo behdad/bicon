@@ -10,9 +10,7 @@ libbjoining_la_SOURCES = \
 		bjoining_log2cuni.c \
 		bjoining_ye.c
 
-libbjoiningincdir = $(includedir)/bicon
-
-libbjoininginc_HEADERS = \
+pkginclude_HEADERS = \
 		bjoining_compose.h \
 		bjoining_charprop.h \
 		bjoining_vis2cuni.h \

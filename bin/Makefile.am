@@ -1,15 +1,15 @@
 bin_SCRIPTS=bicon
 
-edit = sed \
-	-e 's,@datadir\@,$(pkgdatadir),g' \
-	-e 's,@bindir\@,$(bindir),g' \
-	-e 's,@prefix\@,$(prefix),g'
+do_subst = sed \
+		-e 's,@datadir\@,$(pkgdatadir),g' \
+		-e 's,@bindir\@,$(bindir),g' \
+		-e 's,@PACKAGE_NAME\@,$(PACKAGE_NAME),g' \
+		-e 's,@PACKAGE\@,$(PACKAGE),g' \
+		-e 's,@VERSION\@,$(VERSION),g'
                                                                                
-bicon: $(srcdir)/bicon.in Makefile
-	rm -f $@ $@.tmp
-	$(edit) $< > $@.tmp
-	chmod +x $@.tmp
-	mv $@.tmp $@
+bicon: bicon.in Makefile
+	$(do_subst) < $(srcdir)/$< > $@
+	chmod +x $@
 
 MOSTLYCLEANFILES=bicon.tmp
 CLEANFILES=bicon

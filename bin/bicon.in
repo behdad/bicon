@@ -2,6 +2,9 @@
 
 bindir=@bindir@
 datadir=@datadir@
+PACKAGE_NAME="@PACKAGE_NAME@"
+PACKAGE=@PACKAGE@
+VERSION=@VERSION@
 
 LOWER='abcdefghijklmnopqrstuvwxyz'
 UPPER='ABCDEFGHIJKLMNOPQRSTUVWXYZ'

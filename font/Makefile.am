@@ -1,5 +1,5 @@
 fontdir = $(pkgdatadir)/font
-font_DATA = \
+dist_font_DATA = \
 		bicon-8x16-512.psfu.gz \
 		bicon-8x16-512-marks.psfu.gz \
 		bicon-8x16-512-logical.psfu.gz \
