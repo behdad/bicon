@@ -1,0 +1,30 @@
+#!/bin/sh
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+bindir=@bindir@
+pkgdatadir=@datadir@/@PACKAGE@
+
+kbd_mode | grep -q Unicode && WAS_UNICODE=:
+
+if ${WAS_UNICODE}; then
+	:
+else
+	kbd_mode -u
+	echo -ne '\033%G'
+fi
+
+loadkeys ${pkgdatadir}/keymap/arab.kmap.gz 2>/dev/null
+setfont ${pkgdatadir}/font/farsi-8x16-512.psf.gz
+
+${bindir}/bicon
+
+setfont
+loadkeys -d 2>/dev/null
+
+if ${WAS_UNICODE}; then
+	dumpkeys | loadkeys -u
+else
+	kbd_mode -a
+	echo -ne '\033%@'
+fi
+
