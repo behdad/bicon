@@ -1,4 +1,5 @@
-INCLUDES = $(FRIBIDI_CFLAGS)
+INCLUDES = \
+		$(FRIBIDI_CFLAGS)
 
 lib_LTLIBRARIES = libbjoining.la
 
@@ -16,12 +17,13 @@ libbjoininginc_HEADERS = \
 		bjoining_charprop.h \
 		bjoining_vis2cuni.h \
 		bjoining_log2cuni.h \
-		bjoining_ye.h
+		bjoining_ye.h \
+		bjoining.h
 
 TABLE_FILES = \
                 arablig.i \
 		compose.i \
-		nonspace.i 
+		nonspace.i \
 		shape.i
 
 EXTRA_DIST = \

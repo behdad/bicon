@@ -22,6 +22,7 @@
 #include <unistd.h>
 #include <fribidi/fribidi.h>
 #include <string.h>
+#include <bconsole.h>
 
 #define BUFLEN BUFSIZ
 #define LATIN1 ((unsigned char)0xC0)
@@ -33,7 +34,6 @@
 #define UTF8_OFF_STR "\e%@"
 
 #define B_NO_UTF8_STARTUP   0x00010000	/* Do not start in UTF-8 mode. */
-typedef FriBidiChar unichar;
 typedef unsigned char uchar;
 int bicon_options = 0;
 /*
@@ -222,7 +222,7 @@ int
 bicon_read_init (void)
 {
   utf8 = fribidi_parse_charset ("UTF-8");
-  if (utf8 == FRIBIDI_CHAR_SET_NOT_FOUND)
+  if (!utf8)
     return 0;
 
   utf8mode = !(bicon_options & B_NO_UTF8_STARTUP);

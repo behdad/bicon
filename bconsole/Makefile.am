@@ -1,4 +1,6 @@
-INCLUDES = $(FRIBIDI_CFLAGS) -I../bjoining
+INCLUDES = \
+		$(FRIBIDI_CFLAGS) \
+		-I$(top_srcdir)/bjoining
 
 lib_LTLIBRARIES = libbconsole.la
 
@@ -22,7 +24,7 @@ EXTRA_DIST = \
 
 noinst_PROGRAMS = bconsole_vu
 
-bconsole_vu_SOURCES = bconsole_vu.c bconsole.h
-
-bconsole_vu_LDADD = $(FRIBIDI_LIBS) libbconsole.la \
-		$(top_builddir)/bjoining/libbjoining.la
+LDADD = \
+		$(FRIBIDI_LIBS) \
+		$(top_builddir)/bjoining/libbjoining.la \
+		libbconsole.la

@@ -159,14 +159,14 @@ bjoining_vis2cuni (unichar * vis, int len, unichar * ret, int *retlen,
   enum
   { NO, YES }
   join;
-  int p, q, save;
+  int p, q, save = 0;
   con_shape_type **f =
     (con_shape_type **) malloc (len * sizeof (con_shape_type *));
   int *shape = (int *) malloc (len * sizeof (int));
   int type;
   int dir, startindex, endindex, counter, hasprev;
-  int zwnl;
-  int *stoplig;
+  int zwnl = 0;
+  int *stoplig = 0;
   int nls;
   int nls_tab[5][3] = {
     {0, 0, 1},

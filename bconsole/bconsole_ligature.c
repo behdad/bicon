@@ -68,8 +68,8 @@ bconsole_ligature (unichar * us, int *retlen, int options)
   { NO, YES }
   join;
   int dir, startindex, endindex, counter, hasprev;
-  int zwnl;
-  int *stoplig;
+  int zwnl = 0;
+  int *stoplig = 0;
   int nls;
   int nls_tab[5][3] = {
     {0, 0, 1},
