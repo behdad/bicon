@@ -3,6 +3,7 @@ Short time:
 * Fix Arabic keymap.
 * Fix bug with ZWNJ&ZWJ.
 * Fix build and scripts.
+* Fix bugs mentioned in http://bugs.arabeyes.org/cgi-bin/bugzilla/show_bug.cgi?id=181
 
 Long time:
 * Parse command-line options.
