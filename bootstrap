@@ -1,6 +1,22 @@
-#!/bin/sh
-test -f ltmain.sh || libtoolize			|| exit 1
-aclocal						|| exit 1
-autoheader					|| exit 1
-automake --add-missing				|| exit 1
-autoconf					|| exit 1
+#! /bin/sh
+
+# add files 'config.guess', 'config.sub', 'ltconfig', 'ltmain.sh'
+libtoolize --automake --force --copy || exit 1
+
+# generate 'aclocal.m4', and use our macros in ./m4
+#aclocal -I ./m4
+aclocal || exit 1
+
+autoheader || exit 1
+
+#  generate Makefile.in's from Makefile.am's
+automake --add-missing --force --copy || exit 1
+
+# generate configure from configure.in
+autoconf --force || exit 1
+
+#echo "Now run ./configure"
+#./configure "$@" || exit 1
+#make
+
+

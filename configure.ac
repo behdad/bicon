@@ -39,7 +39,8 @@ AC_FUNC_STAT
 AC_FUNC_WAIT3
 AC_CHECK_FUNCS([dup2 memmove memset putenv select strrchr])
 
-AC_CONFIG_FILES([Makefile
+AC_CONFIG_FILES([bicon.pc
+                 Makefile
                  bconsole/Makefile
                  bjoining/Makefile
                  bicon/Makefile])

@@ -8,7 +8,7 @@ libbconsole_la_SOURCES = \
 		bconsole_ligature.c \
 		bconsole_log2con.c
 
-libbconsoleincdir = $(includedir)/bicon/bconsole
+libbconsoleincdir = $(includedir)/bicon
 
 libbconsoleinc_HEADERS = \
 		bconsole_ligature.h \
