@@ -1,1 +1,1 @@
-dist_MANS = bicon.1 bicon_console.1
+dist_MANS = bicon.bin.1 bicon.1
