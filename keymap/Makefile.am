@@ -13,7 +13,7 @@ CLEANFILES = $(KEYMAPSGZ)
 	gzip -9 --stdout $< > $@
 
 install-data-hook:
-	cd "$(DSTDIR)/$(keymapdir)" && \
+	cd "$(DESTDIR)/$(keymapdir)" && \
 	for termapgz in $(ARABICSMAPGZ); do \
 		if $(LN_S) arabic.map.gz $$termapgz; then \
 			echo "Creating symlink for $$termapgz succeeded" ; \
@@ -23,5 +23,5 @@ install-data-hook:
 	done
 
 uninstall-hook:
-	cd "$(DSTDIR)/$(keymapdir)" && \
+	cd "$(DESTDIR)/$(keymapdir)" && \
 	$(RM) $(ARABICSMAPGZ)
