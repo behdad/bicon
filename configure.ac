@@ -49,6 +49,7 @@ AC_CONFIG_FILES([bicon.pc
                  font/Makefile
                  doc/Makefile
                  doc/man/Makefile
+		 testtext/Makefile
                  bin/Makefile
                  bin/bicon_console
                  ])

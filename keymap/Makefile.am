@@ -17,9 +17,9 @@ install-data-hook:
 	cd "$(DSTDIR)/$(keymapdir)" && \
 	for termapgz in $(ARABICSMAPGZ); do \
 		if $(LN_S) arabic.map.gz $$termapgz; then \
-			echo "Creating symlink for $$ter.map.gz succeeded" ; \
+			echo "Creating symlink for $$termapgz succeeded" ; \
 		else \
-			echo "Creating symlink for $$ter.map.gz failed" ; \
+			echo "Creating symlink for $$termapgz failed" ; \
 		fi \
 	done
 

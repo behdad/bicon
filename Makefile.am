@@ -11,7 +11,7 @@ EXTRA_DIST = \
 		font/create_psf font/glyphlist.txt
 
 
-SUBDIRS = bjoining bconsole bicon keymap font bin doc testtexts
+SUBDIRS = bjoining bconsole bicon keymap font bin doc testtext
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = bicon.pc
