@@ -7,10 +7,12 @@ ARABICSMAPGZ = $(patsubst %,%.map.gz,$(ARABICS))
 keymapdir = $(pkgdatadir)/keymap
 dist_keymap_DATA = $(KEYMAPSGZ)
 
-CLEANFILES = $(KEYMAPSGZ)
+CLEANFILES = *.map.gz
 
-%.gz: %
-	gzip -9 --stdout $< > $@
+SUFFIXES = .map .map.gz
+
+.map.map.gz:
+	gzip --best -c $< > $@
 
 install-data-hook:
 	cd "$(DESTDIR)/$(keymapdir)" && \

@@ -1,7 +1,3 @@
-INCLUDES = \
-		$(FRIBIDI_CFLAGS) \
-		-I$(top_srcdir)/bjoining
-
 pkglib_LTLIBRARIES = libbconsole.la
 
 libbconsole_la_SOURCES = \
@@ -21,6 +17,10 @@ EXTRA_DIST = \
 		$(TABLE_FILES)
 
 noinst_PROGRAMS = bconsole_vu
+
+AM_CPPFLAGS = \
+		$(FRIBIDI_CFLAGS) \
+		-I$(top_srcdir)/bjoining
 
 LDADD = \
 		$(FRIBIDI_LIBS) \

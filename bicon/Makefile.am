@@ -1,8 +1,3 @@
-INCLUDES = \
-		$(FRIBIDI_CFLAGS) \
-		-I$(top_srcdir)/bjoining \
-		-I$(top_srcdir)/bconsole
-
 bin_PROGRAMS = bicon.bin
 
 bicon_bin_SOURCES = \
@@ -11,6 +6,11 @@ bicon_bin_SOURCES = \
 		bicon_read.h \
 		pty_spawn.c \
 		pty_spawn.h
+
+bicon_bin_CPPFLAGS = \
+		$(FRIBIDI_CFLAGS) \
+		-I$(top_srcdir)/bjoining \
+		-I$(top_srcdir)/bconsole
 
 bicon_bin_LDADD = \
 		$(FRIBIDI_LIBS) \

@@ -7,9 +7,8 @@
 ##                                               -*- Autoconf -*-
 ## Process this file with autoconf to produce a configure script.
 
-AC_PREREQ(2.54)
-AC_INIT(BiCon, 0.1,
-	[http://bugs.arabeyes.org/cgi-bin/bugzilla/enter_bug.cgi?product=BiCon])
+AC_PREREQ(2.59)
+AC_INIT([BiCon],[0.1],[http://bugs.arabeyes.org/cgi-bin/bugzilla/enter_bug.cgi?product=BiCon])
 AC_REVISION($Id$)
 AC_CONFIG_SRCDIR(bicon/bicon.c)
 AC_CONFIG_HEADERS(config.h)
@@ -34,10 +33,11 @@ AC_SUBST(FRIBIDI_LIBS)
 AC_SUBST(FRIBIDI_CFLAGS)
 
 # Checks for header files.
-AC_HEADER_STDC
+AC_INCLUDE_DEFAULTS
+#AC_HEADER_STDC
 AC_HEADER_SYS_WAIT
 AC_HEADER_TIME
-AC_CHECK_HEADERS([sys/types.h sys/stat.h stdlib.h string.h strings.h inttypes.h unistd.h])
+#AC_CHECK_HEADERS([sys/types.h sys/stat.h stdlib.h string.h strings.h inttypes.h unistd.h])
 AC_CHECK_HEADERS([paths.h sys/file.h sys/ioctl.h termios.h])
 
 # Checks for typedefs and structures.
@@ -64,7 +64,6 @@ AC_FUNC_FORK
 AC_FUNC_MALLOC
 AC_FUNC_SELECT_ARGTYPES
 AC_FUNC_STAT
-AC_FUNC_WAIT3
 AC_CHECK_FUNCS([dup2 memmove memset putenv select])
 AC_TYPE_SIGNAL
 

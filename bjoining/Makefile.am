@@ -1,6 +1,3 @@
-INCLUDES = \
-		$(FRIBIDI_CFLAGS)
-
 pkglib_LTLIBRARIES = libbjoining.la
 
 libbjoining_la_SOURCES = \
@@ -28,5 +25,8 @@ EXTRA_DIST = \
 		$(TABLE_FILES)
 
 noinst_PROGRAMS = bjoining_vu msye fixfarsiye
+
+AM_CPPFLAGS = \
+		$(FRIBIDI_CFLAGS)
 
 LDADD = $(FRIBIDI_LIBS) libbjoining.la

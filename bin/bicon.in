@@ -1,28 +1,28 @@
-#!/bin/sh
+#! /bin/sh
 
 bindir=@bindir@
 datadir=@datadir@
-PACKAGE_NAME="@PACKAGE_NAME@"
+PACKAGE_NAME=@PACKAGE_NAME@
 PACKAGE=@PACKAGE@
 VERSION=@VERSION@
 
-LOWER='abcdefghijklmnopqrstuvwxyz'
-UPPER='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+LOWER=abcdefghijklmnopqrstuvwxyz
+UPPER=ABCDEFGHIJKLMNOPQRSTUVWXYZ
 
-EXPLANG="$1"
+EXPLANG=$1
 shift
-IMPLANG="`echo $LANG | sed "s/...\(..\).*/\1/;y/$UPPER/$LOWER/"`"
+IMPLANG=`echo $LANG | sed "s/...\(..\).*/\1/;y/$UPPER/$LOWER/"`
 
 if [ -n "$EXPLANG" ]; then
 	LANGUAGE="$EXPLANG"
 	if [ -n "$LANGUAGES" ]; then
-		LANGUAGES="$EXPLAN,$LANGUAGES"
+		LANGUAGES=$EXPLAN,$LANGUAGES
 	else
-		LANGUAGES="$EXPLAN"
+		LANGUAGES=$EXPLAN
 	fi
 	export LANGUAGES
 else
-	LANGUAGE="$IMPLANG"
+	LANGUAGE=$IMPLANG
 fi
 
 function isconsole() {
@@ -37,7 +37,7 @@ function iskbdunicode() {
 
 
 # setup environment (bicon_start)
-case "$TERM" in
+case $TERM in
 
 	linux)
 		if isconsole; then
@@ -91,15 +91,15 @@ case "$TERM" in
 esac
 
 
-echo "BiCon started"
+echo BiCon started
 # do the real thing
-${bindir}/bicon.bin "$@"
+${bindir}/bicon.bin ${1+"$@"}
 STATUS=$?
-echo "BiCon done"
+echo BiCon done
 
 
 # rollback environment (bicon_stop)
-case "$TERM" in
+case $TERM in
 
 	linux)
 		if isconsole; then
@@ -136,7 +136,7 @@ case "$TERM" in
 			if [ -n "$OLD_XKB" ]; then
 
 				echo "$OLD_XKB" | xkbcomp -w 2 - "$DISPLAY"
-				unset "OLD_XKB"
+				unset OLD_XKB
 			fi
 		fi
 	;;
