@@ -1,29 +1,28 @@
 fontdir = $(pkgdatadir)/font
-font_DATA = farsi-8x16-512.psf.gz farsi-8x16-512-marks.psf.gz \
-     farsi-8x16-512-logical.psf.gz farsi-8x16-512-marks-logical.psf.gz
+font_DATA = bicon-8x16-512.psf.gz bicon-8x16-512-marks.psf.gz \
+     bicon-8x16-512-logical.psf.gz bicon-8x16-512-marks-logical.psf.gz
 
-MFONT=farsi-8x16.bdf.gz
+all: $(font_DATA)
+BDF=bicon-8x16.bdf
 
 %-set-names: %.bdf
 	./bdf_set_names $< > $<~ && mv -f $<~ $< || { $(RM) $<~; false; }
 
-%-set-names: %.bdf.gz
-	./bdf_set_names $< | gzip -9 > $<~ && mv -f $<~ $< || \
-	{ $(RM) $<~; false; }
-	
-
-farsi-8x16-512.psf.gz: $(MFONT) farsi_arabic.sfm farsi_ascii.sfm farsi_nomarks.sfm
+bicon-8x16-512.psf: $(BDF) bicon-arabic.sfm bicon-ascii.sfm bicon-nomarks.sfm
 	./create_psf $@ $^
 
-farsi-8x16-512-marks.psf.gz: $(MFONT) farsi_arabic.sfm farsi_ascii.sfm farsi_marks.sfm
+bicon-8x16-512-marks.psf: $(BDF) bicon-arabic.sfm bicon-ascii.sfm bicon-marks.sfm
 	./create_psf $@ $^
 
-farsi-8x16-512-logical.psf.gz: $(MFONT) farsi_arabic.sfm farsi_ascii.sfm farsi_nomarks.sfm
+bicon-8x16-512-logical.psf: $(BDF) bicon-arabic.sfm bicon-ascii.sfm bicon-nomarks.sfm
 	./create_psf --mirrorrtl $@ $^
 
-farsi-8x16-512-marks-logical.psf.gz: $(MFONT) farsi_arabic.sfm farsi_ascii.sfm farsi_marks.sfm
+bicon-8x16-512-marks-logical.psf: $(BDF) bicon-arabic.sfm bicon-ascii.sfm bicon-marks.sfm
 	./create_psf --mirrorrtl $@ $^
 
+%.gz: %
+	@echo "Compressing $<"
+	gzip -9 --stdout $< > $@
 
 clean-local:
-	$(RM) *.psf.gz
+	$(RM) *.psf *.psf.gz

@@ -15,13 +15,15 @@
 #              [font1.bdf [font2.bdf ...]] [-m]
 #
 # Notes:
-#   Behdad Esfahbod added -m flag and support for multiple fonts and sfms.
+#   Behdad Esfahbod added -m flag and support for multiple fonts and sfm's.
 #   The -m flag will cause RTL (right-to-left) glyphs to be mirrord
 #   horizontally (he needed the effect.  can you find any usage?).
 #   This version prefers the first glyph assignment and the first sfm map
 #   has the highest priority.
+#
 #   Serge Winitzki's bdf2fon.pl was used as a starting point for
 #   .bdf parsing code.
+#
 #   Doesn't perform strict .bdf syntax/consistency checks!
 #
 # Author:

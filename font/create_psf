@@ -1,4 +1,5 @@
 #!/bin/bash
+# by Behdad Esfahbod -- not copyrighted.
 
 if test "$#" "<" "2"; then
 	echo "Usage:
@@ -28,11 +29,7 @@ set -e
 cat "$@" > $TEMPPREFIX.sfm &&
 echo "Extracting glyphs from font $FONT" &&
 { test "$FONT" "!=" "${FONT%.gz}" && zcat "$FONT" || cat "$FONT"; } |
-./farsi_bdf2psf.pl $MIRROR -s $TEMPPREFIX.sfm -o $TEMPPREFIX.psf &&
+./bicon-bdf2psf.pl $MIRROR -s $TEMPPREFIX.sfm -o $TEMPPREFIX.psf &&
 echo "Adding SFM tables to font" &&
 psfaddtable $TEMPPREFIX.psf $TEMPPREFIX.sfm ${OUTPUT%.gz} &&
 CLEANUP || { CLEANUP; false; }
-if test "$OUTPUT" "!=" "${OUTPUT%.gz}"; then
-	echo "Gzipping the output"
-	gzip -f -9 ${OUTPUT%.gz}
-fi
