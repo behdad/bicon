@@ -1,15 +1,15 @@
-# From: Behdad Esfahbod <behdad@bamdad.org>
+# From: Behdad Esfahbod <bicon@behdad.org>
 # Date: Jun 13 2002
 #
 # Persian ISIRI-2901 Unicode console keyboard driver.
 #
 # ChangeLog:
 #
-# 2002-06-13  Behdad Esfahbod <isiri2901@behdad.org>
+# 2002-06-13  Behdad Esfahbod <bicon@behdad.org>
 #	* U+FDFC RIAL SIGN added.
-# 2002-06-11  Behdad Esfahbod <isiri2901@behdad.org>
+# 2002-06-11  Behdad Esfahbod <bicon@behdad.org>
 #	* Bidi Marks added.
-# 2001-06-19  Behdad Esfahbod <behdad@bamdad.org>
+# 2001-06-19  Behdad Esfahbod <bicon@behdad.org>
 #	* First written.
 
 alt_is_meta
