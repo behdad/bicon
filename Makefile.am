@@ -13,8 +13,6 @@ SUBDIRS = bjoining bconsole bicon keymap font bin doc testtext
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = @PACKAGE@.pc
 
-AUTOMAKE_OPTIONS = gnu
-
 MAINTAINERCLEANFILES = \
 		ChangeLog.bak \
 		INSTALL \

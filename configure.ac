@@ -12,19 +12,16 @@
 
 AC_PREREQ(2.59)
 AC_INIT([BiCon],[0.1.pre],[http://bugs.arabeyes.org/cgi-bin/bugzilla/enter_bug.cgi?product=BiCon])
-AC_REVISION($Id$)
+AC_REVISION([$Id$])
 AC_CONFIG_SRCDIR(bicon/bicon.c)
 AC_CONFIG_HEADERS(config.h)
 AM_INIT_AUTOMAKE([gnu check-news])
 
 # Checks for programs.
 AC_PROG_CC
-AC_PROG_GCC_TRADITIONAL
 AC_PROG_INSTALL
-AC_PROG_MAKE_SET
 AC_PROG_LIBTOOL
 AC_PROG_LN_S
-AC_PROG_RANLIB
 
 # Checks for libraries.
 AC_CHECK_LIB(dl, dlopen)
