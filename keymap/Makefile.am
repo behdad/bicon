@@ -24,16 +24,16 @@ SUFFIXES = .map .map.gz
 	gzip --best -c $< > $@
 
 $(ALL_ARABICS_MAP_GZ):
-	$(LN_S) arabic.map.gz $@
+	@$(LN_S) arabic.map.gz $@ \
+	&& echo Creating symlink for $@ succeeded \
+	|| echo Creating symlink for $@ failed
 
 install-data-hook:
 	@cd "$(DESTDIR)$(keymapdir)" && \
 	for ter_map_gz in $(ALL_ARABICS_MAP_GZ); do \
-		if $(LN_S) arabic.map.gz $$ter_map_gz; then \
-			echo Creating symlink for $$ter_map_gz succeeded; \
-		else \
-			echo Creating symlink for $$ter_map_gz failed; \
-		fi \
+		$(LN_S) arabic.map.gz $$ter_map_gz \
+		&& echo Creating symlink for $$ter_map_gz succeeded \
+		|| echo Creating symlink for $$ter_map_gz failed; \
 	done
 
 uninstall-hook:

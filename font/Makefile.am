@@ -14,9 +14,9 @@ ALL_CONSOLE_FONTS_PSFU_GZ = $(ALL_CONSOLE_FONTS_PSFU:=.gz)
 fontdir = $(pkgdatadir)/font
 dist_font_DATA = $(ALL_CONSOLE_FONTS_PSFU_GZ) $(BDF)
 noinst_DATA = $(ALL_CONSOLE_FONTS_SFM)
-EXTRA_DIST = $(ALL_SUBSFMS)
 
-noinst_SCRIPTS = bicon-bdf2psf.pl
+EXTRA_DIST = $(ALL_SUBSFMS) bicon-bdf2psf.pl
+
 BDF2PSF = $(srcdir)/bicon-bdf2psf.pl
 
 CLEANFILES = *.sfm *.psf *.psfu *.psfu.gz *.tmp

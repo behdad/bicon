@@ -18,10 +18,13 @@ MAINTAINERCLEANFILES = \
 		ChangeLog.bak \
 		INSTALL \
 		aclocal.m4 \
+		autoscan.log \
+		compile \
 		config.guess \
 		config.h.in \
 		config.sub \
 		configure \
+		configure.scan \
 		depcomp \
 		install-sh \
 		ltmain.sh \
