@@ -6,6 +6,8 @@
 ##############################################################################
 ##                                               -*- Autoconf -*-
 ## Process this file with autoconf to produce a configure script.
+## Use autoupdate to update this file for newer versions of autoconf.
+## Use autoscan to check if you need to add something to this file.
 
 AC_PREREQ(2.59)
 AC_INIT([BiCon],[0.1.pre],[http://bugs.arabeyes.org/cgi-bin/bugzilla/enter_bug.cgi?product=BiCon])
@@ -21,6 +23,7 @@ AC_PROG_INSTALL
 AC_PROG_MAKE_SET
 AC_PROG_LIBTOOL
 AC_PROG_LN_S
+AC_PROG_RANLIB
 
 # Checks for libraries.
 AC_CHECK_LIB(dl, dlopen)

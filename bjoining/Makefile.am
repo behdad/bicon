@@ -1,3 +1,12 @@
+##############################################################################
+## $Id$
+## $Date$
+## $Revision$
+## $Source$
+##############################################################################
+##                                               -*- Automake -*-
+## Process this file with automake to produce Makefile.in
+
 pkglib_LTLIBRARIES = libbjoining.la
 
 libbjoining_la_SOURCES = \

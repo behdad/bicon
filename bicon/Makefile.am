@@ -1,3 +1,12 @@
+##############################################################################
+## $Id$
+## $Date$
+## $Revision$
+## $Source$
+##############################################################################
+##                                               -*- Automake -*-
+## Process this file with automake to produce Makefile.in
+
 bin_PROGRAMS = bicon.bin
 
 bicon_bin_SOURCES = \

@@ -1,4 +1,12 @@
 #! /bin/sh
+##############################################################################
+# $Id$
+# $Date$
+# $Revision$
+# $Source$
+##############################################################################
+#                                               -*- Bootstrap -*-
+# Run this file to produce a configure script.
 
 DEFAULTARGS="--force --install --autoreconf=auto"
 

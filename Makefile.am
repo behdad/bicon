@@ -1,3 +1,12 @@
+##############################################################################
+## $Id$
+## $Date$
+## $Revision$
+## $Source$
+##############################################################################
+##                                               -*- Automake -*-
+## Process this file with automake to produce Makefile.in
+
 AUTOMAKE_OPTIONS = gnu
 
 SUBDIRS = bjoining bconsole bicon keymap font bin doc testtext

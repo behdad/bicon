@@ -2,6 +2,7 @@ ChangeLog.bak
 INSTALL
 aclocal.m4
 autom4te.cache
+autoscan.log
 bicon.pc
 compile
 config.guess
@@ -11,6 +12,7 @@ config.log
 config.status
 config.sub
 configure
+configure.scan
 depcomp
 install-sh
 libtool

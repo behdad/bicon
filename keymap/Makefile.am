@@ -1,3 +1,12 @@
+##############################################################################
+## $Id$
+## $Date$
+## $Revision$
+## $Source$
+##############################################################################
+##                                               -*- Automake -*-
+## Process this file with automake to produce Makefile.in
+
 include keymaps.mk
 
 ALL_KEYMAPS_MAP_GZ = $(ALL_KEYMAPS_MAP:=.gz)
