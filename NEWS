@@ -1,7 +1,8 @@
-* Going for 0.1.pre
-* First public release: 0.0.20040401
-* A fake release announced the day before April 1st 2004
-* The real release out on April 1st 2004
-* Excellent autotools integration
-* Works on Linux console, as well as gnome-terminal, xterm, and
-  PuTTY!
+* BiCon 0.0.20040505
+* Better keyboard handling when running with a remote X server.
+==============================================================================
+* First public release: 0.0.20040401.
+* A fake release announced the day before April 1st 2004.
+* The real release out on April 1st 2004.
+* Excellent autotools integration.
+* Works on Linux console, as well as gnome-terminal, xterm, and PuTTY!
