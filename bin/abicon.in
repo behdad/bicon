@@ -4,20 +4,21 @@ exec_prefix=@exec_prefix@
 bindir=@bindir@
 pkgdatadir=@datadir@/@PACKAGE@
 
-NEWLANG=ar
-if test -n "$1"; then
-	NEWLANG=$1
-fi
-
 WAS_UNICODE=false
 kbd_mode | grep -q Unicode && WAS_UNICODE=true
+
+if [ -z "$1" ]; then
+	LANGUAGE=${LANG:0:2}
+else
+	LANGUAGE=$1
+fi
 
 if ! ${WAS_UNICODE}; then
 	kbd_mode -u
 	echo -ne '\033%G'
 fi
 
-loadkeys ${pkgdatadir}/keymap/$NEWLANG.map.gz 2>/dev/null
+loadkeys ${pkgdatadir}/keymap/$LANGUAGE.map.gz 2>/dev/null
 setfont ${pkgdatadir}/font/bicon-8x16-512.psf.gz
 
 ${bindir}/bicon
