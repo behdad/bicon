@@ -4,6 +4,13 @@ BiCon - The Bidirectional Console
 
 This is the bidirectional console as presented by Arabeyes.
 
+
+Depenncy
+--------
+
+ - FriBiDi > 0.10.4 (library headers)
+
+
 Installation
 ------------
 
