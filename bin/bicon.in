@@ -13,7 +13,12 @@ IMPLANG="`echo $LANG | sed "s/...\(..\).*/\1/;y/$UPPER/$LOWER/"`"
 
 if [ -n "$EXPLANG" ]; then
 	LANGUAGE="$EXPLANG"
-	export LANGUAGES="$EXPLAN:$LANGUAGES"
+	if [ -n "$LANGUAGES" ]; then
+		LANGUAGES="$EXPLAN,$LANGUAGES"
+	else
+		LANGUAGES="$EXPLAN"
+	fi
+	export LANGUAGES
 else
 	LANGUAGE="$IMPLANG"
 fi
