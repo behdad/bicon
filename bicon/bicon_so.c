@@ -66,8 +66,8 @@ err_dlopen: \
   } while (0)
 
 /* turn utf-8 off for following functions. */
-hook_function (SLtt_init_video, "libslang.so", turn_utf8_off, );
-hook_function (initscr, "libcurses.so", turn_utf8_off, );
+hook_function (SLtt_init_video, "libslang.so", turn_utf8_off,);
+hook_function (initscr, "libcurses.so", turn_utf8_off,);
 
 void
 init (void)

@@ -5,8 +5,8 @@ Copyright (c) Muhammad Alkarouri
 This code is a direct translation of the pty.spawn function and its 
 dependencies, as included in Python 2.2.3, to the C language.
 
-This code is governed by the same license as pty.spawn, namely the PSF License Agreement For Python 2.2.3
-
+This code is governed by the same license as pty.spawn,
+namely the PSF License Agreement For Python 2.2.3
  */
 #include <unistd.h>
 #include <errno.h>
@@ -15,7 +15,7 @@ This code is governed by the same license as pty.spawn, namely the PSF License A
 #include <sys/select.h>
 #include "pty_spawn.h"
 
-pid_t
+static pid_t
 _fork (int *master_fd)
 {
   pid_t pid;
@@ -45,7 +45,7 @@ _fork (int *master_fd)
   return pid;
 }
 
-int
+static int
 _copy (int master_fd, reader master_read, reader stdin_read)
 {
   fd_set rfds;
@@ -77,8 +77,8 @@ _copy (int master_fd, reader master_read, reader stdin_read)
 }
 
 int
-spawn (const char *file, char *const args[], reader master_read,
-       reader stdin_read)
+bicon_spawn (const char *file, char *const args[], reader master_read,
+	     reader stdin_read)
 {
   pid_t pid;
   int master_fd;

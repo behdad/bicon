@@ -218,10 +218,15 @@ bicon_read (int fd, void *buf, size_t ct)
   return buflen;
 }
 
-void
-initbread (void)
+int
+bicon_read_init (void)
 {
   utf8 = fribidi_parse_charset ("UTF-8");
+  if (utf8 == FRIBIDI_CHAR_SET_NOT_FOUND)
+    return 0;
+
   utf8mode = !(bicon_options & B_NO_UTF8_STARTUP);
   turn = offset = del_num = 0;
+
+  return 1;
 }
