@@ -1,3 +1,27 @@
+2004-03-31 05:22  alkarouri
+
+	* doc/man/bicon.1: minor corrections to the man page of bicon
+
+2004-03-31 04:18  alkarouri
+
+	* README, configure.ac, bin/Makefile.am, bin/abicon.in,
+	  bin/bicon_console.in, doc/man/Makefile.am, doc/man/abicon.1,
+	  doc/man/bicon.1, doc/man/bicon_console.1: renaming abicon to
+	  bicon_console, all references
+
+2004-03-31 04:06  behdad
+
+	* keymap/: Makefile.am, ar.map, arabic.map: renamed ar.map to
+	  arabic.map.  ar.map probably is reserved for Argentina.
+
+2004-03-31 03:44  alkarouri
+
+	* ChangeLog, configure.ac, bin/abicon.in, keymap/Makefile.am: -
+	  make install now creates arabic countries keymaps as symbolic
+	  links to ar.map - abicon now uses the country as a parameter
+	  rather than the language, as different keymaps exist for the same
+	  language (Arabic).
+
 2004-03-29 15:25  behdad
 
 	* keymap/: fa.map, ir.map: Renamed "fa.map" to "ir.map", as this is
