@@ -1,8 +1,3 @@
-2004-02-25  Behdad Esfahbod <bicon@behdad.org>
-	keymap/*: arab.kmap and isiri2901.kmap renamed to ar.map
-		and fa.map.
-	keymap/Makefile.am: Fixed to find and build all keymaps.
-
 2004-January  Behdad Esfahbod <bicon@behdad.org>
 	* *: Well, code is handed to Arabeyes people.  Decided to
 	change the name to "BiCon".  I'm not going to be the
