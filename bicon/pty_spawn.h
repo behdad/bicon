@@ -11,7 +11,7 @@ typedef ssize_t (
   void *buf,
   size_t count);
 
-int spawn (
+int bicon_spawn (
   const char *file,
   char *const args[],
   reader master_read,

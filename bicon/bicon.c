@@ -17,7 +17,7 @@ main (
   if (argc == 1)
     {
       char *sh = getenv ("SHELL");
-      args[0] = sh ? sh : SH;
+      args[0] = sh ? sh : (char *)SH;
       args[1] = NULL;
     }
   else
@@ -31,6 +31,5 @@ main (
       fprintf (stderr, "Error: FriBidi is not compiled with UTF-8 support\n");
       exit (1);
     }
-  bicon_spawn (args[0], args, bicon_read, read);
-  return 0;
+  return bicon_spawn (args[0], args, bicon_read, read);
 }

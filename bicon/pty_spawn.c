@@ -8,6 +8,8 @@ dependencies, as included in Python 2.2.3, to the C language.
 This code is governed by the same license as pty.spawn,
 namely the PSF License Agreement For Python 2.2.3
  */
+#include <stdlib.h>
+#include <stdio.h>
 #include <unistd.h>
 #include <errno.h>
 #include <pty.h>
@@ -92,13 +94,20 @@ bicon_spawn (
   struct termios ts, newts;
   pid = _fork (&master_fd);
   if (pid == -1)
-    return -1;
-  if (pid == 0)
+    return 126;
+  if (pid == 0) {
     execvp (file, args);
+    fprintf(stderr, "bicon: failed running %s\n", file);
+    exit(1);
+  }
   tcgetattr (1, &ts);
   newts = ts;
   cfmakeraw (&newts);
   tcsetattr (1, TCSAFLUSH, &newts);
   _copy (master_fd, master_read, stdin_read);
   tcsetattr (1, TCSAFLUSH, &ts);
+  return 0;
+  /* XXX we better somehow return the return value of the forked
+   * child, but how?
+   */
 }
