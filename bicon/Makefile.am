@@ -17,7 +17,7 @@ bicon_bin_LDADD = \
 		$(top_builddir)/bconsole/libbconsole.la \
 		$(top_builddir)/bjoining/libbjoining.la
 
-lib_LTLIBRARIES = libbicon.la
-
-libbicon_la_SOURCES = bicon_so.c
-libbicon_la_LIBADD = 
+#lib_LTLIBRARIES = libbicon.la
+#
+#libbicon_la_SOURCES = bicon_so.c
+#libbicon_la_LIBADD = 
