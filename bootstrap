@@ -1,22 +1,40 @@
 #! /bin/sh
 
+#WARN=--warnings=all
+FORCE=--force
+INSTALL=--install
+#SYMLINK=--symlink
+#MAKE=--make
+#DRYRUN=echo
+
+test -z "$SYMLINK" && COPY=--copy
+ADDMISSING=${INSTALL+"--add-missing"}
+
+# use autoreconf if possible, just check for version 2+
+case `autoreconf --version 2>/dev/null` in
+	*"autoreconf (GNU Autoconf) 2."* )
+		echo Usable autoreconf found, running
+		$DRYRUN autoreconf $WARN $FORCE $INSTALL $SYMLINK $MAKE
+		exit $?
+	;;
+esac
+
 # add files 'config.guess', 'config.sub', 'ltconfig', 'ltmain.sh'
-libtoolize --automake --force --copy || exit 1
+$DRYRUN libtoolize $FORCE $COPY --automake || exit 1
 
-# generate 'aclocal.m4', and use our macros in ./m4
-#aclocal -I ./m4
-aclocal || exit 1
+# generate 'aclocal.m4'
+$DRYRUN aclocal $FORCE || exit 1
 
-autoheader --warnings=all || exit 1
+# generate 'config.h.in'
+$DRYRUN autoheader $WARN $FORCE || exit 1
 
 #  generate Makefile.in's from Makefile.am's
-automake --warnings=all --add-missing --force --copy || exit 1
+$DRYRUN automake $WARN $FORCE ${INSTALL+"--add-missing"} $COPY || exit 1
 
-# generate configure from configure.in
-autoconf --warnings=all --force || exit 1
+# generate configure from configure.ac
+$DRYRUN autoconf $WARN $FORCE || exit 1
 
-#echo "Now run ./configure"
-#./configure "$@" || exit 1
-#make
-
-
+if test -n "$MAKE"; then
+	$DRYRUN ./configure || exit 1
+	$DRYRUN make || exit 1
+fi
