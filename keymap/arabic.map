@@ -4,7 +4,7 @@ keymaps 0-10,12,14
 include "linux-with-modeshift-altgr.inc"
 strings as usual
 
-# Set alt-shift key combination to change between farsi and english layouts
+# Set alt-shift key combination to change between Arabic and English layouts
 keycode 42		= Shift
 alt keycode 42		= AltGr_Lock
 altgr alt keycode 42	= AltGr_Lock

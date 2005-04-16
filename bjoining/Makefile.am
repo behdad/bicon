@@ -34,7 +34,7 @@ TABLE_FILES = \
 EXTRA_DIST = \
 		$(TABLE_FILES)
 
-noinst_PROGRAMS = bjoining_vu msye fixfarsiye
+noinst_PROGRAMS = bjoining_vu msye fixpersianye
 
 AM_CPPFLAGS = \
 		$(FRIBIDI_CFLAGS)

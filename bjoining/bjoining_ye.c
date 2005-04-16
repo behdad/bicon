@@ -2,7 +2,7 @@
 
 /* should be applied on logical unicode string, not visual */
 int
-bjoining_ye_farsi_fix_for_ms (
+bjoining_ye_persian_fix_for_ms (
   unichar *us,
   int len)
 {
@@ -28,7 +28,7 @@ bjoining_ye_farsi_fix_for_ms (
 
 /* should be applied on logical unicode string, not visual */
 int
-bjoining_ye_to_farsi (
+bjoining_ye_to_persian (
   unichar *us,
   int len)
 {

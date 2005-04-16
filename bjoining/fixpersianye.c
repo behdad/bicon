@@ -28,7 +28,7 @@ main (
 	newline = "";
 
       len = fribidi_charset_to_unicode (utf8, s, len, us);
-      bjoining_ye_to_farsi (us, len);
+      bjoining_ye_to_persian (us, len);
       len = fribidi_unicode_to_charset (utf8, us, len, s);
 
       *(s + len) = '\0';

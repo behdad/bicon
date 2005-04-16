@@ -8,7 +8,7 @@ This is the bidirectional console as presented by Arabeyes.
 Depenncy
 --------
 
- - FriBiDi > 0.10.4 (library headers)
+ - FriBiDi >= 0.10.4 (library AND headers)
 
 
 Installation
@@ -16,9 +16,10 @@ Installation
 
 You need the FriBidi library to compile this program. Probably
 you have it in your distribution. If not, get it from
-http://fribidi.sourceforge.net
+http://fribidi.org/
 
 Installation is simple, the usual steps:
+
 	./configure
 	make
 	make install
@@ -38,7 +39,9 @@ You can also choose the language country by specifying the country on
 the country on the command line, e.g ::
 
 	bicon sa          # enables Arabic (Saudi Arabia) support
-	bicon ir          # for Persian(Iran)
+	bicon ir          # for Persian (Iran)
+
+You can use the alt+shift combination to switch keyboard language.
 
 Of course, you have a man page bicon(1) to check.
 

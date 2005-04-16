@@ -17,22 +17,14 @@ main (
   utf8 = fribidi_parse_charset ("UTF-8");
   while (fgets (s, BUFLEN, stdin))
     {
-      char *newline;
       len = strlen (s);
-      if (s[len - 1] == '\n')
-	{
-	  newline = "\n";
-	  s[--len] = '\n';
-	}
-      else
-	newline = "";
 
       len = fribidi_charset_to_unicode (utf8, s, len, us);
-      bjoining_ye_farsi_fix_for_ms (us, len);
+      bjoining_ye_persian_fix_for_ms (us, len);
       len = fribidi_unicode_to_charset (utf8, us, len, s);
 
       *(s + len) = '\0';
-      printf ("%s%s", s, newline);
+      fputs (s, stdout);
     }
   return 0;
 }

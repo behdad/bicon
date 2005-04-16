@@ -58,7 +58,7 @@ Agreement.
 
 
 
-font/farsi_bdf2psf.pl: license is 'BSD style' (?)
+font/bicon-bdf2psf.pl: license is 'BSD style' (?)
 
 font/glyphlist.txt.gz: Adobe Glyph List, usable only as described within.
 
