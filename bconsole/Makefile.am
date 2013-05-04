@@ -37,3 +37,5 @@ AM_CPPFLAGS = \
 
 LDADD = \
 		libbconsole.la
+
+-include $(top_srcdir)/git.mk

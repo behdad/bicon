@@ -25,3 +25,5 @@ EXTRA_DIST = bicon.in
 
 MOSTLYCLEANFILES=bicon.tmp
 CLEANFILES=bicon
+
+-include $(top_srcdir)/git.mk

@@ -58,3 +58,5 @@ bicon-8x16-512.sfm: bicon-ascii.sub-sfm bicon-arabic.sub-sfm bicon-nomarks.sub-s
 
 bicon-8x16-512-marks.sfm: bicon-ascii.sub-sfm bicon-arabic.sub-sfm bicon-marks.sub-sfm
 	cat $^ > $@
+
+-include $(top_srcdir)/git.mk

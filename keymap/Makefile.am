@@ -44,3 +44,5 @@ uninstall-hook:
 			echo Removing symlink for $$ter_map_gz; \
 		fi \
 	done
+
+-include $(top_srcdir)/git.mk

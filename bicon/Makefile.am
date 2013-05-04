@@ -31,3 +31,5 @@ bicon_bin_LDADD = \
 #
 #libbicon_la_SOURCES = bicon_so.c
 #libbicon_la_LIBADD = 
+
+-include $(top_srcdir)/git.mk
