@@ -1,0 +1,572 @@
+Subject: farsi.  farsi!  farsi?  farsi:
+
+FARSI.
+Yes.
+;-)
+
+Disclaimer 1: This is not a Persian vs Farsi war message.
+Disclaimer 2: CC to FarsiWeb list is only informational.
+Disclaimer 3: The attached code is not in Public Domain.
+Disclaimer 4: This is a long boring message.  Your own risk.
+
+
+Two long years ago, in such a day that today is, perhaps in the same wee hours
+in the morning but in Tehran time, I have been polishing and wrapping up some
+piece of code that has been called "farsi" since then.
+
+The story still goes back more.  Should have been in late 2000 that Roozbeh
+Pournader wrote some C code to convert Unicode Persian text to some legacy
+character set called "iransystem".  As a requirement for that, he wrote the
+joining code that was later used by me in "farsi".
+
+Late 2001.  My major work on FriBidi has been done, so was the time to use
+what I have been doing.  Took Roozbeh's code, cleaned up, plugged FriBidi, and
+it was what you get as farsi/fjoining/.  I wrote some more code to fill the
+gap in console to handle harakats, and called it farsi/fconsole, and finally
+grabbed source code from script(1), hacked a few lines, and called it
+farsi/fcon.  With the help of font tools I borrowed from another project and
+keyboard driver I wrote down, I had finally done my pet called "farsi" that
+was doing me more than Akka was able to do (for me as a Persian).
+
+Since then the code got some clean up and some features added, but nothing
+else changed, even the user-base that was limited to me, myself, and behdad.
+The package named "farsi" was still waiting for me (and Roozbeh) to resolve
+the copyright status and get released, when I lost my interest in bidi console
+and it went down into my 10GB archive of last (lost) files.
+
+Fortunately I did three small releases of the code, first on a local list
+called "farsidev" that does not exist today anymore (and I cannot even
+remember, just wrote it in the ChangeLog in the package);  next in a list in
+the Hebrew community, and last in Arabeyes'.  Seems that the last one is the
+only one that has survived the history.
+
+This is the history about "farsi" in five paragraphs.  I also hacked a Red Hat
+7.2 to enable Persian on console.  I later took some notes of what I did, and
+implemented it on another machine from my notes.  The notes are in farsiredhat
+directory in archive attached to this mail.  Note that they are pretty old.
+Many things have changed these days.
+
+For the past few days I have been known as the most blocker of the whole
+Arabeyes project ;-).  So I first answer the questions I was asked about
+"farsi", and then go through the files in attached archive.
+
+Muhammad Alkarouri wrote:
+>
+> Thanks Behdad for your reply. I would like to know,
+> though, what is the expected timeframe of including
+> joining in fribidi.
+
+2005.  No more, no less ;-).
+Seriously, this winter.
+
+> Another question for all:
+> - do you know any problem that affects using farsi
+> besides bidi before joining and shaping codes, and
+> some may be next stage points like interaction with
+> gpm and ncurses programs?
+
+In the future, ncurses should implement its own bidi/shaping.  But before
+that, both ncurses and gpm need to get some stable Unicode support.  I am
+supposed to have a look at Unicode support in ncurses after I'm satisfied with
+GNOME (FriBidi, Pango, GTK+, AbiWord), but most probably it's not before 2005.
+
+> If there aren't I will base any future work on this
+> code rather than the akka original.
+
+:D.
+
+Nadim Shakili wrote:
+> 
+> A couple of questions though,
+> 
+>  1. Can we take this conversation to Arabeyes' "developer"
+>     mailing-list ?  I'm sure we'll want to refer back to
+>     all these points in the future.
+
+Sure.
+
+>  2. Can we come up with an alternate name to this package.
+>     Akka 2.0 (with no mention of the previous work or credits) ?
+>     suggestions ?  Behdad, its your baby, so its your call.
+
+Well, "farsi" is not such a bad name as long as it's used in English written
+text ;-).  Ok, it has proved to be a bad name.  Perhaps '"farsi"' is a good
+name, but again in written context.  BTW, you should not need that word in
+English; one should always use Persian to refer to the language.
+
+Second, it's the Free World (as in Free Beer) of Free Software
+(as in Freedom) ;-).  Feel Free to Fu^H^HHack the code.  (Free as
+in Freedom, not as in Beer.  Don't forget my Beer).
+
+Akka 2.0, may make up a good name.  I too prefer not binding a new name to the
+same functionality.  Perhaps we would want to give some hints and credit to
+pre-2.0 Akka.  Roozbeh?
+
+I'm fine with Akka, if on your website and the main README file, you write it
+this way:
+		Akka (aka "farsi")
+
+Another idea comes to my mind, about popping another name.  Just take the
+middle and call it 'baghdad'?  ;-).
+
+>  3. Can we, once 1&2 above are agreed upon, release this code
+>     so that its archived somewhere.  From what I remember, the
+>     code as it stands today is fully functional with the
+>     exception of a few missing shaping characters.  Once those
+>     are taken care of, we can release, right ?
+
+I have attached my latest code, and hopefully with my comments at the end of
+this message, you can make it fully functional.  Last time I tried there were
+things that needed some change to work in newer Red Hat systems.  Mainly,
+consolechars is dropped and setfont should be used instead.
+
+Muhammad Alkarouri
+>
+> While I would certainly prefer an alternative name,
+> more descriptive to the type of the package, I see no
+> reason why Behdad cannot name the package he has
+> written in the way he wants. Two points are there:
+> - Is Behdad willing to resume developing the package?
+> If not, I suggest he publishes it and we can develop
+> an Akka 2 based on it at Arabeyes. If he has the time,
+> then we get a good package:)
+> - We need some changes for it to be running. e.g. a
+> unicode keymap for Arabic besides the isiri currently
+> there. And I would remove the farsidict from the
+> package since it is not much related. Otherwise, I
+> would suggest getting an immediate release out and
+> leave other changes to version 1.1. Actually we can
+> release a 0.9 without even correcting these.
+
+It would be nice if someone autotoolsize it.  Other changes I have mentioned
+later.
+
+> By the way, Behdad, what is the license of this
+> package?
+
+Roozbeh's and mine are in LGPL.  (Roozbeh?).  It means all the library code.
+The font, is based on Dmitry Bokhovityanov's VGA font that I have donated
+Arabic glyphs.  There are some mapping tables and other stuff in fonts dir
+done by me, that are in public domain.  You can check the license using
+Google.  Remains the hard part:
+
+The code I borrowed from script(1), which is the skeleton of
+farsi/fcon/fcon.c, has a "BSD with advertisement clause" license.  You need to
+read it yourself and read through fsf.org to find out what we can do.  I guess
+it should remain in that dirty kind of BSD license forever.  No problem, can
+still link to the LGPLed library.
+
+One way is to cut my code out of that and place it in a GPLed
+container, that the Akka project should already have.  It's just
+a simple master/slave pty layer.  My code is the highly commented
+part in farsi/fcon/fcon.c -- lines 200 to 350.  I mean this is
+the part that is just my code, and the engine of the bidi
+terminal itself.  The rest is very easy to find or reimplement.
+
+
+Samy Al Bahra wrote:
+> 
+> >  2. Can we come up with an alternate name to this
+> > package. Akka 2.0 (with no mention of the previous work
+> > or credits) ?
+> 
+> No. You cannot just do that. People have already contributed
+> a bit of code and effort to Akka, it isn't right for them
+> "not be mentioned". I'm talking everything, including the
+> original authors on which Akka was based on should be credited
+> (even the old maintainer, me, Mohammad, Anas, etc...).
+> [snip]
+
+Well, I'm afraid you are wrong, both from an ethical point of view, and from
+the law's.  First, Akka is not a trademark or any other type of shit.  Second,
+previous authors already get some extra credit by those lazy people that do
+not read the AUTHORS file, nor release notes ;-).
+
+I prefer them mentioned myself, if we are going to call it Akka 2...
+
+
+BTW, there's a nice thing happening here.  Akka 1 was based on the work
+previously called "acon", and Akka 2 may be based on my code which the final
+part (teminal layer) is called "fcon".  That's a bit more interesting.  I
+don't know why those people called their package "acon", should be "Arabic
+Console"?  But I named it after "Farsi Condom".  As terminal people (around
+linux-utf8 list at least) call these layers that sit down on a dumb terminal
+and provide some functionality, condoms.  And this is a Farsi condom.  But you
+can't shout it in Iran, so we came up with "fcon" :-).
+
+> If Akka is dropped and a NEW project is started WITH a
+> different name then we can start over with the credits
+> and what not.
+> [snip]
+
+Akka(TM) you mean? ;-)
+
+> There are still a lot of bashisms that need to be
+> dealt with.
+
+I usually use bash where and only where C cannot be used.  In this case, I
+agree that Pythong may be the answer.  I would get to that later in this mail.
+
+> > By the way, Behdad, what is the license of this
+> > package?
+> 
+> None based on the code I have, meaning, technically it
+> is public domain. Behdad, so? I would imagine GPL (and
+> would prefer BSD license).
+
+Already discussed.
+
+> [snip]
+> I did hope you would realize this from this message and add
+> a copyright statement to the code.
+
+As I mentioned, that was the reason I never released it.
+
+
+Mohammed Elzubeir wrote:
+> 
+> Are you saying to simply apply bidi post-bidi in the farsi code? We can
+> do that.
+
+No, the problem is not any easy one, but is some kind of local.  You go your
+way to develop this code, I go mine on FriBidi, later the merge is not any
+hard.
+
+> Also, are you planning to maintain that (develop, etc..). I
+> would like to use that as a basis to replace akka. Seeing that
+> the console will always be a fixed-width environment, this
+> switch in where the shaping is applied is less relevant (but we
+> can always switch if it makes you happy).
+
+We would later switch.  I have really done a hard job on fjoining part to get
+reasonable results without having any standard on where to apply joining.
+(the hard problem if you don't see is with RLO and LRO stuff).
+
+
+Done :-).  Now my file-by-file review that can be the basis for further
+development.  Keep me posted please.  I don't go through farsiredhat stuff,
+that's pretty easy to understand.  Here is the structure of the farsi/ code,
+but the architecture can totally change, should the future developers feel the
+need.
+
+
+
+ChangeLog:
+Well, nice to have it around and add to this.  It certainly lacks some of my
+work later on the code, but can be populated from this mail for each file.
+Perhaps this mail can be saved around there named HISTORY, after mentioning
+Akka 1.x if needed.
+
+
+
+Makefile:
+Autotools perhaps.
+
+
+
+README:
+Should be replaced by a respectful one, but the contents should
+definitely be used somewhere.
+
+
+
+TODO:
+On each entry I would comment as is needed:
+
+* Parse command-line options.
+> This would be definitely done.
+
+* Somehow share options between C sources and shell
+  script!
+> We may never need it again, but I have some skeleton to
+> share variables between C source and Shell script in a
+> single file.  Ask me for it ;-).
+
+* Documentation.
+> Sure!
+
+* Fix fconso bug, also support mc.
+> Not sure if we really need that.  But the idea should
+> be developed.  I would discuss it under fconso.c later.
+
+* Clean-up ZWJ-ZWNJ-ZWJ code, also support
+  ligature-making ZWJ.
+> "ligature-making ZWJ" has been removed from Unicode
+> standard, so nonsense.  About cleaning ZWJ-ZWNJ-ZWJ
+> code, I can't remember what the problem was.  Not a
+> serious problem perhaps.  Just clean up.
+
+* Implement fcon as shared library (stick on fd 1 and 2
+  if point to tty)!
+> I would again discuss it later under fconso.c
+
+
+
+fjoining/
+To summerize, it does the joining, shaping, bidi (calling fribidi), and the
+LAM-ALEF ligature, considering all options that have been passed.  
+
+
+fjoining/Makefile
+fjoining/fjoining-config.in:
+Would be replaced by autotools, pkgconfig stuff.
+
+
+
+fjoining/*.i
+fjoining/fjoining_charprop.[ch]
+fjoining/fjoining_compose.[ch]
+fjoining/fjoining_log2cuni.[ch]
+fjoining/fjoining_vis2cuni.[ch]
+These are the main body of the library.  With tables in *.i files.  It does
+some normalization and the joining and shaping.  Tables may need some update.
+Roozbeh?  Note that the library accepts a bunch of options, defined in
+fjoining/fjoining.h.  The exciting part is that it can do joining without bidi
+sensibly.  You would later see that with a left-to-right (mirrored) Arabic
+font, you can read Arabic text written (and shaped) from left to right, which
+is pretty useful when your software does not support bidi (editors).
+
+
+
+fjoining/fjoining_vu.c
+It's a simple wrapper around library that filters text and applies bidi and
+joining.  It accepts the options in numerical right now.
+
+
+
+fjoining/fjoining_ye.[ch]
+fjoining/msye.c
+fjoining/fixfarsiye.c
+These deal with the problem of the Persian YEH in Microsoft fonts.  The first
+one "msye" replaces initial and medial Persian YEHs with Arabic YEH, and
+replace final and isolated Arabic YEHs with Persian ones.  The other one,
+fixfarsiye.c simply replaces Arabic YEH with Persian YEH.  Should not be
+needed anymore, but would be handy around, as there are lots of Persian text
+with mixed Arabic and Persian YEHs.  The names of course may change to
+something more proper.
+
+
+
+fconsole/
+This is a level of abstraction that I really love.  This small piece of does
+some ligaturing that is needed in console.  It can be assumed as your
+rendering engine that handles harakats, ....  What it currently does, if I
+remember correctly, is to ligate shadda+harakat combinations to a single
+ligature, and then ligating harakats that are applied to a character that
+joins to the next char, and put them on top of a tatweel (kashida).  It gives
+a far better looking output.
+
+
+
+fconsole/Makefile
+fconsole/fconsole-config.in
+Again, would be replaced by autotools stuff.
+
+
+
+fconsole/fconsole_*.i
+Ligature and shaping tables that the fonts supports.
+
+
+
+fconsole/fconsole.h
+fconsole/fconsole_ligature.[ch]
+fconsole/fconsole_log2con.[ch]
+The ligature engine again.  This shares some code with fjoining siblings, but
+not so much to ruin the architecture for that.  No need to change for the
+moment.
+
+
+
+fconsole/fconsole_vu.c
+Simple wrapper around library that uses fjoining stuff and do console specific
+ligaturing.
+
+
+
+fconsole/edconsole
+fconsole/vuconsole
+Test scripts that load a font and call fconsole_vu.  One of them loads the
+font and sets options so that you see the bidi/joining marks (edconsole),
+while the other one removes them (vuconsole).
+
+
+
+fcon/
+This is the terminal layer finally.
+
+
+
+fcon.c
+This is the code I borrowed from script(1).  As I mentioned before, lines 200
+to 350 is my work.  It simply sits between a master/slave pty layer and
+applies fconsole on the stream.  It takes care of a few interesting things.
+For example:
+
+* Escape seqeuences:  Escape sequences are considered as paragraph
+  terminators right now.
+
+* Paragraph terminators: "\n" usually.  Starts a new paragraph.
+
+* Unfinished paragraphs:  This is the most trickey part that I'm sure has not
+  been done in Akka :>.  If you have an unfinished paragraph, like you are
+  typing Arabic on a bash prompt, it would remember your unfinished paragraph,
+  and when you add characters to it, it "deletes" (writing backspace chars)
+  whatever glyphs it has wrote on screen, and rewrites the whole paragraph.
+  So writing on a bash prompt you get perfect effect.  But of course it would
+  fail if your unfinished paragraph spans the end of line.  Remember that this
+  layer (fcon) would always remain a hach, and perfect bidi terminal cannot be
+  implemented in this layer.  So, it's just trying to be a better hack.
+
+* It accepts terminal UTF-8 on/off escape sequences, and would turn on/off the
+  whole functionality.
+
+I like this messy code :-).
+
+
+
+fcon/fconso.c
+It's some preprocessor hack that should be seen!  Back in my time, ncurses and
+slang didn't support Unicode by any means.  So I wanted to turn my bidi
+turminal layer off, so wrote this small library, that when preloaded using
+LD_PRELOAD, causes any app that uses ncurses or slang to turn off the bidi
+functionality, and moreover, to fall back to LANG=en_US.  But the code is not
+done yet.  I remember mc used to crash.  It can be further developed.
+
+
+
+Some note on fcon.  A terminal master/slave layer is the most obvious way and
+the natural one to implement this thing, but has some drawbacks.  The main one
+be that, you are sacrificing your /dev/tty* terminal.  So for example you
+cannot startx from withing such a bidi terminal.  There are a couple of ways
+to overcome this problem I can imagine:
+
+* Instead of a layer, the code can get loaded with LD_PRELOAD as a shared
+  library, and override some system calls (open, write, dup, ...) and apply
+  bidi on any file descriptor that is going to the terminal.  It's a bit shaky
+  to determine that.  This way also has it's own known problems.
+
+* A kernel module to apply all these code to console.  I once tried that but
+  gave up.  It needs to port all fribidi and "farsi" code to kernel.  I may
+  give it another try after reading Robert Love's book.
+
+
+
+bin/farsifilter
+Calles fcon/fcon.  Some bashism there to find the binary.  Nothing more.
+Autotools would solve these bash problems.
+
+
+
+bin/farsidict
+A simple bash stuff to launch a lynx session to a dictionary using bidi
+terminal.  Nice example perhaps.  And the dictionary works for Persian.
+
+
+
+bin/farsi
+The main interface to the terminal program.  Parses options, load fonts,
+keyboard maps, ..., run bidi console, then undo all that did.
+
+
+
+* In the future, a nice Python interface can be written that provides the
+  whole functionality, so we can get rid of this piece.  But other pieces like
+  vuconsole and edconsole ...  should be thought of as test suites for their
+  library, that can be distributed with binary packages, or not.
+
+
+
+sbin/farsigetty
+It's a Persian replacement for mgetty in /etc/inittab to give a Persian
+console from the login time.  It assumes a lot from my farsiredhat stuff.
+Should be looked over to get the idea.  Also see my inittab in farsiredhat to
+see how I enabled a logical (left to right) console.  It's a matter of some
+parameters to bin/farsi wrapper.
+
+
+
+keymap/isiri2901.kmap.gz
+This is the standard keyboard map for Persian.  It's outdated and should be
+upgraded.  I would provide a new one later.  Other ones should be added here.
+Perhaps a symlink like fa -> isiri2901.kmap.gz in the directory is in place.
+Would be nice if stuff (font maps, keymaps, ...) from Hebrew people would go
+around here.
+
+
+
+font/farsi-8x16.bdf.gz
+As mentioned above, it's a my edited version of Dmitry Bolkhovityanov's font.
+For the time being, this font can be edited and used.  Later one should send
+patches upstream, and perhaps to other 8x16 fonts that I have sent the same
+glyphs.  This is the original font that should be edited.
+
+
+
+font/create_psf
+Some bash script that creates a PSF font suitable for console, from a bdf
+font, and some SFM maps.  There is an option I have added that is --mirrorrtl,
+that causes all Arabic (right to left) glyphs to be mirrored;  it is used to
+generate fonts for the logical view I said before.
+
+
+
+font/farsi_bdf2psf.pl
+Perl script used by above bash script.  Hacked by me to implement --mirrorrtl
+feature.
+
+
+
+font/glyphlist.txt.gz
+font/bdf_set_names
+Adobe's glyph names list and a script I wrote to set proper names in a BDF
+font.  Don't know if used here or not.  Well, xmbdfed used to trash the names.
+So I put stuff to reconstruct them.
+
+
+
+font/farsi_ascii.sfm
+font/farsi_arabic.sfm
+font/farsi_marks.sfm
+font/farsi_nomarks.sfm
+Glyph maps that define which characters/glyphs should appear in a PSF font.
+The glyphs are then extracted from the BDF font.  ascii is the ascii block
+identity mapping.  farsi_arabic is the base arabic block.  farsi_marks maps
+control chars, formatting chars, different spacing and punctuation, ....  It
+is used for when you do not want to remove marks in the pipeline.
+farsi_nomarks instead, uses the same space as farsi_marks, but feels with
+Latin characters.  All these maps try their best to map as many character as
+possible.  For example, c-cedilla may be mapped on c.  There are marks as "#
+RTL ..."  in these files, that trigger the perl script to mirror rtl chars if
+asked so.
+
+Note:  The package uses 512char fonts.  So you would lose one color bit of
+your console.  This is the default since Red Hat 8 or 9.  BTW, if you load
+framebuffer console (sample is in my farsiredhat package), you get your color
+bit back.
+
+
+
+testtexts/hafez
+First Persian sonnet from Hafez.
+
+
+
+testtexts/fatiha
+First surrah of Quran.
+
+
+
+testtexts/marks
+Some Unicode marks with their names.  To check if you are seeing
+marks or they are removed.
+
+
+
+
+
+Well, that's it.
+
+Behdad Esfahbod
+Dec 11 2003
+

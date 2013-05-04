@@ -1,0 +1,114 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH BICON 1 "March 28, 2004"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+bicon \- a bidirectional console
+.SH SYNOPSIS
+.B bicon [isocode] [command [arguments...]]
+.SH DESCRIPTION
+.B Bicon
+is a console program that supports bidirectional text display, for languages like Arabic, Persian and Hebrew.
+
+.B bicon
+uses 
+.B bicon.bin(1)
+to do the real bidi/joining conversion after loading a suitable keymap and font.
+
+While using
+.B bicon
+you can switch between Arabic and English, or between Persian and English, using the Alt-Shift key combination.
+
+.SH OPTIONS
+.TP
+isocode
+The two letter ISO country code, in small letters.
+If left empty, the derived value from the LANG variable is used
+instead.
+
+.TP
+command
+is executed by
+.B bicon
+after it loads. If omitted,
+.B bicon
+uses the current
+SHELL
+, or /bin/sh if
+SHELL
+is undefined.
+
+.TP
+arguments
+are passed to the command to run.
+
+.SH ENVIRONMENT
+The following environment variables are utilized by
+.B bicon
+:
+
+.TP
+SHELL
+If the variable
+SHELL
+exists, the shell forked by
+.B bicon
+will be that shell. If
+SHELL
+is not set, the Bourne shell is
+assumed.  (Most shells set this variable automatically).
+
+.TP
+LANG
+If isocode is not passed to
+.B bicon
+, it will examine LANG to determine the desired language.
+
+.TP
+TERM
+Variable TERM is examined in case to determine how to set the keymap
+and font.  Recognized values are linux and xterm currently.
+
+.TP
+DISPLAY
+If the value of TERM is xterm, then DISPLAY is examined by
+.B bicon
+to find the X server to contant to load the keymap.
+
+.El
+.SH SEE ALSO
+bicon.bin(1),
+unicode_start(1),
+unicode_stop(1),
+loadkeys(1),
+dumpkeys(1),
+kbd_mode(1),
+setfont(8),
+setxkbmap(1),
+xkbcomp(1).
+
+.SH AUTHOR
+This manual page was written by Muhammad Alkarouri, of the Arabeyes project.
+
+.SH REPORTING BUGS
+Please report bugs at
+http://bugs.arabeyes.org/cgi-bin/bugzilla/enter_bug.cgi?product=BiCon.
+
+.SH COPYRIGHT
+Copyright \(co 2004 Arabeyes Project.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+

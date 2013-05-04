@@ -1,0 +1,76 @@
+
+fribidi_libs="`fribidi-config --libs`"
+fribidi_cflags="`fribidi-config --cflags`"
+for i in $fribidi_cflags; do
+	fribidi_cflags_new="$fribidi_cflags_new $i"
+	if test "$i" = "${i/glib//}"; then
+		fribidi_cflags_new="$fribidi_cflags_new $i/fribidi"
+	fi
+done
+fribidi_cflags="$fribidi_cflags_new"
+
+exec_prefix=${prefix}
+exec_prefix_set=no
+
+usage()
+{
+       cat <<EOF
+Usage: bjoining-config [OPTIONS] [LIBRARIES]
+Options:
+       [--libs]
+       [--cflags]
+EOF
+       exit $1
+}
+
+if test $# -eq 0; then
+       usage 1 1>&2
+fi
+
+while test $# -gt 0; do
+  case "$1" in
+  -*=*) optarg=`echo "$1" | sed 's/[-_a-zA-Z0-9]*=//'` ;;
+  *) optarg= ;;
+  esac
+
+  case $1 in
+    --cflags)
+      echo_cflags=yes
+      ;;
+    --libs)
+      echo_libs=yes
+      ;;
+    *)
+      usage 1 1>&2
+      ;;
+  esac
+  shift
+done
+
+if test "$echo_cflags" = "yes"; then
+      if test ${prefix}/include != /usr/include ; then
+        includes=-I${prefix}
+        for i in $fribidi_cflags ; do
+          if test $i = "$includes" ; then
+            includes=""
+          fi
+        done
+      fi
+      echo $includes $fribidi_cflags
+fi
+
+if test "$echo_libs" = "yes"; then
+      my_fribidi_libs=
+      libdirs=-L${exec_prefix}
+      for i in $fribidi_libs ; do
+        if test $i != "$libdirs" ; then
+          if test -z "$my_fribidi_libs" ; then
+            my_fribidi_libs="$i"
+          else
+            my_fribidi_libs="$my_fribidi_libs $i"
+          fi
+        fi
+      done
+
+      echo $libdirs -lbjoining $my_fribidi_libs
+fi      

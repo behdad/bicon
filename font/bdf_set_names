@@ -1,0 +1,41 @@
+#!/bin/sh
+# by Behdad Esfahbod -- not copyrighted.
+
+if test "$#" "!=" 1; then
+	echo "Usage
+	bdf_set_names fontname.bdf[.gz]"
+fi
+
+{
+  cat glyphlist.txt
+  test "$1" "!=" "${1%.gz}" && zcat "$1" || cat "$1"
+} |
+awk -F";" '
+/^STARTCHAR/ {
+  f = 1;
+}
+/^ENCODING/ {
+  f = 1;
+  n = int(substr($0, 9));
+  x = sprintf("%04X", n);
+  if (n == 0)
+    nam = "char0";
+  else
+    nam = name[x];
+  if (nam == "")
+    nam = "uni"x;
+  printf("STARTCHAR %s\nENCODING %d\n", nam, n);
+}
+
+/^[^#]/  {
+  if (NF < 2) {
+    if (!f)
+      print $0;
+  } else
+    name[$2] = $1;
+}
+
+{
+  f = 0;
+}
+'

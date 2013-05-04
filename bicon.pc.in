@@ -1,0 +1,13 @@
+# $Id: bicon.pc.in,v 1.4 2004/04/13 08:42:07 behdad Exp $
+# @configure_input@
+
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: @PACKAGE_NAME@
+Description: Bidi Console Tools
+Version: @VERSION@
+Libs: -L${libdir}/@PACKAGE@ -lbjoining -lbconsole
+Cflags: -I${includedir}/@PACKAGE@

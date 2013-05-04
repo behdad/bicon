@@ -1,0 +1,155 @@
+#! /bin/bash
+
+bindir=@bindir@
+datadir=@datadir@
+PACKAGE_NAME=@PACKAGE_NAME@
+PACKAGE=@PACKAGE@
+VERSION=@VERSION@
+
+LOWER=abcdefghijklmnopqrstuvwxyz
+UPPER=ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+EXPLANG=$1
+shift
+IMPLANG=`echo $LANG | sed "s/...\(..\).*/\1/;y/$UPPER/$LOWER/"`
+
+if [ -n "$EXPLANG" ]; then
+	LANGUAGE="$EXPLANG"
+	if [ -n "$LANGUAGES" ]; then
+		LANGUAGES=$EXPLAN,$LANGUAGES
+	else
+		LANGUAGES=$EXPLAN
+	fi
+	export LANGUAGES
+else
+	LANGUAGE=$IMPLANG
+fi
+
+function isconsole() {
+	if [ 0 "<" $(expr "`tty`" : "/dev/tty[0-9]") ]
+	then return 0; else return 1; fi
+}
+
+function iskbdunicode() {
+	if kbd_mode | grep -q -i Unicode
+	then return 0; else return 1; fi
+}
+
+
+# setup environment (bicon_start)
+case $TERM in
+
+	linux)
+		if isconsole; then
+			# save old keyboard state
+			OLD_UNICODE_STATE=""
+			iskbdunicode && OLD_UNICODE_STATE=-u
+			if [ x$OLD_UNICODE_STATE = x ]; then
+				kbd_mode -u
+			fi
+			OLD_KBD=`dumpkeys`
+			echo -ne '\033%G'
+
+			# set keymap
+			loadkeys -u "${datadir}/keymap/$LANGUAGE.map.gz" 2>/dev/null ||
+			loadkeys -u "$LANGUAGE"
+
+			# set font
+			setfont "${datadir}/font/bicon-8x16-512.psfu.gz"
+		fi
+	;;
+
+	xterm)
+		if [ -n "$DISPLAY" ]; then
+			# only load keymap if asked explicitly
+			if [ -n "$EXPLANG" ]; then
+
+				# save old keyboard state
+				OLD_XKB="`setxkbmap \
+					-display "$DISPLAY" \
+					-print`"
+
+				# set keymap
+				# better heuristic wanted
+				setxkbmap \
+					-display "$DISPLAY" \
+					-layout "us,$EXPLANG" \
+					-option grp:alt_shift_toggle,grp_led:scroll \
+					-print | \
+				xkbcomp -w 2 - "$DISPLAY"
+			fi
+
+			# set font
+			# guess there's no way to do
+		fi
+	;;
+
+	*)
+
+	;;
+
+esac
+
+
+echo BiCon started
+# do the real thing
+${bindir}/bicon.bin ${1+"$@"}
+STATUS=$?
+echo BiCon done
+
+
+# rollback environment (bicon_stop)
+case $TERM in
+
+	linux)
+		if isconsole; then
+			# default font
+			setfont
+
+			# default keymap
+			#loadkeys -d
+
+			# or
+
+			# load old keymap
+			if [ -n "$OLD_KBD" ]; then
+				loadkeys -s -c $OLD_UNICODE_STATE $PAR <<EOF
+					$OLD_KBD
+EOF
+				unset OLD_KBD
+			fi
+
+
+			# load old keyboard state
+			if [ x$OLD_UNICODE_STATE = x ]; then
+				kbd_mode -a
+				echo -ne '\033%@'
+			else
+				kbd_mode -u
+				echo -ne '\033%G'
+			fi
+			unset OLD_UNICODE_STATE
+		fi
+	;;
+
+	xterm)
+		if [ -n "$DISPLAY" ]; then
+			
+			# load old keyboard state and keymap
+			if [ -n "$OLD_XKB" ]; then
+
+				xkbcomp -w 2 - "$DISPLAY" <<EOF
+					$OLD_XKB
+EOF
+				unset OLD_XKB
+			fi
+		fi
+	;;
+
+	*)
+
+	;;
+
+esac
+
+exit $STATUS

@@ -1,0 +1,97 @@
+#!/bin/bash
+
+PATH="/usr/local/bin:/bin:/usr/bin"
+export PATH
+# Find path
+path="$0"
+old_path=""
+while test -n "$path"; do
+  old_path="$path"
+  path="`readlink "$path"`"
+done
+path="${old_path%/*}/.."
+
+
+
+# Process farsi library options
+
+let "F_KEEP_BIDI_MARKS		= 0x00000001"
+let "F_LOGICAL_OUTPUT		= 0x00000002"
+let "F_KEEP_JOINING_MARKS	= 0x00000010"
+let "F_NO_LA_LIGATURE		= 0x00000020"
+let "F_NO_ZWJZWNJZWJ		= 0x00000040"
+
+let "F_NO_EXTRA_LIGATURE	= 0x00000100"
+
+let "F_NO_UTF8_STARTUP		= 0x00010000"
+
+let "F_KEEP_MARKS		= (F_KEEP_BIDI_MARKS + F_KEEP_JOINING_MARKS)"
+let "F_NO_LIGATURE		= (F_NO_LA_LIGATURE + F_NO_EXTRA_LIGATURE)"
+
+# Just initialize the console, do not run the filter.
+test "$1" = --init -o "$1" = -i	&&
+{ INIT=true; shift; } || INIT=false
+
+# Quiet, don't print the Entering and Leaving messages.
+test "$1" = --quiet -o "$1" = -q &&
+{ QUIET=true; shift; } || QUIET=false
+
+FARSI_OPTIONS=0
+
+# Logical output
+test "$1" = --logical &&
+{ let "FARSI_OPTIONS=FARSI_OPTIONS|F_LOGICAL_OUTPUT"; shift; }
+
+# Keep marks
+test "$1" = --marks &&
+{ let "FARSI_OPTIONS=FARSI_OPTIONS|F_KEEP_MARKS"; shift; }
+
+# No ligatures
+test "$1" = --nolig &&
+{ let "FARSI_OPTIONS=FARSI_OPTIONS|F_NO_LIGATURE"; shift; }
+
+# The numeric options
+test "$1" = --options &&
+{ let "FARSI_OPTIONS=FARSI_OPTIONS|$2"; shift 2; }
+
+# The options that should be passed to the filters.
+FCONSOLE_VU_OPTIONSLINE="$FARSI_OPTIONS"
+FCON_OPTIONSLINE="--options $FARSI_OPTIONS"
+
+
+let MARKS="${FARSI_OPTIONS:-0} & F_KEEP_MARKS"
+test "$MARKS" = 0 && unset MARKS
+let LOGICAL="${FARSI_OPTIONS:-0} & F_LOGICAL_OUTPUT"
+test "$LOGICAL" = 0 && unset LOGICAL
+
+KEYMAP=isiri2901.kmap.gz
+FONT="farsi-8x16-512${MARKS:+-marks}${LOGICAL:+-logical}.psf.gz"
+
+
+# Set keyboard mode to unicode
+kbd_mode -u &&
+# Load persian keyboard map
+loadkeys "$path/keymap/$KEYMAP" 2> /dev/null &&
+# Load persian font
+consolechars -f "$path/font/$FONT" &&
+# Put console in utf-8 mode
+echo -ne "\033%G"
+# If we are only asked to initialize console, do not run remaining commands.
+# We should not exit, because we want to be able to source this file.
+if ! $INIT; then
+
+{ $QUIET && echo "Entering farsi console"; true; } &&
+# Run fcon filter to get a bidi enabled shell, or command passed on cmdline
+"$path/fcon/fcon" $FCON_OPTIONSLINE "$@" &&
+{ $QUIET && echo -e "\nLeaving farsi console"; true; } ||
+echo "farsi: some error happened." >&2
+
+
+# Load system's default font
+/sbin/setsysfont || consolechars -d
+# Load system's default keyboard map
+loadkeys -d 2> /dev/null
+# Set keyboard mode to ascii
+kbd_mode -a
+
+fi
