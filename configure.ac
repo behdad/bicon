@@ -1,18 +1,5 @@
-##############################################################################
-## $Id: configure.ac,v 1.29 2004/08/22 13:06:46 alkarouri Exp $
-## $Author: alkarouri $
-## $Date: 2004/08/22 13:06:46 $
-## $Revision: 1.29 $
-## $Source: /home/arabeyes/cvs/projects/bicon/configure.ac,v $
-##############################################################################
-##                                               -*- Autoconf -*-
-## Process this file with autoconf to produce a configure script.
-## Use autoupdate to update this file for newer versions of autoconf.
-## Use autoscan to check if you need to add something to this file.
-
 AC_PREREQ(2.59)
-AC_INIT([BiCon],[0.2.0],[http://bugs.arabeyes.org/cgi-bin/bugzilla/enter_bug.cgi?product=BiCon])
-AC_REVISION([$Id: configure.ac,v 1.29 2004/08/22 13:06:46 alkarouri Exp $])
+AC_INIT([BiCon],[0.3.0],[http://github.com/behdad/bicon])
 AC_CONFIG_SRCDIR(bicon/bicon.c)
 AC_CONFIG_HEADERS(config.h)
 AM_INIT_AUTOMAKE([gnu check-news])
