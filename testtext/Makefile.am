@@ -9,3 +9,5 @@
 ## Process this file with automake to produce Makefile.in
 
 EXTRA_DIST = hafez fatiha marks
+
+-include $(top_srcdir)/git.mk

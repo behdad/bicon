@@ -17,21 +17,12 @@ pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = @PACKAGE@.pc
 
 MAINTAINERCLEANFILES = \
-		$(srcdir)/INSTALL \
-		$(srcdir)/aclocal.m4 \
-		$(srcdir)/autoscan.log \
-		$(srcdir)/compile \
-		$(srcdir)/config.guess \
-		$(srcdir)/config.h.in \
-		$(srcdir)/config.sub \
-		$(srcdir)/configure \
-		$(srcdir)/configure.scan \
-		$(srcdir)/depcomp \
-		$(srcdir)/install-sh \
-		$(srcdir)/ltmain.sh \
-		$(srcdir)/missing \
-		`find "$(srcdir)" -type f -name Makefile.in -print` \
-		`find "$(srcdir)" -type f -name "*~" -print`
+	$(GITIGNORE_MAINTAINERCLEANFILES_TOPLEVEL) \
+	$(GITIGNORE_MAINTAINERCLEANFILES_M4_LIBTOOL) \
+	$(GITIGNORE_MAINTAINERCLEANFILES_MAKEFILE_IN) \
+	$(srcdir)/INSTALL \
+	$(srcdir)/ChangeLog \
+	$(NULL)
 
 # Indent all C source and header files, using indent(1):
 
@@ -64,3 +55,5 @@ ChangeLog:
 	  echo A git checkout and git-log is required to generate this file >> "$(srcdir)/$@"); \
 	fi
 .PHONY: $(srcdir)/ChangeLog
+
+-include $(top_srcdir)/git.mk

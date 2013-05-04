@@ -41,3 +41,5 @@ AM_CPPFLAGS = \
 		$(FRIBIDI_CFLAGS)
 
 LDADD = libbjoining.la $(FRIBIDI_LIBS)
+
+-include $(top_srcdir)/git.mk
