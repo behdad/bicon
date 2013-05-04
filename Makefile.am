@@ -11,7 +11,7 @@
 ## The order of subdirs is important, don't change without a reason.
 SUBDIRS = bjoining bconsole bicon keymap font bin doc testtext
 
-EXTRA_DIST = bootstrap ChangeLog.old
+EXTRA_DIST = autogen.sh ChangeLog.old
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = @PACKAGE@.pc
@@ -31,12 +31,7 @@ MAINTAINERCLEANFILES = \
 		$(srcdir)/ltmain.sh \
 		$(srcdir)/missing \
 		`find "$(srcdir)" -type f -name Makefile.in -print` \
-		`find "$(srcdir)" -type f -name "*~" -print` \
-		`$(srcdir)/bootstrap --write-configure`
-# The last line above is a horrible hack.
-# GNU Coding Standards recommends that `make maintainer-clean' should not 
-# remove the configure script.
-# We instead make configure call bootstrap.
+		`find "$(srcdir)" -type f -name "*~" -print`
 
 # Indent all C source and header files, using indent(1):
 
