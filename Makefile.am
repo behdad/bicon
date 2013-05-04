@@ -11,7 +11,7 @@
 ## The order of subdirs is important, don't change without a reason.
 SUBDIRS = bjoining bconsole bicon keymap font bin doc testtext
 
-EXTRA_DIST = autogen.sh ChangeLog.old
+EXTRA_DIST = autogen.sh
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = @PACKAGE@.pc
@@ -42,26 +42,25 @@ indent: $(srcdir)/.indent.pro
 
 .PHONY: indent
 
-# Creating ChangeLog from CVS log, using cvs2cl(1):
 
-MAINTAINERCLEANFILES += ChangeLog ChangeLog.bak
+MAINTAINERCLEANFILES += ChangeLog
 
-EXTRA_DIST += ChangeLog
 
-ChangeLog: $(srcdir)/ChangeLog
-
-$(srcdir)/ChangeLog:
-	@if test -d "$(srcdir)/CVS"; then \
-	  (cd "$(srcdir)" && \
-	  ./missing --run cvs2cl --stdout --utc --FSF -U AUTHORS) > $@.tmp \
-	  && echo "For older changes see ChangeLog.old" >> $@.tmp && mv -f $@.tmp $@ \
+#
+# ChangeLog generation
+#
+CHANGELOG_RANGE =
+ChangeLog:
+	$(AM_V_GEN) if test -d "$(top_srcdir)/.git"; then \
+	  (GIT_DIR=$(top_srcdir)/.git $(top_srcdir)/missing --run \
+	   git log $(CHANGELOG_RANGE) --stat) | fmt --split-only > $@.tmp \
+	  && mv -f $@.tmp "$(srcdir)/ChangeLog" \
 	  || ($(RM) $@.tmp; \
 	      echo Failed to generate ChangeLog, your ChangeLog may be outdated >&2; \
-	      (test -f $@ || echo cvs2cl is required to generate this file >> $@)); \
+	      (test -f $@ || echo git-log is required to generate this file >> "$(srcdir)/$@")); \
 	else \
 	  test -f $@ || \
-	  (echo A CVS checkout and cvs2cl is required to generate ChangeLog >&2 && \
-	  echo A CVS checkout and cvs2cl is required to generate this file >> $@); \
+	  (echo A git checkout and git-log is required to generate ChangeLog >&2 && \
+	  echo A git checkout and git-log is required to generate this file >> "$(srcdir)/$@"); \
 	fi
-
-.PHONY: ChangeLog $(srcdir)/ChangeLog
+.PHONY: $(srcdir)/ChangeLog
