@@ -22,9 +22,13 @@ static pid_t
 _fork (int *master_fd, int *slave_fd)
 {
   pid_t pid;
-  struct winsize win;
-  (void) ioctl(0, TIOCGWINSZ, (char *)&win);
-  pid = forkpty (master_fd, NULL, NULL, &win);
+  struct termios ts = {0};
+  struct winsize win = {0};
+  if (-1 == tcgetattr (1, &ts))
+    fprintf (stderr, "bicon: tcgetaddr() failed.\n");
+  if (-1 == ioctl(0, TIOCGWINSZ, (char *)&win))
+    fprintf (stderr, "bicon: ioctl(0, TIOCGWINSZ) failed.\n");
+  pid = forkpty (master_fd, NULL, &ts, &win);
   if (pid != -1)
     {
       if (pid == 0)
@@ -118,7 +122,7 @@ bicon_spawn (
   if (pid == 0)
     {
       execvp (file, args);
-      fprintf (stderr, "bicon: failed running %s\n", file);
+      fprintf (stderr, "bicon: failed running %s.\n", file);
       exit (1);
     }
 
@@ -126,7 +130,7 @@ bicon_spawn (
   sa.sa_flags = 0;
   sa.sa_handler = resize;
   if (sigaction(SIGWINCH, &sa, NULL) == -1)
-    fprintf (stderr, "bicon: failed installing resize handler\n");
+    fprintf (stderr, "bicon: sigaction() failed.\n");
 
   tcgetattr (1, &ts);
   newts = ts;
