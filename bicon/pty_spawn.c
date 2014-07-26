@@ -22,7 +22,9 @@ static pid_t
 _fork (int *master_fd, int *slave_fd)
 {
   pid_t pid;
-  pid = forkpty (master_fd, NULL, NULL, NULL);
+  struct winsize win;
+  (void) ioctl(0, TIOCGWINSZ, (char *)&win);
+  pid = forkpty (master_fd, NULL, NULL, &win);
   if (pid != -1)
     {
       if (pid == 0)
