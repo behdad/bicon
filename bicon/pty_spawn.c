@@ -64,7 +64,11 @@ _copy (
       FD_SET (master_fd, &rfds);
       FD_SET (0, &rfds);
       if (select (master_fd + 1, &rfds, NULL, NULL, NULL) == -1)
+      {
+	if (errno == EINTR)
+	  continue;
 	return -1;
+      }
       if (FD_ISSET (master_fd, &rfds))
 	{
 	  count = master_read (master_fd, buf, sizeof (buf));
@@ -87,12 +91,13 @@ static int master_fd, slave_fd;
 static pid_t pid;
 
 static void
-resize(int dummy) {
+resize(int dummy)
+{
   struct	winsize win;
 
   /* transmit window change information to the child */
   (void) ioctl(0, TIOCGWINSZ, (char *)&win);
-  (void) ioctl(slave_fd, TIOCSWINSZ, (char *)&win);
+  (void) ioctl(master_fd, TIOCSWINSZ, (char *)&win);
 
   kill(pid, SIGWINCH);
 }
@@ -105,6 +110,8 @@ bicon_spawn (
   reader stdin_read)
 {
   struct termios ts, newts;
+  struct sigaction sa;
+
   pid = _fork (&master_fd, &slave_fd);
   if (pid == -1)
     return 126;
@@ -114,13 +121,19 @@ bicon_spawn (
       fprintf (stderr, "bicon: failed running %s\n", file);
       exit (1);
     }
+
+  sigemptyset (&sa.sa_mask);
+  sa.sa_flags = 0;
+  sa.sa_handler = resize;
+  if (sigaction(SIGWINCH, &sa, NULL) == -1)
+    fprintf (stderr, "bicon: failed installing resize handler\n");
+
   tcgetattr (1, &ts);
   newts = ts;
   cfmakeraw (&newts);
   tcsetattr (1, TCSAFLUSH, &newts);
   _copy (master_fd, master_read, stdin_read);
   tcsetattr (1, TCSAFLUSH, &ts);
-  signal (SIGWINCH, resize);
   return 0;
   /* XXX we better somehow return the return value of the forked
    * child, but how?
