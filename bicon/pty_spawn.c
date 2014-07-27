@@ -74,6 +74,26 @@ _xread (
   return ret;
 }
 
+static inline void
+_xwrite (
+  int fd,
+  char *buf,
+  size_t count)
+{
+  int ret;
+  for (; count; buf += ret, count -= ret)
+  {
+    do {
+      ret = write (fd, buf, count);
+    } while (ret == -1 && errno == EINTR);
+    if (ret == -1)
+    {
+      fprintf (stderr, "bicon: write() failed.\n");
+      exit (1);
+    }
+  }
+}
+
 static int
 _copy (
   int master_fd,
@@ -82,7 +102,7 @@ _copy (
   pid_t pid)
 {
   fd_set rfds;
-  char buf[BUFLEN], *buf_p;
+  char buf[BUFLEN];
   int count, c, ret;
   struct timeval timeout, *ptimeout = NULL;
   struct stat st;
@@ -130,30 +150,12 @@ _copy (
       if (FD_ISSET (master_fd, &rfds))
 	{
 	  count = _xread (master_read, master_fd, buf, sizeof (buf));
-	  for (buf_p = buf, c = 0; count > 0; buf_p += c, count -= c)
-	  {
-	    c = write (1, buf_p, count);
-	    if (c == -1)
-	    {
-	      if (errno != EINTR)
-		return -1;
-	      c = 0;
-	    }
-	  }
+	  _xwrite (1, buf, count);
 	}
       if (FD_ISSET (0, &rfds))
 	{
 	  count = _xread (stdin_read, 0, buf, sizeof (buf));
-	  for (buf_p = buf, c = 0; count > 0; buf_p += c, count -= c)
-	  {
-	    c = write (master_fd, buf_p, count);
-	    if (c == -1)
-	    {
-	      if (errno != EINTR)
-		return -1;
-	      c = 0;
-	    }
-	  }
+	  _xwrite (master_fd, buf, count);
 	}
       /* Set timeout, such that if things are steady, we update cwd
        * next iteration. */
