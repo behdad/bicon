@@ -68,8 +68,9 @@ bicon_read (
     if (count == -1)
       return -1;
     count += offset;
-    /* Null terminate string, for debug purposes only, no real need infact. */
-    *(input_end = input[turn] + count) = '\0';
+    input_end = input[turn] + count;
+    /* Mark an 'X' there so we notice visually if we run past the buffer. */
+    *input_end = 'X';
 
     /* Iterate over the input paragraph by paragraph. */
     input_cursor = input[turn];
@@ -188,7 +189,7 @@ bicon_read (
 	  register uchar x;
 
 	  /* Go forward while there are control characters. */
-	  while ((x = *input_cursor)
+	  while (input_cursor < input_end && (x = *input_cursor)
 		 && (x < 0x20 || (x == LATIN1 && *(input_cursor + 1) < 0xA0)))
 	    {
 	      input_cursor++;
@@ -202,13 +203,20 @@ bicon_read (
 
 		  /* A escape sequence looks like this: \033.[0-?]*[ -/]*[@-~]?
 		   * We handle a somehow looser expression. */
-		  input_cursor++;
-		  while (*input_cursor >= '0' && *input_cursor <= '?')
+		  if (input_cursor < input_end)
 		    input_cursor++;
-		  while (*input_cursor >= ' ' && *input_cursor <= '/')
+		  while (input_cursor < input_end &&
+			 *input_cursor >= '0' && *input_cursor <= '?')
 		    input_cursor++;
-		  if (*input_cursor >= '@' && *input_cursor <= '~')
+		  while (input_cursor < input_end &&
+			 *input_cursor >= ' ' && *input_cursor <= '/')
 		    input_cursor++;
+		  if (input_cursor < input_end &&
+		      *input_cursor >= '@' && *input_cursor <= '~')
+		    input_cursor++;
+		  /* TODO If a control sequence ends prematurely, we should
+		   * remember the state and continue skipping over it next
+		   * time around. */
 		}
 	    }
 	}
