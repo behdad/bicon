@@ -55,6 +55,25 @@ _fork (int *master_fd, int *slave_fd)
   return pid;
 }
 
+static inline int
+_xread (
+  reader read,
+  int fd,
+  void *buf,
+  size_t count)
+{
+  int ret;
+  do {
+    ret = read (fd, buf, count);
+  } while (ret == -1 && errno == EINTR);
+  if (ret == -1)
+  {
+    fprintf (stderr, "bicon: read() failed.\n");
+    exit (1);
+  }
+  return ret;
+}
+
 static int
 _copy (
   int master_fd,
@@ -110,12 +129,7 @@ _copy (
       }
       if (FD_ISSET (master_fd, &rfds))
 	{
-	  count = master_read (master_fd, buf, sizeof (buf));
-	  if (count == -1)
-	  {
-	    if (errno != EINTR)
-	      return -1;
-	  }
+	  count = _xread (master_read, master_fd, buf, sizeof (buf));
 	  for (buf_p = buf, c = 0; count > 0; buf_p += c, count -= c)
 	  {
 	    c = write (1, buf_p, count);
@@ -129,12 +143,7 @@ _copy (
 	}
       if (FD_ISSET (0, &rfds))
 	{
-	  count = stdin_read (0, buf, sizeof (buf));
-	  if (count == -1)
-	  {
-	    if (errno != EINTR)
-	      return -1;
-	  }
+	  count = _xread (stdin_read, 0, buf, sizeof (buf));
 	  for (buf_p = buf, c = 0; count > 0; buf_p += c, count -= c)
 	  {
 	    c = write (master_fd, buf_p, count);
