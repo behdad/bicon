@@ -112,14 +112,20 @@ _copy (
 	{
 	  count = master_read (master_fd, buf, sizeof (buf));
 	  if (count == -1)
-	    return -1;
+	  {
+	    if (errno != EINTR)
+	      return -1;
+	  }
 	  /* TODO while (errno == EINTR)... */ write (1, buf, count);
 	}
       if (FD_ISSET (0, &rfds))
 	{
 	  count = stdin_read (0, buf, sizeof (buf));
 	  if (count == -1)
-	    return -1;
+	  {
+	    if (errno != EINTR)
+	      return -1;
+	  }
 	  for (buf_p = buf, c = 0; count > 0; buf_p += c, count -= c)
 	    c = write (master_fd, buf_p, count);
 	}
