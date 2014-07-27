@@ -13,6 +13,7 @@ namely the PSF License Agreement For Python 2.2.3
 #include <unistd.h>
 #include <errno.h>
 #include <pty.h>
+#include <sys/time.h>
 #include <sys/types.h>
 #include <sys/select.h>
 #include <sys/stat.h>
@@ -63,45 +64,56 @@ _copy (
 {
   fd_set rfds;
   char buf[BUFLEN], *buf_p;
-  int count, c;
+  int count, c, ret;
+  struct timeval timeout, *ptimeout = NULL;
   struct stat st;
   ino_t cwd = -1;
   char _proc_child_cwd[32];
   snprintf (_proc_child_cwd, sizeof (_proc_child_cwd), "/proc/%u/cwd", pid);
   for (;;)
     {
-      /* Check whether child cwd changed and follow.  This is useful
-       * with older versions of gnome-terminal that used the process
-       * cwd to for window title...  Might be too slow, who knows... */
-      {
-	if (-1 != stat (_proc_child_cwd, &st) && st.st_ino != cwd)
-	{
-	  int len;
-	  len = readlink (_proc_child_cwd, buf, sizeof (buf));
-	  if (len != -1)
-	  {
-	    buf[len] = '\0';
-	    chdir (buf);
-	  }
-	  cwd = st.st_ino;
-	}
-      }
 
       FD_ZERO (&rfds);
       FD_SET (master_fd, &rfds);
       FD_SET (0, &rfds);
-      if (select (master_fd + 1, &rfds, NULL, NULL, NULL) == -1)
+      ret = select (master_fd + 1, &rfds, NULL, NULL, ptimeout);
+      if (-1 == ret)
       {
 	if (errno == EINTR)
 	  continue;
 	return -1;
+      }
+      if (0 == ret)
+      {
+        /* Timeout. */
+
+	/* Check whether child cwd changed and follow.  This is useful
+	 * with older versions of gnome-terminal that used the process
+	 * cwd to for window title...  Might be too slow, who knows... */
+	{
+	  if (-1 != stat (_proc_child_cwd, &st) && st.st_ino != cwd)
+	  {
+	    int len;
+	    len = readlink (_proc_child_cwd, buf, sizeof (buf));
+	    if (len != -1)
+	    {
+	      buf[len] = '\0';
+	      (void) chdir (buf);
+	    }
+	    cwd = st.st_ino;
+	  }
+	}
+
+        /* Remove timeout now. */
+        ptimeout = NULL;
+        continue;
       }
       if (FD_ISSET (master_fd, &rfds))
 	{
 	  count = master_read (master_fd, buf, sizeof (buf));
 	  if (count == -1)
 	    return -1;
-	  write (1, buf, count);
+	  /* TODO while (errno == EINTR)... */ write (1, buf, count);
 	}
       if (FD_ISSET (0, &rfds))
 	{
@@ -111,6 +123,11 @@ _copy (
 	  for (buf_p = buf, c = 0; count > 0; buf_p += c, count -= c)
 	    c = write (master_fd, buf_p, count);
 	}
+      /* Set timeout, such that if things are steady, we update cwd
+       * next iteration. */
+      timeout.tv_sec = 0;
+      timeout.tv_usec = 50000; /* 50ms */
+      ptimeout = &timeout;
     }
 }
 
