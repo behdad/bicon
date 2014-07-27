@@ -187,7 +187,7 @@ bicon_read (
 	{
 	  register uchar x;
 
-	  /* Go forward until there are control characters. */
+	  /* Go forward while there are control characters. */
 	  while ((x = *input_cursor)
 		 && (x < 0x20 || (x == LATIN1 && *(input_cursor + 1) < 0xA0)))
 	    {
@@ -200,7 +200,7 @@ bicon_read (
 		    !strcmp (input_cursor - 1,
 			     utf8mode ? UTF8_OFF_STR : UTF8_ON_STR);
 
-		  /* An escape sequence looks like this: \033.[0-?]*[ -/]*[@-~]?
+		  /* A escape sequence looks like this: \033.[0-?]*[ -/]*[@-~]?
 		   * We handle a somehow looser expression. */
 		  input_cursor++;
 		  while (*input_cursor >= '0' && *input_cursor <= '?')
