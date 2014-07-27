@@ -117,7 +117,15 @@ _copy (
 	      return -1;
 	  }
 	  for (buf_p = buf, c = 0; count > 0; buf_p += c, count -= c)
+	  {
 	    c = write (1, buf_p, count);
+	    if (c == -1)
+	    {
+	      if (errno != EINTR)
+		return -1;
+	      c = 0;
+	    }
+	  }
 	}
       if (FD_ISSET (0, &rfds))
 	{
@@ -128,7 +136,15 @@ _copy (
 	      return -1;
 	  }
 	  for (buf_p = buf, c = 0; count > 0; buf_p += c, count -= c)
+	  {
 	    c = write (master_fd, buf_p, count);
+	    if (c == -1)
+	    {
+	      if (errno != EINTR)
+		return -1;
+	      c = 0;
+	    }
+	  }
 	}
       /* Set timeout, such that if things are steady, we update cwd
        * next iteration. */
