@@ -1,3 +1,11 @@
+BiCon 0.4
+==============================================================================
+- Moved to http://github.com/behdad/bicon
+- Fixed screen initial size and resizing.
+- Track child's current directory.
+- Return child's return status.
+- Fix corruption.
+
 * BiCon 0.0.20040505, with various microupdates, elevated to 0.2.0
 ==============================================================================
 * BiCon 0.0.20040505
