@@ -15,6 +15,7 @@ namely the PSF License Agreement For Python 2.2.3
 #include <pty.h>
 #include <sys/types.h>
 #include <sys/select.h>
+#include <sys/stat.h>
 #include <signal.h>
 #include "pty_spawn.h"
 
@@ -57,13 +58,35 @@ static int
 _copy (
   int master_fd,
   reader master_read,
-  reader stdin_read)
+  reader stdin_read,
+  pid_t pid)
 {
   fd_set rfds;
   char buf[BUFLEN], *buf_p;
   int count, c;
+  struct stat st;
+  ino_t cwd = -1;
+  char _proc_child_cwd[32];
+  snprintf (_proc_child_cwd, sizeof (_proc_child_cwd), "/proc/%u/cwd", pid);
   for (;;)
     {
+      /* Check whether child cwd changed and follow.  This is useful
+       * with older versions of gnome-terminal that used the process
+       * cwd to for window title...  Might be too slow, who knows... */
+      {
+	if (-1 != stat (_proc_child_cwd, &st) && st.st_ino != cwd)
+	{
+	  int len;
+	  len = readlink (_proc_child_cwd, buf, sizeof (buf));
+	  if (len != -1)
+	  {
+	    buf[len] = '\0';
+	    chdir (buf);
+	  }
+	  cwd = st.st_ino;
+	}
+      }
+
       FD_ZERO (&rfds);
       FD_SET (master_fd, &rfds);
       FD_SET (0, &rfds);
@@ -136,7 +159,7 @@ bicon_spawn (
   newts = ts;
   cfmakeraw (&newts);
   tcsetattr (1, TCSAFLUSH, &newts);
-  _copy (master_fd, master_read, stdin_read);
+  _copy (master_fd, master_read, stdin_read, pid);
   tcsetattr (1, TCSAFLUSH, &ts);
   return 0;
   /* XXX we better somehow return the return value of the forked
