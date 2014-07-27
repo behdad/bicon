@@ -116,7 +116,8 @@ _copy (
 	    if (errno != EINTR)
 	      return -1;
 	  }
-	  /* TODO while (errno == EINTR)... */ write (1, buf, count);
+	  for (buf_p = buf, c = 0; count > 0; buf_p += c, count -= c)
+	    c = write (1, buf_p, count);
 	}
       if (FD_ISSET (0, &rfds))
 	{
