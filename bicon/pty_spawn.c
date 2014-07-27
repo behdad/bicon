@@ -66,11 +66,6 @@ _xread (
   do {
     ret = read (fd, buf, count);
   } while (ret == -1 && errno == EINTR);
-  if (ret == -1)
-  {
-    fprintf (stderr, "bicon: read() failed.\n");
-    exit (1);
-  }
   return ret;
 }
 
@@ -150,11 +145,15 @@ _copy (
       if (FD_ISSET (master_fd, &rfds))
 	{
 	  count = _xread (master_read, master_fd, buf, sizeof (buf));
+	  if (count == -1)
+	    return -1;
 	  _xwrite (1, buf, count);
 	}
       if (FD_ISSET (0, &rfds))
 	{
 	  count = _xread (stdin_read, 0, buf, sizeof (buf));
+	  if (count == -1)
+	    return -1;
 	  _xwrite (master_fd, buf, count);
 	}
       /* Set timeout, such that if things are steady, we update cwd
