@@ -17,6 +17,7 @@ namely the PSF License Agreement For Python 2.2.3
 #include <sys/types.h>
 #include <sys/select.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
 #include <signal.h>
 #include "pty_spawn.h"
 
@@ -98,7 +99,7 @@ _copy (
 {
   fd_set rfds;
   char buf[BUFLEN];
-  int count, c, ret;
+  int count, ret;
   struct timeval timeout, *ptimeout = NULL;
   struct stat st;
   ino_t cwd = -1;
@@ -188,6 +189,7 @@ bicon_spawn (
 {
   struct termios ts, newts;
   struct sigaction sa;
+  int status, ret;
 
   pid = _fork (&master_fd, &slave_fd);
   if (pid == -1)
@@ -211,8 +213,14 @@ bicon_spawn (
   tcsetattr (1, TCSAFLUSH, &newts);
   _copy (master_fd, master_read, stdin_read, pid);
   tcsetattr (1, TCSAFLUSH, &ts);
-  return 0;
-  /* XXX we better somehow return the return value of the forked
-   * child, but how?
-   */
+
+  do {
+    ret = waitpid (pid, &status, 0);
+  } while (ret == -1 && errno == EINTR);
+  if (ret == -1)
+  {
+    fprintf (stderr, "bicon: waitpid() failed.\n");
+    exit (1);
+  }
+  return WEXITSTATUS (status);
 }
