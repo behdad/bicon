@@ -1,13 +1,3 @@
-##############################################################################
-## $Id$
-## $Author$
-## $Date$
-## $Revision$
-## $Source$
-##############################################################################
-##                                               -*- Automake -*-
-## Process this file with automake to produce Makefile.in
-
 include fonts.mk
 
 ALL_CONSOLE_FONTS_PSFU_GZ = $(ALL_CONSOLE_FONTS_PSFU:=.gz)

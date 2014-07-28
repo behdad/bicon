@@ -1,13 +1,3 @@
-##                                               -*- Automake -*-
-## Process this file with automake to produce Makefile.in
-##############################################################################
-## $Id$
-## $Author$
-## $Date$
-## $Revision$
-## $Source$
-##############################################################################
-
 ## The order of subdirs is important, don't change without a reason.
 SUBDIRS = bjoining bconsole bicon keymap font bin doc testtext
 

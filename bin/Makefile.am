@@ -1,13 +1,3 @@
-##############################################################################
-## $Id$
-## $Author$
-## $Date$
-## $Revision$
-## $Source$
-##############################################################################
-##                                               -*- Automake -*-
-## Process this file with automake to produce Makefile.in
-
 bin_SCRIPTS=bicon
 
 do_subst = sed \

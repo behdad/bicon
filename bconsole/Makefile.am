@@ -1,13 +1,3 @@
-##############################################################################
-## $Id$
-## $Author$
-## $Date$
-## $Revision$
-## $Source$
-##############################################################################
-##                                               -*- Automake -*-
-## Process this file with automake to produce Makefile.in
-
 pkglib_LTLIBRARIES = libbconsole.la
 
 libbconsole_la_SOURCES = \
