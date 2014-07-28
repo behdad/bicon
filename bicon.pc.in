@@ -1,4 +1,4 @@
-# $Id: bicon.pc.in,v 1.4 2004/04/13 08:42:07 behdad Exp $
+# $Id$
 # @configure_input@
 
 prefix=@prefix@

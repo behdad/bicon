@@ -14,7 +14,8 @@ libbconsole_la_SOURCES = \
 		bconsole_ligature.c \
 		bconsole_log2con.c
 libbconsole_la_LIBADD = \
-		$(top_builddir)/bjoining/libbjoining.la
+		$(top_builddir)/bjoining/libbjoining.la \
+		$(FRIBIDI_LIBS)
 
 pkginclude_HEADERS = \
 		bconsole_ligature.h \
@@ -35,4 +36,4 @@ AM_CPPFLAGS = \
 		-I$(top_srcdir)/bjoining
 
 LDADD = \
-		libbconsole.la $(FRIBIDI_LIBS)
+		libbconsole.la
