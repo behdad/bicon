@@ -1,9 +1,9 @@
 ##############################################################################
-## $Id: Makefile.am,v 1.10 2005/04/16 03:10:52 behdad Exp $
-## $Author: behdad $
-## $Date: 2005/04/16 03:10:52 $
-## $Revision: 1.10 $
-## $Source: /home/arabeyes/cvs/projects/bicon/bjoining/Makefile.am,v $
+## $Id$
+## $Author$
+## $Date$
+## $Revision$
+## $Source$
 ##############################################################################
 ##                                               -*- Automake -*-
 ## Process this file with automake to produce Makefile.in

@@ -1,10 +1,10 @@
 #! /bin/sh
 ##############################################################################
-# $Id: bootstrap,v 1.11 2004/08/27 21:54:19 behdad Exp $
+# $Id$
 # $Author: behdad
-# $Date: 2004/08/27 21:54:19 $
-# $Revision: 1.11 $
-# $Source: /home/arabeyes/cvs/projects/bicon/bootstrap,v $
+# $Date$
+# $Revision$
+# $Source$
 ##############################################################################
 #                                               -*- Bootstrap -*-
 # Run this file to produce a configure script.

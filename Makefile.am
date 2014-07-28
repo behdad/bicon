@@ -1,11 +1,11 @@
 ##                                               -*- Automake -*-
 ## Process this file with automake to produce Makefile.in
 ##############################################################################
-## $Id: Makefile.am,v 1.25 2004/08/27 21:54:19 behdad Exp $
-## $Author: behdad $
-## $Date: 2004/08/27 21:54:19 $
-## $Revision: 1.25 $
-## $Source: /home/arabeyes/cvs/projects/bicon/Makefile.am,v $
+## $Id$
+## $Author$
+## $Date$
+## $Revision$
+## $Source$
 ##############################################################################
 
 ## The order of subdirs is important, don't change without a reason.
