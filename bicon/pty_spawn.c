@@ -10,6 +10,7 @@ namely the PSF License Agreement For Python 2.2.3
  */
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include <unistd.h>
 #include <errno.h>
 #include <pty.h>
@@ -20,6 +21,8 @@ namely the PSF License Agreement For Python 2.2.3
 #include <sys/wait.h>
 #include <signal.h>
 #include "pty_spawn.h"
+
+static volatile int done;
 
 static pid_t
 _fork (int *master_fd, int *slave_fd)
@@ -66,7 +69,7 @@ _xread (
   int ret;
   do {
     ret = read (fd, buf, count);
-  } while (ret == -1 && errno == EINTR);
+  } while (ret == -1 && errno == EINTR && !done);
   return ret;
 }
 
@@ -81,7 +84,7 @@ _xwrite (
   {
     do {
       ret = write (fd, buf, count);
-    } while (ret == -1 && errno == EINTR);
+    } while (ret == -1 && errno == EINTR && !done);
     if (ret == -1)
     {
       fprintf (stderr, "bicon: write() failed.\n");
@@ -105,7 +108,7 @@ _copy (
   ino_t cwd = -1;
   char _proc_child_cwd[32];
   snprintf (_proc_child_cwd, sizeof (_proc_child_cwd), "/proc/%u/cwd", pid);
-  for (;;)
+  for (;!done;)
     {
 
       FD_ZERO (&rfds);
@@ -114,9 +117,9 @@ _copy (
       ret = select (master_fd + 1, &rfds, NULL, NULL, ptimeout);
       if (-1 == ret)
       {
-	if (errno == EINTR)
+	if (errno == EINTR && !done)
 	  continue;
-	return -1;
+	return;
       }
       if (0 == ret)
       {
@@ -147,14 +150,14 @@ _copy (
 	{
 	  count = _xread (master_read, master_fd, buf, sizeof (buf));
 	  if (count == -1)
-	    return -1;
+	    return;
 	  _xwrite (1, buf, count);
 	}
       if (FD_ISSET (0, &rfds))
 	{
 	  count = _xread (stdin_read, 0, buf, sizeof (buf));
 	  if (count == -1)
-	    return -1;
+	    return;
 	  _xwrite (master_fd, buf, count);
 	}
       /* Set timeout, such that if things are steady, we update cwd
@@ -178,6 +181,13 @@ resize(int dummy)
   (void) ioctl(master_fd, TIOCSWINSZ, (char *)&win);
 
   kill(pid, SIGWINCH);
+}
+
+static void
+child(int dummy)
+{
+  done = 1;
+  fprintf (stderr, "done\n");
 }
 
 int
@@ -205,6 +215,11 @@ bicon_spawn (
   sa.sa_flags = 0;
   sa.sa_handler = resize;
   if (sigaction(SIGWINCH, &sa, NULL) == -1)
+    fprintf (stderr, "bicon: sigaction() failed.\n");
+  sigemptyset (&sa.sa_mask);
+  sa.sa_flags = 0;
+  sa.sa_handler = child;
+  if (sigaction(SIGCHLD, &sa, NULL) == -1)
     fprintf (stderr, "bicon: sigaction() failed.\n");
 
   tcgetattr (1, &ts);
