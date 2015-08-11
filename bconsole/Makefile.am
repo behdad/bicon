@@ -26,6 +26,7 @@ AM_CPPFLAGS = \
 		-I$(top_srcdir)/bjoining
 
 LDADD = \
+		$(FRIBIDI_LIBS) \
 		libbconsole.la
 
 -include $(top_srcdir)/git.mk
