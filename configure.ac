@@ -1,5 +1,5 @@
 AC_PREREQ(2.59)
-AC_INIT([BiCon],[0.4],[http://github.com/behdad/bicon])
+AC_INIT([BiCon],[0.5],[http://github.com/behdad/bicon])
 AC_CONFIG_SRCDIR(bicon/bicon.c)
 AC_CONFIG_HEADERS(config.h)
 AM_INIT_AUTOMAKE([gnu check-news])

@@ -1,3 +1,9 @@
+BiCon 0.5
+Thursday, August 20, 2015
+==============================================================================
+- Exit when child exits even if it leaves subprocesses behind.
+- Build fixes.
+
 BiCon 0.4
 ==============================================================================
 - Moved to http://github.com/behdad/bicon
