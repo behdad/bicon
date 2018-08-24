@@ -18,7 +18,7 @@ bjoining_log2cuni (
   unichar *vis = malloc ((len + 1) * sizeof (unichar));
 
   f = f && bjoining_compose (str, &len);
-  if (0 == (options & B_LOGICAL_OUTPUT))
+  if (0 == (options & (B_LOGICAL_OUTPUT | B_LOGICAL_OUTPUT_LOG2CUNI)))
     {
       f = f
 	&& fribidi_log2vis ((FriBidiChar *) str, len, &ptype,
