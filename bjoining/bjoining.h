@@ -16,6 +16,7 @@ typedef FriBidiChar unichar;
 /* Options that bjoining functions handle. */
 #define B_KEEP_BIDI_MARKS	0x00000001	/* Do not remove bidi marks (LRM, RLM, ...). */
 #define B_LOGICAL_OUTPUT	0x00000002	/* Do not perform bidi, just joining stuff. */
+#define B_LOGICAL_OUTPUT_LOG2CUNI 0x00000004	/* Do not perform bidi, just joining stuff. In log2cuni */
 #define B_KEEP_JOINING_MARKS	0x00000010	/* Do not remove joining marks (ZWJ, ZWNJ). */
 #define B_NO_LA_LIGATURE	0x00000020	/* Do not make LAM-ALEF ligature. */
 #define B_NO_ZWJZWNJZWJ		0x00000040	/* Do not interpret ZWJ+ZWNJ+ZWJ sequences. */
