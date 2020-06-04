@@ -1,7 +1,7 @@
 #ifndef __BICON_READ_H
 #define __BICON_READ_H
 
-int bicon_options;
+extern int bicon_options;
 
 ssize_t bicon_read (
   int fd,
