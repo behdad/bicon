@@ -95,6 +95,8 @@ Known Issues
 ------------
 
 * Text that is soft-wrapped, is vertically inverted. You can wrap the text yourself using, e.g., `command ggrep -Eo ".{1,100}"`, to avoid this problem.
+* `tmux` is somewhat buggy, but still usable. (See the [screenshots](#Screenshots).)
+* As the RTL text is changed in order to be displayed correctly, [copying](https://github.com/behdad/bicon/issues/11) it will probably not work as you intend it.
 * [Some](https://github.com/behdad/bicon/issues/24) zsh plugins are somewhat incompatible with running under `bicon`:
   * zsh-syntax-highlighting
   * zdharma/fast-syntax-highlighting
@@ -122,6 +124,17 @@ if ! isBicon ; then
   antibody bundle zdharma/fast-syntax-highlighting # etc
 fi
 ```
+
+Screenshots
+-----------
+
+All the screenshots have been taken on iTerm 3.4.4 (macOS).
+
+![](./readme_images/fd.png)
+![](./readme_images/fzf.png)
+![](./readme_images/emacs.png)
+![](./readme_images/long_text.png)
+![](./readme_images/long_text_tmux.png)
 
 Reporting Bugs
 --------------
