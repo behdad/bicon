@@ -1,4 +1,3 @@
-=================================
 BiCon - The Bidirectional Console
 =================================
 
@@ -13,7 +12,11 @@ Installation
 
 You need the FriBidi library to compile this program. Probably
 you have it in your distribution. If not, get it from
-http://fribidi.org/
+http://fribidi.org/ . You can install it via Homebrew as well (works on both Linux and macOS):
+
+``` sh
+brew install fribidi
+```
 
 Installation is simple, the usual steps:
 
@@ -21,6 +24,17 @@ Installation is simple, the usual steps:
 	./configure
 	make
 	make install
+
+
+macOS
+-----
+
+Things seem to somewhat work, but:
+- The build fails its last step because there is no `psfaddtable` on macOS. This doesn't seem to matter.
+  - The built binary can be found at `./bicon/bicon.bin`. 
+- Sometimes programs exit abnormally: `[1]    15104 abort      bicon.bin ls`. This also doesn't seem to matter, but you do need to do a `reset` on the terminal after it.
+  - I have added a test file that triggers this: `bicon.bin cat ./macOS/test.txt`
+- Opening a shell with `bicon` seems to work without problems.
 
 Usage
 -----
@@ -42,6 +56,72 @@ the country on the command line, e.g ::
 You can use the alt+shift combination to switch keyboard language.
 
 Of course, you have a man page bicon(1) to check.
+
+Emacs
+-----
+
+This works for me:
+
+``` zsh
+function bicon-emc() {
+  bicon.bin --reshape-only emacsclient -t "$@"
+  reset
+}
+```
+
+Take care not to run this from a shell that is itself running under `bicon`. You need to use this function if you want to do so (you also need the wrappers defined in the [known issues](#Known-Issues) section):
+
+``` zsh
+bicon-emc () {
+    if isBicon
+    then
+        {
+            (
+                emacsclient -t -e "(progn (setq-default bidi-display-reordering nil) (redraw-display))" "$@"
+            )
+        } always {
+            emacsclient -e "(setq-default bidi-display-reordering t)"
+        }
+        return $?
+    fi
+    biconm --reshape-only emacsclient -t "$@"
+    reset
+}
+```
+
+And it will still not be good for editing RTL text, as Emacs is confused by the bidi reversal that `bicon` does.
+
+Known Issues
+------------
+
+* Text that is soft-wrapped, is vertically inverted. You can wrap the text yourself using, e.g., `command ggrep -Eo ".{1,100}"`, to avoid this problem.
+* [Some](https://github.com/behdad/bicon/issues/24) zsh plugins are somewhat incompatible with running under `bicon`:
+  * zsh-syntax-highlighting
+  * zdharma/fast-syntax-highlighting
+  * zsh-users/zsh-autosuggestions
+  
+One workaround is to wrap your invocations of `bicon` in:
+
+``` sh
+biconm () {
+    BICON_MODE=y bicon.bin "$@"
+}
+bicon-zsh () {
+    biconm zsh
+    reset
+}
+```
+
+Then check if `zsh` is running under `bicon`:
+
+``` sh
+isBicon () {
+    test -n "$BICON_MODE"
+}
+if ! isBicon ; then
+  antibody bundle zdharma/fast-syntax-highlighting # etc
+fi
+```
 
 Reporting Bugs
 --------------
