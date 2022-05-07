@@ -93,7 +93,7 @@ _xwrite (
   }
 }
 
-static int
+static void
 _copy (
   int master_fd,
   reader master_read,
