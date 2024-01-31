@@ -21,7 +21,7 @@ bjoining_log2cuni (
   if (0 == (options & (B_LOGICAL_OUTPUT | B_LOGICAL_OUTPUT_LOG2CUNI)))
     {
       f = f
-	&& fribidi_log2vis ((FriBidiChar *) str, len, &ptype,
+	&& fribidi_log2vis ((FriBidiChar *) str, len, (FriBidiParType * )&ptype,
 			    (FriBidiChar *) vis, NULL, NULL, NULL);
     }
   else
