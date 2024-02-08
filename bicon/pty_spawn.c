@@ -13,7 +13,13 @@ namely the PSF License Agreement For Python 2.2.3
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
-#include <pty.h>
+#ifdef __APPLE__
+    #include <util.h>
+    #pragma GCC diagnostic ignored "-Wimplicit-function-declaration"
+    #pragma GCC diagnostic ignored "-Wreturn-type"
+#else
+    #include <pty.h>
+#endif
 #include <sys/time.h>
 #include <sys/types.h>
 #include <sys/select.h>
